@@ -1,0 +1,122 @@
+{
+  "title": "Every Scariest Asteroid Explained in 11 Minutes",
+  "alt_titles": [
+    "The Most Fearsome Asteroids in Our Solar System Explained",
+    "Asteroids That Could Potentially Destroy Earth Explained",
+    "The Largest and Most Threatening Asteroids Explained in Detail"
+  ],
+  "hook": "Asteroids have been a source of fascination and fear for humanity for centuries, with some posing a significant threat to our planet. From the massive Vesta to the potentially hazardous Apophis, these space rocks are a reminder of the awe-inspiring power of the universe.",
+  "beats": [
+    {
+      "beat": 1,
+      "narration": "Let's start with the asteroid Vesta, which is not only one of the largest asteroids in the solar system but also has a surface that provides valuable insights into the early formation of the solar system.",
+      "visual": "an image of the asteroid Vesta with its surface features visible",
+      "seconds": 12
+    }
+  ],
+  "substance": [
+    {
+      "claim": "The asteroid Apophis, discovered in 2004, has a 1 in 100,000 chance of impacting Earth in 2068, according to NASA's asteroid watch program.",
+      "why_it_matters": "Understanding the trajectory and potential impact of asteroids like Apophis is crucial for developing strategies to prevent or mitigate such disasters.",
+      "needs_check": false
+    }
+  ],
+  "description": "This video explores the most fearsome asteroids in our solar system, discussing their composition, size, and potential threat to Earth. From the asteroid belt to near-Earth objects, we delve into the fascinating world of asteroids and the science behind their study. By examining the characteristics and orbits of these asteroids, we can better understand the risks and opportunities they present.",
+  "hashtags": [
+    "asteroids",
+    "space",
+    "solar system"
+  ],
+  "tags": [
+    "asteroid science",
+    "space exploration",
+    "near-Earth objects"
+  ],
+  "end_screen_followup": "Every Type of Black Hole Explained in 11 Minutes",
+  "format_slug": "bluntly-explained",
+  "topic": "Asteroids",
+  "bend": {
+    "distance": "adjacent",
+    "opportunity": 78.0,
+    "why": "The audience exists because asteroids pose a threat to Earth and people are interested in learning more about them",
+    "search_term": "asteroid facts",
+    "saturation": {
+      "checked": true,
+      "search_term": "asteroid facts",
+      "demand_median_views": 359880,
+      "demand_max_views": 25979684,
+      "competition_count": 0,
+      "competition_strength": 0,
+      "competitors": [],
+      "verdict": "open"
+    }
+  },
+  "thumbnail_spec": {
+    "layout": "scene_no_clear_subject",
+    "subject_count": 0,
+    "palette": [
+      {
+        "hex": "#070507",
+        "weight": 0.5
+      },
+      {
+        "hex": "#0d0a0f",
+        "weight": 0.5
+      },
+      {
+        "hex": "#121214",
+        "weight": 0.42
+      },
+      {
+        "hex": "#0c0b0d",
+        "weight": 0.42
+      },
+      {
+        "hex": "#0f0a0c",
+        "weight": 0.42
+      }
+    ],
+    "measured_rules": [
+      "layout: scene_no_clear_subject (7/10 videos)",
+      "header text band across the top",
+      "high saturation (format average 0.50)",
+      "high contrast (format average 0.36)"
+    ],
+    "instructions": [
+      "One subject, centered, filling roughly half the frame.",
+      "Header text band across the top ~25% of the frame.",
+      "Push saturation to ~0.50 (format norm).",
+      "Hold contrast near 0.36 (format norm)."
+    ],
+    "verify_with": "python -m formatengine verify-thumb <file> --format bluntly-explained"
+  },
+  "generated_at": "2026-07-27T10:07:34.410653+00:00",
+  "gate": {
+    "passed": false,
+    "checks": [
+      {
+        "check": "title_vs_source",
+        "value": 0.627,
+        "limit": 0.72,
+        "pass": true
+      },
+      {
+        "check": "self_similarity_peak",
+        "value": 0.0,
+        "limit": 0.8,
+        "pass": true,
+        "window": 0
+      },
+      {
+        "check": "substance_items",
+        "value": 1,
+        "limit": 3,
+        "pass": false
+      }
+    ],
+    "failures": [
+      "Only 1 original substance items (need 3). Without them this is a reskin, which is the exact thing that gets a channel demonetised."
+    ],
+    "warnings": []
+  }
+}

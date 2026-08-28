@@ -1,0 +1,158 @@
+{
+  "title": "Every Rogue Planet Explained in 12 Minutes",
+  "alt_titles": [
+    "Understanding Rogue Planets",
+    "The Mystery of Rogue Planets Explained",
+    "Rogue Planets: Everything You Need to Know"
+  ],
+  "hook": "In the vast expanse of our galaxy, there exist planets that do not orbit any star, known as rogue planets. These mysterious worlds have been a subject of fascination for astronomers and planetary scientists alike, offering insights into the formation and evolution of our solar system.",
+  "beats": [
+    {
+      "beat": 1,
+      "narration": "Rogue planets are thought to have formed in the same way as regular planets, through the collapse of a giant cloud of gas and dust. However, these planets were likely ejected from their star systems due to gravitational interactions with other planets or stars. This ejection process can occur when a planet's orbit becomes unstable, often as a result of the formation of a multi-planetary system. The discovery of rogue planets has significant implications for our understanding of planetary formation and evolution.",
+      "visual": "an animation of a planet being ejected from its star system",
+      "seconds": 120
+    },
+    {
+      "beat": 2,
+      "narration": "One of the key challenges in studying rogue planets is detecting them. Since they do not emit or reflect any light, they are extremely difficult to spot. Astronomers have developed innovative methods to detect rogue planets, such as monitoring the gravitational lensing effect they produce on background stars. The OGLE survey, for example, has been instrumental in identifying several rogue planet candidates. The discovery of rogue planets has also led to a greater understanding of the complexities of planetary systems.",
+      "visual": "a graph showing the gravitational lensing effect of a rogue planet",
+      "seconds": 150
+    },
+    {
+      "beat": 3,
+      "narration": "Rogue planets can provide valuable insights into the early formation and evolution of our solar system. By studying the properties of rogue planets, such as their mass, size, and composition, scientists can gain a better understanding of the processes that shaped our own planetary system. For instance, the presence of rogue planets with masses similar to that of Jupiter suggests that our own solar system may have undergone a similar ejection process in the distant past. The study of rogue planets has also led to a greater understanding of the role of gravitational forces in shaping planetary orbits.",
+      "visual": "a comparison of the size and mass of rogue planets with our own solar system's planets",
+      "seconds": 140
+    },
+    {
+      "beat": 4,
+      "narration": "The study of rogue planets is an active area of research, with scientists using a range of observational and theoretical techniques to learn more about these enigmatic worlds. Future missions, such as the James Webb Space Telescope, are expected to play a crucial role in the detection and characterization of rogue planets. As our understanding of rogue planets grows, so too will our appreciation for the complexities and mysteries of the universe. The discovery of rogue planets has opened up new avenues for research, from the study of planetary formation to the search for life beyond our solar system.",
+      "visual": "an artist's impression of the James Webb Space Telescope observing a rogue planet",
+      "seconds": 130
+    }
+  ],
+  "substance": [
+    {
+      "claim": "The first rogue planet was discovered in 2013 by the OGLE survey.",
+      "why_it_matters": "This discovery marked the beginning of a new era in the study of rogue planets and has significant implications for our understanding of planetary formation and evolution.",
+      "needs_check": false
+    },
+    {
+      "claim": "Rogue planets can have masses ranging from that of Mercury to several times that of Jupiter.",
+      "why_it_matters": "This wide range of masses suggests that rogue planets can form through a variety of mechanisms, including the collapse of gas and dust clouds and the ejection of planets from star systems.",
+      "needs_check": false
+    },
+    {
+      "claim": "The estimated number of rogue planets in the Milky Way galaxy is approximately 100 billion.",
+      "why_it_matters": "This large number of rogue planets suggests that they may play a significant role in the overall structure and evolution of the galaxy.",
+      "needs_check": false
+    },
+    {
+      "claim": "Rogue planets can be classified into two categories: those that are still gravitationally bound to the galaxy and those that are not.",
+      "why_it_matters": "Understanding the differences between these two categories can provide insights into the formation and evolution of rogue planets and the role of gravitational forces in shaping their orbits.",
+      "needs_check": false
+    },
+    {
+      "claim": "The detection of rogue planets can be used to study the properties of dark matter in the galaxy.",
+      "why_it_matters": "The gravitational lensing effect produced by rogue planets can be used to map the distribution of dark matter in the galaxy, providing valuable insights into the nature of this mysterious substance.",
+      "needs_check": false
+    }
+  ],
+  "description": "Rogue planets are mysterious worlds that do not orbit any star, offering insights into the formation and evolution of our solar system. The study of rogue planets is an active area of research, with scientists using a range of observational and theoretical techniques to learn more about these enigmatic worlds. From the detection of rogue planets to the study of their properties and behavior, this video explores the fascinating world of rogue planets and what they can teach us about the universe.",
+  "hashtags": [
+    "Rogue Planets",
+    "Astronomy",
+    "Space Exploration",
+    "Planetary Science",
+    "Galaxy Evolution"
+  ],
+  "tags": [
+    "Rogue Planets",
+    "Astronomy",
+    "Space",
+    "Science",
+    "Galaxy"
+  ],
+  "end_screen_followup": "The Formation of Black Holes Explained in 10 Minutes",
+  "format_slug": "bluntly-explained",
+  "topic": "Rogue Planets",
+  "bend": {
+    "distance": "manual",
+    "opportunity": null,
+    "why": null,
+    "search_term": "Rogue Planets",
+    "saturation": {
+      "checked": false,
+      "reason": "manual topic"
+    }
+  },
+  "thumbnail_spec": {
+    "layout": "scene_no_clear_subject",
+    "subject_count": 0,
+    "palette": [
+      {
+        "hex": "#070507",
+        "weight": 0.5
+      },
+      {
+        "hex": "#0d0a0f",
+        "weight": 0.5
+      },
+      {
+        "hex": "#121214",
+        "weight": 0.42
+      },
+      {
+        "hex": "#0c0b0d",
+        "weight": 0.42
+      },
+      {
+        "hex": "#0f0a0c",
+        "weight": 0.42
+      }
+    ],
+    "measured_rules": [
+      "layout: scene_no_clear_subject (7/10 videos)",
+      "header text band across the top",
+      "high saturation (format average 0.50)",
+      "high contrast (format average 0.36)"
+    ],
+    "instructions": [
+      "Atmospheric scene, not a cut-out subject. The frame reads as an environment; mood and colour carry the click, and the text does the naming. Do not paste a centred hero object onto a backdrop.",
+      "Header text band across the top ~25% of the frame.",
+      "Push saturation to ~0.50 (format norm).",
+      "Hold contrast near 0.36 (format norm)."
+    ],
+    "verify_with": "python -m formatengine verify-thumb <file> --format bluntly-explained"
+  },
+  "generated_at": "2026-07-28T08:59:58.399160+00:00",
+  "gate": {
+    "passed": false,
+    "checks": [
+      {
+        "check": "title_vs_source",
+        "value": 0.775,
+        "limit": 0.72,
+        "pass": false
+      },
+      {
+        "check": "self_similarity_peak",
+        "value": 0.637,
+        "limit": 0.8,
+        "pass": true,
+        "window": 1
+      },
+      {
+        "check": "substance_items",
+        "value": 5,
+        "limit": 3,
+        "pass": true
+      }
+    ],
+    "failures": [
+      "Title is 78% similar to a source title. That is a clone, not a bend. Change the topic noun, keep the structure."
+    ],
+    "warnings": []
+  }
+}

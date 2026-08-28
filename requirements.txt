@@ -1,0 +1,8 @@
+# Deliberately small. No paid SaaS, no SDKs that pull half of PyPI.
+# YouTube Data API + Groq are both called over stdlib urllib.
+numpy>=1.24
+opencv-python>=4.8       # offline thumbnail deconstruction
+Pillow>=10.0             # thumbnail IO
+# Production handoff (already present in this vault, listed for a clean box):
+# edge-tts>=6.1          # free neural TTS, replaces ElevenLabs
+# ffmpeg (system binary)  # free assembly

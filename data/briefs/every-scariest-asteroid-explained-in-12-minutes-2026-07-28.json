@@ -1,0 +1,182 @@
+{
+  "title": "Every Scariest Asteroid Explained in 12 Minutes",
+  "alt_titles": [
+    "The Most Frightening Asteroids in Our Solar System Explained",
+    "Asteroids That Pose a Threat to Earth Explained",
+    "Understanding the Scariest Asteroids in Space"
+  ],
+  "hook": "Asteroids have long been a source of fascination and fear for humans, with their immense size and unpredictable orbits. From the potentially hazardous to the downright devastating, we're counting down the scariest asteroids in our solar system.",
+  "beats": [
+    {
+      "beat": 1,
+      "narration": "Asteroids are remnants from the early days of our solar system, with some dating back over 4.5 billion years. These space rocks can provide valuable insights into the formation and evolution of our cosmic neighborhood. The largest asteroid, Ceres, is approximately 590 miles in diameter and is now classified as a dwarf planet.",
+      "visual": "image of Ceres",
+      "seconds": 120
+    },
+    {
+      "beat": 2,
+      "narration": "Asteroids are primarily composed of rock and metal, with some containing valuable resources such as water and precious metals. The asteroid belt between Mars and Jupiter is home to millions of these space rocks, ranging in size from a few feet to hundreds of miles in diameter.",
+      "visual": "image of the asteroid belt",
+      "seconds": 120
+    },
+    {
+      "beat": 3,
+      "narration": "One of the most significant concerns surrounding asteroids is their potential to impact Earth. The Chicxulub asteroid impact, which occurred around 66 million years ago, is believed to have contributed to the extinction of the dinosaurs. More recently, the Chelyabinsk asteroid exploded over Russia in 2013, injuring over 1,000 people and causing significant damage.",
+      "visual": "image of the Chelyabinsk asteroid explosion",
+      "seconds": 150
+    },
+    {
+      "beat": 4,
+      "narration": "The asteroid 16 Psyche is a metal-rich space rock that is estimated to be worth over $700 quintillion. This asteroid is of particular interest to scientists and engineers, as it could provide valuable insights into the formation of our solar system and potentially even serve as a source of resources for future space missions.",
+      "visual": "image of 16 Psyche",
+      "seconds": 120
+    },
+    {
+      "beat": 5,
+      "narration": "Asteroids can also provide a window into the early days of our solar system. The asteroid Vesta, for example, is thought to have been the source of many meteorites found on Earth, and its surface features can provide valuable insights into the geological history of the asteroid.",
+      "visual": "image of Vesta",
+      "seconds": 120
+    },
+    {
+      "beat": 6,
+      "narration": "The asteroid Apophis is a potentially hazardous asteroid that is expected to pass close to Earth in 2029 and 2036. While the chances of impact are low, this asteroid serves as a reminder of the importance of monitoring near-Earth objects and developing strategies for mitigating potential threats.",
+      "visual": "image of Apophis",
+      "seconds": 120
+    },
+    {
+      "beat": 7,
+      "narration": "Asteroids can also be used as a stepping stone for deeper space exploration. The asteroid 101955 Bennu, for example, is the target of NASA's OSIRIS-REx mission, which aims to return samples from the asteroid to Earth. This mission could provide valuable insights into the formation and evolution of our solar system, as well as the potential for resource utilization in space.",
+      "visual": "image of 101955 Bennu",
+      "seconds": 120
+    },
+    {
+      "beat": 8,
+      "narration": "In conclusion, asteroids are fascinating and complex objects that continue to capture the imagination of scientists and the general public alike. From their potential to provide valuable resources to their role in shaping our understanding of the solar system, asteroids are an integral part of the ongoing exploration of space.",
+      "visual": "image of an asteroid field",
+      "seconds": 120
+    }
+  ],
+  "substance": [
+    {
+      "claim": "The asteroid Ceres is the largest object in the asteroid belt, with a diameter of approximately 590 miles.",
+      "why_it_matters": "Ceres is a significant object in the asteroid belt, and its size and composition can provide valuable insights into the formation and evolution of the solar system.",
+      "needs_check": false
+    },
+    {
+      "claim": "The asteroid 16 Psyche is estimated to be worth over $700 quintillion due to its metal-rich composition.",
+      "why_it_matters": "The value of 16 Psyche highlights the potential for asteroids to serve as a source of resources for future space missions, and its composition can provide valuable insights into the formation of the solar system.",
+      "needs_check": false
+    },
+    {
+      "claim": "The asteroid Vesta is thought to have been the source of many meteorites found on Earth.",
+      "why_it_matters": "The study of Vesta and its meteorites can provide valuable insights into the geological history of the asteroid and the early days of the solar system.",
+      "needs_check": false
+    },
+    {
+      "claim": "The asteroid Apophis is expected to pass close to Earth in 2029 and 2036.",
+      "why_it_matters": "The close approach of Apophis highlights the importance of monitoring near-Earth objects and developing strategies for mitigating potential threats.",
+      "needs_check": false
+    },
+    {
+      "claim": "The asteroid 101955 Bennu is the target of NASA's OSIRIS-REx mission, which aims to return samples from the asteroid to Earth.",
+      "why_it_matters": "The OSIRIS-REx mission can provide valuable insights into the formation and evolution of the solar system, as well as the potential for resource utilization in space.",
+      "needs_check": false
+    }
+  ],
+  "description": "Asteroids are fascinating and complex objects that continue to capture the imagination of scientists and the general public alike. From their potential to provide valuable resources to their role in shaping our understanding of the solar system, asteroids are an integral part of the ongoing exploration of space. This video explores some of the scariest asteroids in our solar system, including those that pose a threat to Earth and those that could provide valuable insights into the formation and evolution of our cosmic neighborhood.",
+  "hashtags": [
+    "asteroids",
+    "space exploration",
+    "solar system"
+  ],
+  "tags": [
+    "asteroids",
+    "space",
+    "solar system"
+  ],
+  "end_screen_followup": "The Most Mysterious Events in Space Explained",
+  "format_slug": "bluntly-explained",
+  "topic": "Asteroids",
+  "bend": {
+    "distance": "adjacent",
+    "opportunity": 78.0,
+    "why": "The audience exists because asteroids pose a threat to Earth and people are interested in learning more about them",
+    "search_term": "asteroid facts",
+    "saturation": {
+      "checked": true,
+      "search_term": "asteroid facts",
+      "demand_median_views": 359880,
+      "demand_max_views": 25979684,
+      "competition_count": 0,
+      "competition_strength": 0,
+      "competitors": [],
+      "verdict": "open"
+    }
+  },
+  "thumbnail_spec": {
+    "layout": "scene_no_clear_subject",
+    "subject_count": 0,
+    "palette": [
+      {
+        "hex": "#070507",
+        "weight": 0.5
+      },
+      {
+        "hex": "#0d0a0f",
+        "weight": 0.5
+      },
+      {
+        "hex": "#121214",
+        "weight": 0.42
+      },
+      {
+        "hex": "#0c0b0d",
+        "weight": 0.42
+      },
+      {
+        "hex": "#0f0a0c",
+        "weight": 0.42
+      }
+    ],
+    "measured_rules": [
+      "layout: scene_no_clear_subject (7/10 videos)",
+      "header text band across the top",
+      "high saturation (format average 0.50)",
+      "high contrast (format average 0.36)"
+    ],
+    "instructions": [
+      "One subject, centered, filling roughly half the frame.",
+      "Header text band across the top ~25% of the frame.",
+      "Push saturation to ~0.50 (format norm).",
+      "Hold contrast near 0.36 (format norm)."
+    ],
+    "verify_with": "python -m formatengine verify-thumb <file> --format bluntly-explained"
+  },
+  "generated_at": "2026-07-28T08:54:23.606834+00:00",
+  "gate": {
+    "passed": true,
+    "checks": [
+      {
+        "check": "title_vs_source",
+        "value": 0.613,
+        "limit": 0.72,
+        "pass": true
+      },
+      {
+        "check": "self_similarity_peak",
+        "value": 0.0,
+        "limit": 0.8,
+        "pass": true,
+        "window": 0
+      },
+      {
+        "check": "substance_items",
+        "value": 5,
+        "limit": 3,
+        "pass": true
+      }
+    ],
+    "failures": [],
+    "warnings": []
+  }
+}

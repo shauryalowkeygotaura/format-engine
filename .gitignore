@@ -1,0 +1,9 @@
+data/cache/
+data/thumbs/
+data/ledger.json
+data/checkpoint_*.json
+data/profile-*.json
+data/discover-*.json
+__pycache__/
+*.pyc
+.env
