@@ -77,6 +77,7 @@ Return ONLY JSON."""
 
 SCRIPT_USER = """Format template: {template}
 Format archetype: {archetype}
+Format rules (these OVERRIDE anything below that conflicts): {notes}
 Proven titles in this format:
 {titles}
 
@@ -95,6 +96,10 @@ HARD REQUIREMENTS - a response that misses these is rejected:
   order and rhythm, fix any grammar the template introduced.
 - A non-empty "hook" that creates tension in its first sentence. A brief with no
   hook is rejected outright by the renderer.
+- "thumbnail_text": 2 to 4 words that DO NOT repeat the title or any fragment of
+  it. The viewer has already read the title, so repeating it adds nothing and
+  closes the curiosity gap. Name the PAYOFF instead, the worst level or the
+  surprising outcome, in words a phone screen can read at a glance.
 - No two beats may begin with the same word.
 - The beats must actually deliver what the title promises.
 
@@ -102,6 +107,7 @@ Return JSON exactly:
 {{
   "title": "...",
   "alt_titles": ["...", "...", "..."],
+  "thumbnail_text": "2-4 words for the thumbnail, NOT from the title",
   "hook": "2 sentences, spoken, opening on tension not throat-clearing",
   "beats": [
     {{"beat": 1, "narration": "...", "visual": "image prompt for this beat",
@@ -156,6 +162,7 @@ def build(spec: dict, bend: dict, *, words: int = 1200, model: str | None = None
         SCRIPT_USER.format(
             template=tf.get("template", "{topic}"),
             archetype=tf.get("archetype", "other"),
+            notes=spec.get("notes") or "none",
             titles="\n".join(f"- {t}" for t in titles),
             topic=bend.get("topic", ""),
             title=title,

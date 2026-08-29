@@ -1,0 +1,106 @@
+{
+  "name": "Levels Of",
+  "slug": "levels-of",
+  "source_channel": "hand-authored 2026-08-29 from the @AnimeAddicts33 format analysis in Deliverables/faceless-niche-2026-08-27.md",
+  "rpm_band": "education",
+  "rpm_estimate_usd": {
+    "low": 5.0,
+    "high": 14.0,
+    "note": "estimate from category, not measured"
+  },
+  "safety_flags": [],
+  "notes": "Escalating ranking. Each level MUST beat the previous one on a single stated axis, and that axis is named in the first 10 seconds. The top level is withheld until the end. CRITICAL: never begin a beat's narration with the word Level or with a number. The level number belongs in the on-screen visual, not the spoken line. 'It starts with something the size of a grain of sand' is the opening; 'Level 1: grain of sand' is a drone and will be rejected. Every beat must open on a DIFFERENT word.",
+  "titles": [
+    "The 7 Levels Of Asteroid Impact",
+    "The 6 Levels Of Solar Storm",
+    "The 8 Levels Of Extinction Event",
+    "The 5 Levels Of Deep Sea Pressure",
+    "The 7 Levels Of Nuclear Accident",
+    "The 6 Levels Of Volcanic Eruption"
+  ],
+  "title_format": {
+    "archetype": "escalating_ranking",
+    "template": "The {number} Levels Of {topic}",
+    "second_person_rate": 0.35,
+    "per_title": [
+      {
+        "title": "The 7 Levels Of Asteroid Impact",
+        "number": 7,
+        "adjective": null,
+        "topic": "Asteroid Impact",
+        "enforcement": null,
+        "qualifier": null,
+        "second_person": false
+      },
+      {
+        "title": "The 6 Levels Of Solar Storm",
+        "number": 6,
+        "adjective": null,
+        "topic": "Solar Storm",
+        "enforcement": null,
+        "qualifier": null,
+        "second_person": false
+      }
+    ]
+  },
+  "thumbnail_checklist": {
+    "sample_size": 10,
+    "dominant_layout": "scene_no_clear_subject",
+    "layout_distribution": {
+      "scene_no_clear_subject": 7,
+      "single_subject": 2,
+      "two_subject_versus": 1
+    },
+    "subject_count_mode": 0,
+    "middle_unique_rate": 0.1,
+    "center_dominant_rate": 0.0,
+    "header_text_rate": 0.6,
+    "avg_saturation": 0.503,
+    "avg_contrast": 0.36,
+    "avg_brightness": 0.321,
+    "signature_palette": [
+      {
+        "hex": "#070507",
+        "weight": 0.5
+      },
+      {
+        "hex": "#0d0a0f",
+        "weight": 0.5
+      },
+      {
+        "hex": "#121214",
+        "weight": 0.42
+      },
+      {
+        "hex": "#0c0b0d",
+        "weight": 0.42
+      },
+      {
+        "hex": "#0f0a0c",
+        "weight": 0.42
+      }
+    ],
+    "rules": [
+      "layout: scene_no_clear_subject (7/10 videos)",
+      "header text band across the top",
+      "high saturation (format average 0.50)",
+      "high contrast (format average 0.36)"
+    ],
+    "layout": "single_dramatic_subject",
+    "max_words": 4,
+    "must_not": [
+      "repeat the title verbatim or any fragment of it",
+      "show a calm or serene frame when the topic is a threat",
+      "use more than 4 words"
+    ],
+    "should": [
+      "name the TOP level only, so the rest stays a curiosity gap",
+      "high contrast against both light and dark YouTube themes",
+      "readable at phone size, since most views are mobile"
+    ]
+  },
+  "thumbnail_analyses": [],
+  "source_videos": [],
+  "saved_at": "2026-08-29",
+  "bends": []
+}

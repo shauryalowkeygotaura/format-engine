@@ -1,0 +1,1024 @@
+{
+  "name": "bluntly-explained",
+  "slug": "bluntly-explained",
+  "source_channel": {
+    "id": "UC4ZpfvppuvCefRu3T7p0ojg",
+    "title": "Bluntly Explained",
+    "url": "https://www.youtube.com/channel/UC4ZpfvppuvCefRu3T7p0ojg",
+    "subscribers": 21000,
+    "age_days": 103.5,
+    "score": 74.9
+  },
+  "rpm_band": "education",
+  "rpm_estimate_usd": {
+    "low": 5.0,
+    "high": 14.0,
+    "note": "estimate from category, not measured"
+  },
+  "safety_flags": [],
+  "titles": [
+    "Every Type Of Black Hole Explained in 11 Minutes",
+    "Every DIMENSION Explained in 9 Minutes ",
+    "Every Type Of Star Explained in 10 minutes",
+    "The SCARIEST Places In The Universe Explained in 11 Minutes",
+    "Every Way The Universe Could End Explained in 9 Minutes",
+    "Every Type Of Galaxy Explained in 10 Minutes",
+    "Every Type Of Planet Explained in 12 Minutes",
+    "Every STAGE Of Civilization Explained in 9 Minutes",
+    "The Most Disturbing Space Theories Explained",
+    "What If We Replaced Our Sun With Other Stars?"
+  ],
+  "title_format": {
+    "archetype": "explainer",
+    "template": "Every {adjective} {topic} Explained {qualifier}",
+    "second_person_rate": 0.1,
+    "per_title": [
+      {
+        "title": "Every Type Of Black Hole Explained in 11 Minutes",
+        "number": null,
+        "adjective": "Type Of",
+        "topic": "Black Hole",
+        "enforcement": null,
+        "qualifier": "in 11 Minutes",
+        "second_person": false
+      },
+      {
+        "title": "Every DIMENSION Explained in 9 Minutes",
+        "number": null,
+        "adjective": null,
+        "topic": "DIMENSION",
+        "enforcement": null,
+        "qualifier": "in 9 Minutes",
+        "second_person": false
+      },
+      {
+        "title": "Every Type Of Star Explained in 10 minutes",
+        "number": null,
+        "adjective": "Type Of",
+        "topic": "Star",
+        "enforcement": null,
+        "qualifier": "in 10 minutes",
+        "second_person": false
+      },
+      {
+        "title": "The SCARIEST Places In The Universe Explained in 11 Minutes",
+        "number": null,
+        "adjective": "SCARIEST",
+        "topic": "Places In The Universe",
+        "enforcement": null,
+        "qualifier": "in 11 Minutes",
+        "second_person": false
+      },
+      {
+        "title": "Every Way The Universe Could End Explained in 9 Minutes",
+        "number": null,
+        "adjective": null,
+        "topic": "Way The Universe Could End",
+        "enforcement": null,
+        "qualifier": "in 9 Minutes",
+        "second_person": false
+      },
+      {
+        "title": "Every Type Of Galaxy Explained in 10 Minutes",
+        "number": null,
+        "adjective": "Type Of",
+        "topic": "Galaxy",
+        "enforcement": null,
+        "qualifier": "in 10 Minutes",
+        "second_person": false
+      },
+      {
+        "title": "Every Type Of Planet Explained in 12 Minutes",
+        "number": null,
+        "adjective": "Type Of",
+        "topic": "Planet",
+        "enforcement": null,
+        "qualifier": "in 12 Minutes",
+        "second_person": false
+      },
+      {
+        "title": "Every STAGE Of Civilization Explained in 9 Minutes",
+        "number": null,
+        "adjective": null,
+        "topic": "STAGE Of Civilization",
+        "enforcement": null,
+        "qualifier": "in 9 Minutes",
+        "second_person": false
+      },
+      {
+        "title": "The Most Disturbing Space Theories Explained",
+        "number": null,
+        "adjective": "Most Disturbing",
+        "topic": "Space Theories",
+        "enforcement": null,
+        "qualifier": "Explained",
+        "second_person": false
+      },
+      {
+        "title": "What If We Replaced Our Sun With Other Stars?",
+        "number": null,
+        "adjective": null,
+        "topic": "Our Sun With Other Stars",
+        "enforcement": null,
+        "qualifier": null,
+        "second_person": true
+      }
+    ],
+    "slot_vocabulary": {
+      "adjective": [
+        "Type Of",
+        "SCARIEST",
+        "Most Disturbing"
+      ],
+      "enforcement": [],
+      "qualifier": [
+        "Explained in 11 Minutes",
+        "Explained in 9 Minutes",
+        "Explained in 10 minutes",
+        "Explained"
+      ],
+      "number": []
+    },
+    "topic_axis": "astronomical concepts",
+    "notes": "This format works because it consistently uses 'Every' or 'The' to introduce a topic, often with an adjective, and explains it in a specific time frame."
+  },
+  "thumbnail_checklist": {
+    "sample_size": 10,
+    "dominant_layout": "scene_no_clear_subject",
+    "layout_distribution": {
+      "scene_no_clear_subject": 7,
+      "single_subject": 2,
+      "two_subject_versus": 1
+    },
+    "subject_count_mode": 0,
+    "middle_unique_rate": 0.1,
+    "center_dominant_rate": 0.0,
+    "header_text_rate": 0.6,
+    "avg_saturation": 0.503,
+    "avg_contrast": 0.36,
+    "avg_brightness": 0.321,
+    "signature_palette": [
+      {
+        "hex": "#070507",
+        "weight": 0.5
+      },
+      {
+        "hex": "#0d0a0f",
+        "weight": 0.5
+      },
+      {
+        "hex": "#121214",
+        "weight": 0.42
+      },
+      {
+        "hex": "#0c0b0d",
+        "weight": 0.42
+      },
+      {
+        "hex": "#0f0a0c",
+        "weight": 0.42
+      }
+    ],
+    "rules": [
+      "layout: scene_no_clear_subject (7/10 videos)",
+      "header text band across the top",
+      "high saturation (format average 0.50)",
+      "high contrast (format average 0.36)"
+    ]
+  },
+  "thumbnail_analyses": [
+    {
+      "layout": "scene_no_clear_subject",
+      "subject_count": 0,
+      "face_count": 0,
+      "middle_unique": false,
+      "center_dominant": false,
+      "has_header_text": true,
+      "text_coverage": 0.9012,
+      "palette": [
+        {
+          "hex": "#0a0608",
+          "share": 0.414
+        },
+        {
+          "hex": "#4b383e",
+          "share": 0.212
+        },
+        {
+          "hex": "#847a8e",
+          "share": 0.166
+        },
+        {
+          "hex": "#e4e4e5",
+          "share": 0.119
+        },
+        {
+          "hex": "#c06532",
+          "share": 0.09
+        }
+      ],
+      "brightness": 0.298,
+      "saturation": 0.444,
+      "contrast": 0.391,
+      "edge_density": 0.1614,
+      "_detail": {
+        "thirds": {
+          "middle_unique": false,
+          "center_dominant": false,
+          "flank_similarity_chisq": 1.426,
+          "middle_distance_chisq": 1.452,
+          "edge_energy_split": [
+            0.306,
+            0.355,
+            0.339
+          ]
+        },
+        "text": {
+          "text_coverage": 0.9012,
+          "has_header_band": true,
+          "text_boxes": 2220
+        },
+        "blob_count": 0
+      },
+      "video_id": "GprjiFSsLOI",
+      "title": "Every Type Of Black Hole Explained in 11 Minutes"
+    },
+    {
+      "layout": "single_subject",
+      "subject_count": 1,
+      "face_count": 1,
+      "middle_unique": false,
+      "center_dominant": false,
+      "has_header_text": false,
+      "text_coverage": 0.7872,
+      "palette": [
+        {
+          "hex": "#121214",
+          "share": 0.418
+        },
+        {
+          "hex": "#77443a",
+          "share": 0.212
+        },
+        {
+          "hex": "#b7918d",
+          "share": 0.177
+        },
+        {
+          "hex": "#ebebee",
+          "share": 0.123
+        },
+        {
+          "hex": "#267cbb",
+          "share": 0.07
+        }
+      ],
+      "brightness": 0.351,
+      "saturation": 0.487,
+      "contrast": 0.375,
+      "edge_density": 0.1973,
+      "_detail": {
+        "thirds": {
+          "middle_unique": false,
+          "center_dominant": false,
+          "flank_similarity_chisq": 223.737,
+          "middle_distance_chisq": 47.599,
+          "edge_energy_split": [
+            0.293,
+            0.344,
+            0.363
+          ]
+        },
+        "text": {
+          "text_coverage": 0.7872,
+          "has_header_band": false,
+          "text_boxes": 2033
+        },
+        "blob_count": 0
+      },
+      "video_id": "UW1SzjCZ6VE",
+      "title": "Every DIMENSION Explained in 9 Minutes "
+    },
+    {
+      "layout": "two_subject_versus",
+      "subject_count": 2,
+      "face_count": 2,
+      "middle_unique": false,
+      "center_dominant": false,
+      "has_header_text": false,
+      "text_coverage": 0.9248,
+      "palette": [
+        {
+          "hex": "#070507",
+          "share": 0.502
+        },
+        {
+          "hex": "#8394b1",
+          "share": 0.168
+        },
+        {
+          "hex": "#512f38",
+          "share": 0.15
+        },
+        {
+          "hex": "#eef2f0",
+          "share": 0.098
+        },
+        {
+          "hex": "#d8702a",
+          "share": 0.082
+        }
+      ],
+      "brightness": 0.28,
+      "saturation": 0.359,
+      "contrast": 0.374,
+      "edge_density": 0.1284,
+      "_detail": {
+        "thirds": {
+          "middle_unique": false,
+          "center_dominant": false,
+          "flank_similarity_chisq": 5.766,
+          "middle_distance_chisq": 4.352,
+          "edge_energy_split": [
+            0.306,
+            0.347,
+            0.347
+          ]
+        },
+        "text": {
+          "text_coverage": 0.9248,
+          "has_header_band": false,
+          "text_boxes": 2064
+        },
+        "blob_count": 0
+      },
+      "video_id": "0gwHOu8ZmkU",
+      "title": "Every Type Of Star Explained in 10 minutes"
+    },
+    {
+      "layout": "scene_no_clear_subject",
+      "subject_count": 0,
+      "face_count": 0,
+      "middle_unique": false,
+      "center_dominant": false,
+      "has_header_text": true,
+      "text_coverage": 0.863,
+      "palette": [
+        {
+          "hex": "#1c1619",
+          "share": 0.399
+        },
+        {
+          "hex": "#6b8a8e",
+          "share": 0.189
+        },
+        {
+          "hex": "#b43c26",
+          "share": 0.168
+        },
+        {
+          "hex": "#dcd5d6",
+          "share": 0.137
+        },
+        {
+          "hex": "#3a30ad",
+          "share": 0.108
+        }
+      ],
+      "brightness": 0.34,
+      "saturation": 0.512,
+      "contrast": 0.364,
+      "edge_density": 0.2088,
+      "_detail": {
+        "thirds": {
+          "middle_unique": false,
+          "center_dominant": false,
+          "flank_similarity_chisq": 35.979,
+          "middle_distance_chisq": 6.414,
+          "edge_energy_split": [
+            0.312,
+            0.345,
+            0.343
+          ]
+        },
+        "text": {
+          "text_coverage": 0.863,
+          "has_header_band": true,
+          "text_boxes": 2188
+        },
+        "blob_count": 0
+      },
+      "video_id": "KKDe7bRKgm8",
+      "title": "The SCARIEST Places In The Universe Explained in 11 Minutes"
+    },
+    {
+      "layout": "scene_no_clear_subject",
+      "subject_count": 0,
+      "face_count": 0,
+      "middle_unique": false,
+      "center_dominant": false,
+      "has_header_text": true,
+      "text_coverage": 0.6551,
+      "palette": [
+        {
+          "hex": "#0d0a0f",
+          "share": 0.497
+        },
+        {
+          "hex": "#48384a",
+          "share": 0.215
+        },
+        {
+          "hex": "#418cc5",
+          "share": 0.114
+        },
+        {
+          "hex": "#aa9586",
+          "share": 0.099
+        },
+        {
+          "hex": "#e5e7ea",
+          "share": 0.074
+        }
+      ],
+      "brightness": 0.26,
+      "saturation": 0.539,
+      "contrast": 0.353,
+      "edge_density": 0.1697,
+      "_detail": {
+        "thirds": {
+          "middle_unique": false,
+          "center_dominant": false,
+          "flank_similarity_chisq": 7.356,
+          "middle_distance_chisq": 9.308,
+          "edge_energy_split": [
+            0.357,
+            0.321,
+            0.323
+          ]
+        },
+        "text": {
+          "text_coverage": 0.6551,
+          "has_header_band": true,
+          "text_boxes": 1834
+        },
+        "blob_count": 0
+      },
+      "video_id": "_8GzSKgDBH8",
+      "title": "Every Way The Universe Could End Explained in 9 Minutes"
+    },
+    {
+      "layout": "scene_no_clear_subject",
+      "subject_count": 0,
+      "face_count": 0,
+      "middle_unique": false,
+      "center_dominant": false,
+      "has_header_text": false,
+      "text_coverage": 0.8846,
+      "palette": [
+        {
+          "hex": "#0e0b0f",
+          "share": 0.33
+        },
+        {
+          "hex": "#42333c",
+          "share": 0.22
+        },
+        {
+          "hex": "#edeceb",
+          "share": 0.169
+        },
+        {
+          "hex": "#717997",
+          "share": 0.155
+        },
+        {
+          "hex": "#c16c45",
+          "share": 0.126
+        }
+      ],
+      "brightness": 0.36,
+      "saturation": 0.476,
+      "contrast": 0.376,
+      "edge_density": 0.1974,
+      "_detail": {
+        "thirds": {
+          "middle_unique": false,
+          "center_dominant": false,
+          "flank_similarity_chisq": 130.629,
+          "middle_distance_chisq": 7.624,
+          "edge_energy_split": [
+            0.32,
+            0.32,
+            0.36
+          ]
+        },
+        "text": {
+          "text_coverage": 0.8846,
+          "has_header_band": false,
+          "text_boxes": 2079
+        },
+        "blob_count": 0
+      },
+      "video_id": "brNCEiOrlyU",
+      "title": "Every Type Of Galaxy Explained in 10 Minutes"
+    },
+    {
+      "layout": "single_subject",
+      "subject_count": 1,
+      "face_count": 1,
+      "middle_unique": false,
+      "center_dominant": false,
+      "has_header_text": true,
+      "text_coverage": 0.9083,
+      "palette": [
+        {
+          "hex": "#0f0a0c",
+          "share": 0.416
+        },
+        {
+          "hex": "#4f5266",
+          "share": 0.221
+        },
+        {
+          "hex": "#849db3",
+          "share": 0.161
+        },
+        {
+          "hex": "#e9eaec",
+          "share": 0.119
+        },
+        {
+          "hex": "#c25d2a",
+          "share": 0.083
+        }
+      ],
+      "brightness": 0.336,
+      "saturation": 0.372,
+      "contrast": 0.387,
+      "edge_density": 0.1818,
+      "_detail": {
+        "thirds": {
+          "middle_unique": false,
+          "center_dominant": false,
+          "flank_similarity_chisq": 3.504,
+          "middle_distance_chisq": 5.482,
+          "edge_energy_split": [
+            0.334,
+            0.321,
+            0.345
+          ]
+        },
+        "text": {
+          "text_coverage": 0.9083,
+          "has_header_band": true,
+          "text_boxes": 2313
+        },
+        "blob_count": 0
+      },
+      "video_id": "9zaruOUM_0o",
+      "title": "Every Type Of Planet Explained in 12 Minutes"
+    },
+    {
+      "layout": "scene_no_clear_subject",
+      "subject_count": 0,
+      "face_count": 0,
+      "middle_unique": false,
+      "center_dominant": false,
+      "has_header_text": true,
+      "text_coverage": 0.8933,
+      "palette": [
+        {
+          "hex": "#251b1c",
+          "share": 0.341
+        },
+        {
+          "hex": "#4d5a7e",
+          "share": 0.234
+        },
+        {
+          "hex": "#ab9eb0",
+          "share": 0.16
+        },
+        {
+          "hex": "#a78223",
+          "share": 0.151
+        },
+        {
+          "hex": "#efeeec",
+          "share": 0.113
+        }
+      ],
+      "brightness": 0.411,
+      "saturation": 0.55,
+      "contrast": 0.359,
+      "edge_density": 0.2302,
+      "_detail": {
+        "thirds": {
+          "middle_unique": false,
+          "center_dominant": false,
+          "flank_similarity_chisq": 35.474,
+          "middle_distance_chisq": 30.873,
+          "edge_energy_split": [
+            0.331,
+            0.356,
+            0.314
+          ]
+        },
+        "text": {
+          "text_coverage": 0.8933,
+          "has_header_band": true,
+          "text_boxes": 2440
+        },
+        "blob_count": 0
+      },
+      "video_id": "hAGNFusW1Ao",
+      "title": "Every STAGE Of Civilization Explained in 9 Minutes"
+    },
+    {
+      "layout": "scene_no_clear_subject",
+      "subject_count": 0,
+      "face_count": 0,
+      "middle_unique": false,
+      "center_dominant": false,
+      "has_header_text": false,
+      "text_coverage": 0.5839,
+      "palette": [
+        {
+          "hex": "#0c0b0d",
+          "share": 0.417
+        },
+        {
+          "hex": "#493029",
+          "share": 0.249
+        },
+        {
+          "hex": "#414eaa",
+          "share": 0.125
+        },
+        {
+          "hex": "#9497a3",
+          "share": 0.109
+        },
+        {
+          "hex": "#eeefee",
+          "share": 0.101
+        }
+      ],
+      "brightness": 0.274,
+      "saturation": 0.514,
+      "contrast": 0.352,
+      "edge_density": 0.1755,
+      "_detail": {
+        "thirds": {
+          "middle_unique": false,
+          "center_dominant": false,
+          "flank_similarity_chisq": 247.967,
+          "middle_distance_chisq": 117.724,
+          "edge_energy_split": [
+            0.367,
+            0.334,
+            0.299
+          ]
+        },
+        "text": {
+          "text_coverage": 0.5839,
+          "has_header_band": false,
+          "text_boxes": 1319
+        },
+        "blob_count": 0
+      },
+      "video_id": "spymcHcV4Cs",
+      "title": "The Most Disturbing Space Theories Explained"
+    },
+    {
+      "layout": "scene_no_clear_subject",
+      "subject_count": 0,
+      "face_count": 0,
+      "middle_unique": true,
+      "center_dominant": false,
+      "has_header_text": true,
+      "text_coverage": 0.7589,
+      "palette": [
+        {
+          "hex": "#241336",
+          "share": 0.397
+        },
+        {
+          "hex": "#801d40",
+          "share": 0.211
+        },
+        {
+          "hex": "#2e5ec6",
+          "share": 0.182
+        },
+        {
+          "hex": "#e88c17",
+          "share": 0.147
+        },
+        {
+          "hex": "#c2ceda",
+          "share": 0.063
+        }
+      ],
+      "brightness": 0.302,
+      "saturation": 0.776,
+      "contrast": 0.267,
+      "edge_density": 0.2073,
+      "_detail": {
+        "thirds": {
+          "middle_unique": true,
+          "center_dominant": false,
+          "flank_similarity_chisq": 76.001,
+          "middle_distance_chisq": 698.573,
+          "edge_energy_split": [
+            0.377,
+            0.349,
+            0.273
+          ]
+        },
+        "text": {
+          "text_coverage": 0.7589,
+          "has_header_band": true,
+          "text_boxes": 614
+        },
+        "blob_count": 0
+      },
+      "video_id": "sRENq4NZyXA",
+      "title": "What If We Replaced Our Sun With Other Stars?"
+    }
+  ],
+  "source_videos": [
+    {
+      "id": "GprjiFSsLOI",
+      "title": "Every Type Of Black Hole Explained in 11 Minutes",
+      "views": 1329860,
+      "view_multiple": 13.97,
+      "velocity_multiple": 6.02,
+      "url": "https://www.youtube.com/watch?v=GprjiFSsLOI"
+    },
+    {
+      "id": "UW1SzjCZ6VE",
+      "title": "Every DIMENSION Explained in 9 Minutes ",
+      "views": 520799,
+      "view_multiple": 5.47,
+      "velocity_multiple": 3.54,
+      "url": "https://www.youtube.com/watch?v=UW1SzjCZ6VE"
+    },
+    {
+      "id": "0gwHOu8ZmkU",
+      "title": "Every Type Of Star Explained in 10 minutes",
+      "views": 768602,
+      "view_multiple": 8.07,
+      "velocity_multiple": 2.84,
+      "url": "https://www.youtube.com/watch?v=0gwHOu8ZmkU"
+    },
+    {
+      "id": "KKDe7bRKgm8",
+      "title": "The SCARIEST Places In The Universe Explained in 11 Minutes",
+      "views": 215859,
+      "view_multiple": 2.27,
+      "velocity_multiple": 1.73,
+      "url": "https://www.youtube.com/watch?v=KKDe7bRKgm8"
+    },
+    {
+      "id": "_8GzSKgDBH8",
+      "title": "Every Way The Universe Could End Explained in 9 Minutes",
+      "views": 134768,
+      "view_multiple": 1.42,
+      "velocity_multiple": 0.39,
+      "url": "https://www.youtube.com/watch?v=_8GzSKgDBH8"
+    },
+    {
+      "id": "brNCEiOrlyU",
+      "title": "Every Type Of Galaxy Explained in 10 Minutes",
+      "views": 130955,
+      "view_multiple": 1.38,
+      "velocity_multiple": 2.41,
+      "url": "https://www.youtube.com/watch?v=brNCEiOrlyU"
+    },
+    {
+      "id": "9zaruOUM_0o",
+      "title": "Every Type Of Planet Explained in 12 Minutes",
+      "views": 129051,
+      "view_multiple": 1.34,
+      "velocity_multiple": 0.52,
+      "url": "https://www.youtube.com/watch?v=9zaruOUM_0o"
+    },
+    {
+      "id": "hAGNFusW1Ao",
+      "title": "Every STAGE Of Civilization Explained in 9 Minutes",
+      "views": 61344,
+      "view_multiple": 0.47,
+      "velocity_multiple": 0.46,
+      "url": "https://www.youtube.com/watch?v=hAGNFusW1Ao"
+    },
+    {
+      "id": "spymcHcV4Cs",
+      "title": "The Most Disturbing Space Theories Explained",
+      "views": 45512,
+      "view_multiple": 0.35,
+      "velocity_multiple": 0.16,
+      "url": "https://www.youtube.com/watch?v=spymcHcV4Cs"
+    },
+    {
+      "id": "sRENq4NZyXA",
+      "title": "What If We Replaced Our Sun With Other Stars?",
+      "views": 38959,
+      "view_multiple": 0.3,
+      "velocity_multiple": 0.09,
+      "url": "https://www.youtube.com/watch?v=sRENq4NZyXA"
+    }
+  ],
+  "saved_at": "2026-07-27T10:07:16.369843+00:00",
+  "bends": [
+    {
+      "topic": "Asteroids",
+      "search_term": "asteroid facts",
+      "distance": "adjacent",
+      "proposed_title": "Every Scariest Asteroid Explained",
+      "why": "The audience exists because asteroids pose a threat to Earth and people are interested in learning more about them",
+      "audience_age_skew": "older",
+      "rpm_guess": "medium",
+      "saturation": {
+        "checked": true,
+        "search_term": "asteroid facts",
+        "demand_median_views": 359880,
+        "demand_max_views": 25979684,
+        "competition_count": 0,
+        "competition_strength": 0,
+        "competitors": [],
+        "verdict": "open"
+      },
+      "opportunity": 78.0,
+      "title_similarity_to_source": 0.389
+    },
+    {
+      "topic": "Dark Matter",
+      "search_term": "dark matter facts",
+      "distance": "lateral",
+      "proposed_title": "Every Scariest Dark Matter Theory Explained",
+      "why": "The audience exists because dark matter is a mysterious component that makes up a large portion of the universe's mass-energy budget",
+      "audience_age_skew": "older",
+      "rpm_guess": "high",
+      "saturation": {
+        "checked": true,
+        "search_term": "dark matter facts",
+        "demand_median_views": 191636,
+        "demand_max_views": 12287569,
+        "competition_count": 0,
+        "competition_strength": 0,
+        "competitors": [],
+        "verdict": "open"
+      },
+      "opportunity": 76.1,
+      "title_similarity_to_source": 0.358
+    },
+    {
+      "topic": "Gravitational Waves",
+      "search_term": "gravitational wave facts",
+      "distance": "lateral",
+      "proposed_title": "Every Most Disturbing Gravitational Wave Explained",
+      "why": "The audience exists because gravitational waves have opened a new window into the universe, allowing us to study cosmic events in ways previously impossible",
+      "audience_age_skew": "older",
+      "rpm_guess": "high",
+      "saturation": {
+        "checked": true,
+        "search_term": "gravitational wave facts",
+        "demand_median_views": 89723,
+        "demand_max_views": 142798548,
+        "competition_count": 0,
+        "competition_strength": 0,
+        "competitors": [],
+        "verdict": "open"
+      },
+      "opportunity": 65.8,
+      "title_similarity_to_source": 0.496
+    },
+    {
+      "topic": "Cosmic Rays",
+      "search_term": "cosmic ray facts",
+      "distance": "lateral",
+      "proposed_title": "Every Type Of Cosmic Ray Explained in 11 Minutes",
+      "why": "The audience exists because cosmic rays are high-energy particles that can provide insights into the universe's most powerful events",
+      "audience_age_skew": "older",
+      "rpm_guess": "medium",
+      "saturation": {
+        "checked": true,
+        "search_term": "cosmic ray facts",
+        "demand_median_views": 115,
+        "demand_max_views": 423846,
+        "competition_count": 1,
+        "competition_strength": 24,
+        "competitors": [
+          {
+            "title": "Every Type Of Cosmic Ray Explained in 10 Minutes",
+            "views": 24,
+            "channel": "Cosmic Doodles",
+            "url": "https://www.youtube.com/watch?v=TyYKxAV27pI"
+          }
+        ],
+        "verdict": "weak-demand"
+      },
+      "opportunity": 5.0,
+      "title_similarity_to_source": 0.735
+    },
+    {
+      "topic": "Comets",
+      "search_term": "comet facts",
+      "distance": "adjacent",
+      "proposed_title": "Every Most Disturbing Comet Explained in 10 minutes",
+      "why": "The audience exists because comets have been observed for centuries and people are fascinated by their beauty and mystery",
+      "audience_age_skew": "older",
+      "rpm_guess": "medium",
+      "saturation": {
+        "checked": true,
+        "search_term": "comet facts",
+        "demand_median_views": 4640,
+        "demand_max_views": 4078274,
+        "competition_count": 0,
+        "competition_strength": 0,
+        "competitors": [],
+        "verdict": "weak-demand"
+      },
+      "opportunity": 5.0,
+      "title_similarity_to_source": 0.593
+    },
+    {
+      "topic": "Nebulae",
+      "search_term": "nebulae facts",
+      "distance": "adjacent",
+      "proposed_title": "Every Type Of Nebula Explained",
+      "why": "The audience exists because nebulae are breathtakingly beautiful and play a crucial role in the formation of stars",
+      "audience_age_skew": "older",
+      "rpm_guess": "medium",
+      "saturation": {
+        "checked": false,
+        "reason": "outside search budget"
+      },
+      "opportunity": 0.0,
+      "title_similarity_to_source": 0.574
+    },
+    {
+      "topic": "Exoplanets",
+      "search_term": "exoplanet facts",
+      "distance": "adjacent",
+      "proposed_title": "Every Most Disturbing Exoplanet Explained in 10 minutes",
+      "why": "The audience exists because exoplanets have the potential to harbor life and expand our understanding of the universe",
+      "audience_age_skew": "older",
+      "rpm_guess": "medium",
+      "saturation": {
+        "checked": false,
+        "reason": "outside search budget"
+      },
+      "opportunity": 0.0,
+      "title_similarity_to_source": 0.581
+    },
+    {
+      "topic": "Supernovae",
+      "search_term": "supernova facts",
+      "distance": "adjacent",
+      "proposed_title": "Every Type Of Supernova Explained",
+      "why": "The audience exists because supernovae are catastrophic events that can briefly outshine an entire galaxy",
+      "audience_age_skew": "older",
+      "rpm_guess": "medium",
+      "saturation": {
+        "checked": false,
+        "reason": "outside search budget"
+      },
+      "opportunity": 0.0,
+      "title_similarity_to_source": 0.569
+    },
+    {
+      "topic": "Pulsars",
+      "search_term": "pulsar facts",
+      "distance": "lateral",
+      "proposed_title": "Every Scariest Pulsar Explained in 9 Minutes",
+      "why": "The audience exists because pulsars are incredibly dense objects that emit intense beams of radiation",
+      "audience_age_skew": "older",
+      "rpm_guess": "low",
+      "saturation": {
+        "checked": false,
+        "reason": "outside search budget"
+      },
+      "opportunity": 0.0,
+      "title_similarity_to_source": 0.686
+    },
+    {
+      "topic": " Meteor Showers",
+      "search_term": "meteor shower facts",
+      "distance": "adjacent",
+      "proposed_title": "Every Scariest Meteor Shower Explained in 9 Minutes",
+      "why": "The audience exists because meteor showers are spectacular events that can be observed from Earth",
+      "audience_age_skew": "mixed",
+      "rpm_guess": "low",
+      "saturation": {
+        "checked": false,
+        "reason": "outside search budget"
+      },
+      "opportunity": 0.0,
+      "title_similarity_to_source": 0.644
+    }
+  ],
+  "retired": "2026-08-29: enumeration format with no structural tension. Produced an encyclopedia recitation. Superseded by levels-of."
+}
