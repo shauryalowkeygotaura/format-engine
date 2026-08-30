@@ -131,3 +131,10 @@ MAX_TITLE_SIMILARITY_TO_SOURCE = 0.72   # above this you are cloning the title
 MAX_SELF_SIMILARITY_ROLLING = 0.80      # your own last N briefs vs each other
 SELF_SIMILARITY_WINDOW = 8
 MIN_SUBSTANCE_ITEMS = 3                 # original facts/angles required per brief
+
+# Narration voice floors, measured from nine working channels in the levels-of
+# and your-life-as formats (431K-4.1M views). Their medians: 6.1 second-person
+# uses per 100 words, 8-word sentences. Ours scored 0.0 and 13, which is the
+# mechanical definition of the "encyclopedia recitation" complaint.
+MIN_SECOND_PERSON_PER_100 = 4.0
+MAX_MEDIAN_SENTENCE_WORDS = 12

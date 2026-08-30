@@ -25,6 +25,10 @@ your own uploads converging into a template.
 from __future__ import annotations
 
 import json
+import re
+import statistics
+statistics
+re
 from collections import Counter
 from datetime import datetime, timezone
 
@@ -68,6 +72,24 @@ video someone watches from one they close in eight seconds.
 - Ban vague value-language. "Valuable insights", "fascinating", "plays a crucial
   role", "it is important to note", "sheds light on" carry no information. Say
   the actual thing instead.
+- WRITE IN SECOND PERSON, PRESENT TENSE. "You're four years old in a cramped
+  kindergarten" beats "Visible light dances across the polar horizon". Measured
+  across nine working channels in these formats, narration averages 6.1 uses of
+  you/your per 100 words; a script at 0 reads as an encyclopedia entry, because
+  an encyclopedia is precisely the register that never addresses its reader.
+- SHORT SENTENCES. Working scripts run a median of 8 words per sentence. Break
+  the long ones. "You're four." "You have nothing left." "You're done."
+- NAME THINGS. 3.2 proper nouns per 100 words in working scripts. Marco.
+  Modesto. Kim Il-Sung. Night of the Living Dead. Not "satellites in low Earth
+  orbit experience mild drag".
+- ONE COMPARISON-JOKE PER BEAT, built as a simile: "the problem solving skills
+  of a broken toaster", "slower than your great aunt Gertrude after Thanksgiving
+  dinner". This is a template, not a talent.
+- HAVE AN OPINION. "Their lyrics are stupid. No redeemable qualities
+  whatsoever." Encyclopedias never judge; every script that works does.
+- NEVER DESCRIBE YOUR OWN STRUCTURE. "The axis of escalation is economic and
+  infrastructural damage" is the video explaining its own format to the viewer.
+  No working script does this. Show the escalation, do not announce it.
 - DELIVER WHAT THE TITLE PROMISES. If the title says "scariest", the beats must
   be frightening. If it implies a countdown or a ranking, the beats must count
   down or rank. A title that promises a list and a body that delivers an
@@ -143,12 +165,17 @@ def _completion_budget(words: int) -> int:
     return max(1500, min(want, _TPM_CEILING - _PROMPT_HEADROOM))
 
 
-def build(spec: dict, bend: dict, *, words: int = 1200, model: str | None = None) -> dict:
+def build(spec: dict, bend: dict, *, words: int = 2500, model: str | None = None) -> dict:
     """Generate the brief. One Groq call, zero YouTube quota."""
     tf = spec.get("title_format", {})
     titles = spec.get("titles", [])[:8]
     title = bend.get("proposed_title") or f"{bend.get('topic','')}"
 
+    # Default raised 1200 -> 2500. Nine working channels in these formats run a
+    # 2,462-word median (1,990-3,264), which at ~165 wpm is the 14-15 minute
+    # runtime the format actually wins at. Our 313-word script was 8x short.
+    # NOTE: length drives cost roughly linearly - TTS, shot count and b-roll
+    # fetches all scale with it.
     # ~150 spoken words per beat keeps each visual on screen roughly 45-60s at
     # normal narration pace. Clamped so a 400-word test still gets structure and
     # a 3000-word doc does not ask for forty beats in one completion.
@@ -312,6 +339,33 @@ def gate(brief: dict, spec: dict) -> dict:
         failures.append(
             "Repeated filler: " + ", ".join(f"'{h}' x{body.count(h)}" for h in hits) +
             ". These phrases carry no information. Say the actual thing instead.")
+
+    # 5. Does the narration address the viewer at all?
+    narration = " ".join(b.get("narration", "") for b in brief.get("beats", [])
+                         if isinstance(b, dict))
+    nwords = max(1, len(narration.split()))
+    you = len(re.findall(r"(you|your|you're|yours|yourself)", narration, re.I))
+    rate = round(100 * you / nwords, 1)
+    ok = rate >= config.MIN_SECOND_PERSON_PER_100
+    checks.append({"check": "second_person_per_100w", "value": rate,
+                   "limit": config.MIN_SECOND_PERSON_PER_100, "pass": ok})
+    if not ok:
+        failures.append(
+            f"Narration uses second person {rate} times per 100 words; working "
+            f"channels in this format average 6.1. At {rate} the script reads as "
+            f"an encyclopedia entry rather than something happening to the "
+            f"viewer. Rewrite in second person, present tense.")
+
+    # 6. Sentence length. Working scripts sit at a median of 8 words.
+    sents = [s for s in re.split(r"(?<=[.!?])\s+", narration) if s.strip()]
+    med = statistics.median([len(s.split()) for s in sents]) if sents else 0
+    ok = med <= config.MAX_MEDIAN_SENTENCE_WORDS
+    checks.append({"check": "median_sentence_words", "value": med,
+                   "limit": config.MAX_MEDIAN_SENTENCE_WORDS, "pass": ok})
+    if not ok:
+        failures.append(
+            f"Median sentence is {med} words against a working median of 8. "
+            f"Long sentences are what makes narration sound like a bulletin.")
 
     unchecked = [s["claim"] for s in substance if s.get("needs_check")]
     if unchecked:

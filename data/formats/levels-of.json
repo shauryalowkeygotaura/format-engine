@@ -9,7 +9,7 @@
     "note": "estimate from category, not measured"
   },
   "safety_flags": [],
-  "notes": "Escalating ranking. Each level MUST beat the previous one on a single stated axis, and that axis is named in the first 10 seconds. The top level is withheld until the end. CRITICAL: never begin a beat's narration with the word Level or with a number. The level number belongs in the on-screen visual, not the spoken line. 'It starts with something the size of a grain of sand' is the opening; 'Level 1: grain of sand' is a drone and will be rejected. Every beat must open on a DIFFERENT word.",
+  "notes": "Escalating ranking. Each level MUST beat the previous one on a single stated axis. The top level is withheld until the end. OPEN EVERY BEAT WITH THE LEVEL LABEL: 'Level one, trash apocalypse.' / 'Level one, the surface web.' This was previously forbidden here on the hand-authored theory that the number belongs on screen. That was wrong: every working channel in this format does exactly this, every level - measured at 11 sentence-starts in 7 Levels Of Zombie Apocalypse (824K), 12 in Illuminati (1.6M), 7 in Internet (1.1M), 6 in Movie Watching, 4 in Rapper (4.1M). Start at Level 1 within the first ~6 words: no preamble, no thesis statement, no explaining the format. Then a vivid description, then named examples. Write in SECOND PERSON, present tense, short sentences.",
   "titles": [
     "The 7 Levels Of Asteroid Impact",
     "The 6 Levels Of Solar Storm",
@@ -102,5 +102,6 @@
   "thumbnail_analyses": [],
   "source_videos": [],
   "saved_at": "2026-08-29",
-  "bends": []
+  "bends": [],
+  "notes_superseded": "Escalating ranking. Each level MUST beat the previous one on a single stated axis, and that axis is named in the first 10 seconds. The top level is withheld until the end. CRITICAL: never begin a beat's narration with the word Level or with a number. The level number belongs in the on-screen visual, not the spoken line. 'It starts with something the size of a grain of sand' is the opening; 'Level 1: grain of sand' is a drone and will be rejected. Every beat must open on a DIFFERENT word."
 }
