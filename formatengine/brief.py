@@ -116,6 +116,10 @@ HARD REQUIREMENTS - a response that misses these is rejected:
   of the topic. No two may restate the same fact.
 - Rewrite the target title so it is natural English. Keep the format's word
   order and rhythm, fix any grammar the template introduced.
+- SECOND PERSON. The narration must address the viewer as "you"/"your" at least
+  6 times per 100 words, spread across every beat. A script that never says
+  "you" is rejected outright. Write what is happening TO THE VIEWER: "You're in
+  the kitchen when the lights stutter", not "Residential lighting flickers".
 - A non-empty "hook" that creates tension in its first sentence. A brief with no
   hook is rejected outright by the renderer.
 - "thumbnail_text": 2 to 4 words that DO NOT repeat the title or any fragment of
@@ -318,7 +322,18 @@ def gate(brief: dict, spec: dict) -> dict:
             "ships a video that opens cold on its first expository beat. That is "
             "the single biggest reason a faceless video loses the first 8 seconds.")
 
-    openers = [n.split()[0].strip(_PUNCT).lower() for n in narrations if n.split()]
+    # Strip a leading "Level three," label before judging opener variety.
+    # The levels-of spec REQUIRES every beat to open with it, because every
+    # working channel in the format does; without this strip, the two rules
+    # contradict and a correct script is rejected for "8 of 8 beats open with
+    # the word level". Variety is measured on what follows the label.
+    _LVL = re.compile(r"^\s*level\s+(?:\d+|one|two|three|four|five|six|seven|eight|nine|ten)\s*[,:.\-]?\s*",
+                      re.I)
+    _ART = re.compile(r"^\s*(?:the|a|an|your|you're)\s+", re.I)
+    # Also drop a leading article: after the label is stripped, every beat
+    # legitimately starts "the <name>" and the gate would fire on "the".
+    stripped = [_ART.sub("", _LVL.sub("", n)) for n in narrations]
+    openers = [n.split()[0].strip(_PUNCT).lower() for n in stripped if n.split()]
     if openers:
         top, n_top = Counter(openers).most_common(1)[0]
         limit = max(2, len(openers) // 3)
@@ -341,10 +356,18 @@ def gate(brief: dict, spec: dict) -> dict:
             ". These phrases carry no information. Say the actual thing instead.")
 
     # 5. Does the narration address the viewer at all?
-    narration = " ".join(b.get("narration", "") for b in brief.get("beats", [])
-                         if isinstance(b, dict))
+    # Reuse the narrations already derived above rather than re-deriving them.
+    # The duplicate derivation returned an empty string here and scored every
+    # script 0.0, which read as "the model ignores second person" when the
+    # script in front of me used "you" 45 times in 620 words.
+    narration = " ".join(narrations)
     nwords = max(1, len(narration.split()))
-    you = len(re.findall(r"(you|your|you're|yours|yourself)", narration, re.I))
+    _PRON = {"you", "your", "you're", "yours", "yourself", "youre"}
+    # Tokenise and match a set rather than a word-boundary regex. The regex
+    # literal here was mangled by an escaping layer into a backslash followed
+    # by "b", which matches nothing, so every script scored 0.0 and looked like
+    # a model that refused to write second person. It was the counter.
+    you = sum(1 for w in re.split(r"[^A-Za-z']+", narration) if w.lower() in _PRON)
     rate = round(100 * you / nwords, 1)
     ok = rate >= config.MIN_SECOND_PERSON_PER_100
     checks.append({"check": "second_person_per_100w", "value": rate,
