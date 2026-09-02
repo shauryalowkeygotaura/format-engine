@@ -27,6 +27,9 @@ from __future__ import annotations
 import json
 import re
 import statistics
+import time
+
+NEWLINE = chr(10)
 statistics
 re
 from collections import Counter
@@ -163,6 +166,32 @@ _TPM_CEILING = 8000
 _PROMPT_HEADROOM = 1200
 
 
+
+SCRIPT_MORE_USER = """You are continuing a script that is already underway. Do not
+restart it and do not re-introduce the topic.
+
+Title: {title}
+Format rules (these OVERRIDE anything that conflicts): {notes}
+Topic: {topic}
+
+The script so far ENDED with this line:
+{tail}
+
+Write ONLY beats {first} through {last} inclusive, continuing from that line,
+totalling roughly {words} words of narration.
+
+HARD REQUIREMENTS - a response that misses these is rejected:
+- Exactly {n} objects in "beats", numbered {first}..{last}.
+- SECOND PERSON throughout: address the viewer as "you"/"your" at least 6 times
+  per 100 words. A beat that never says "you" is rejected.
+- Short sentences, median around 8 words.
+- Each beat opens on a DIFFERENT word from the one before it.
+- Escalate. Every beat must be worse or bigger than the one before it.
+
+Return ONLY JSON of the form:
+{{"beats": [{{"beat": {first}, "narration": "...", "visual": "...", "seconds": 30}}]}}
+"""
+
 def _completion_budget(words: int) -> int:
     """Completion tokens to reserve for a `words`-long script."""
     want = int(words) * 3 + 1500
@@ -188,6 +217,16 @@ def build(spec: dict, bend: dict, *, words: int = 2500, model: str | None = None
     # whole brief; gate() is the floor, not the target.
     n_substance = config.MIN_SUBSTANCE_ITEMS + 2
 
+    # Groq's ceiling is 8000 tokens PER MINUTE and counts prompt plus reserved
+    # completion together, so a 2500-word script cannot be asked for in one
+    # call. Sizing calls is not sufficient either: the cap is per MINUTE, so
+    # several legal calls fired back to back still breach it, which is why the
+    # chunks below are paced apart rather than merely small.
+    if _completion_budget(words) > config.TPM_SAFE_COMPLETION:
+        return _build_chunked(spec, bend, words=words, model=model,
+                              n_beats=n_beats, n_substance=n_substance,
+                              title=title, tf=tf, titles=titles)
+
     out = chat_json(
         SCRIPT_SYSTEM,
         SCRIPT_USER.format(
@@ -210,6 +249,81 @@ def build(spec: dict, bend: dict, *, words: int = 2500, model: str | None = None
                    ("distance", "opportunity", "why", "search_term", "saturation")}
     out["thumbnail_spec"] = thumbnail_spec(spec, bend)
     out["generated_at"] = datetime.now(timezone.utc).isoformat()
+    return out
+
+
+
+def _build_chunked(spec, bend, *, words, model, n_beats, n_substance,
+                   title, tf, titles) -> dict:
+    """Generate a long script across several paced calls.
+
+    The first call establishes the shell (title, hook, substance, thumbnail
+    text) plus the opening beats. Each later call adds beats only, and is given
+    the previous chunk's closing line so the script continues rather than
+    restarting every few beats.
+
+    Partial output is kept on failure: a short script can still be judged by the
+    gate, whereas an exception loses everything already paid for.
+    """
+    first_n = min(n_beats, config.CHUNK_BEATS)
+    first_words = max(200, round(words * first_n / n_beats))
+
+    out = chat_json(
+        SCRIPT_SYSTEM,
+        SCRIPT_USER.format(
+            template=tf.get("template", "{topic}"),
+            archetype=tf.get("archetype", "other"),
+            notes=spec.get("notes") or "none",
+            titles=NEWLINE.join("- " + str(x) for x in titles),
+            topic=bend.get("topic", ""),
+            title=title,
+            words=first_words,
+            n_beats=first_n,
+            n_substance=n_substance,
+            second_person=bool(tf.get("second_person_rate", 0) >= 0.5),
+        ),
+        model=model, temperature=0.75,
+        max_tokens=_completion_budget(first_words),
+    )
+    beats = [b for b in (out.get("beats") or []) if isinstance(b, dict)]
+    made = len(beats)
+    print("  chunk 1 - " + str(made) + "/" + str(n_beats) + " beats")
+
+    while made < n_beats:
+        take = min(config.CHUNK_BEATS, n_beats - made)
+        chunk_words = max(200, round(words * take / n_beats))
+        tail = (beats[-1].get("narration", "") if beats else "")[-400:]
+        time.sleep(config.CHUNK_GAP_SECONDS)
+        try:
+            more = chat_json(
+                SCRIPT_SYSTEM,
+                SCRIPT_MORE_USER.format(
+                    title=out.get("title") or title,
+                    notes=spec.get("notes") or "none",
+                    topic=bend.get("topic", ""),
+                    tail=tail,
+                    first=made + 1, last=made + take, n=take,
+                    words=chunk_words),
+                model=model, temperature=0.75,
+                max_tokens=_completion_budget(chunk_words),
+            )
+        except Exception as exc:
+            print("  chunk failed (" + type(exc).__name__ + "); keeping "
+                  + str(made) + " beats")
+            break
+        got = [b for b in (more.get("beats") or []) if isinstance(b, dict)
+               and (b.get("narration") or "").strip()]
+        if not got:
+            break
+        beats.extend(got)
+        made = len(beats)
+        total = sum(len((b.get("narration") or "").split()) for b in beats)
+        print("  chunk ok - " + str(made) + "/" + str(n_beats)
+              + " beats, " + str(total) + " words")
+
+    for i, b in enumerate(beats, 1):
+        b["beat"] = i
+    out["beats"] = beats
     return out
 
 

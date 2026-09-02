@@ -138,3 +138,14 @@ MIN_SUBSTANCE_ITEMS = 3                 # original facts/angles required per bri
 # mechanical definition of the "encyclopedia recitation" complaint.
 MIN_SECOND_PERSON_PER_100 = 4.0
 MAX_MEDIAN_SENTENCE_WORDS = 12
+
+# Groq free tier is 8000 tokens per MINUTE and counts prompt + reserved
+# completion together, so one call cannot cover a 2500-word script (which alone
+# reserves ~9000). Beats are generated in paced chunks instead.
+# Observed: a 1200-word script (budget 5100) generates fine in ONE call, while
+# 2500 words was refused with 'Requested 8393, Limit 8000'. 5200 keeps the
+# known-working case single-call and sends only genuinely oversized scripts
+# down the slower chunked path.
+TPM_SAFE_COMPLETION = 5200      # max_tokens any single call may reserve
+CHUNK_BEATS = 4                 # beats per continuation call
+CHUNK_GAP_SECONDS = 35          # spacing, because the cap is per minute
