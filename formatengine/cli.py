@@ -17,7 +17,7 @@ import sys
 
 from . import bend as bend_mod
 from . import brief as brief_mod
-from . import config, discover, packaging, store
+from . import config, discover, feedback, packaging, store
 from .llm import LLMError
 from .outlier import format_score, profile
 from .yt import QuotaExhausted, YouTube, YouTubeError, valid_id
@@ -333,6 +333,54 @@ def cmd_verify_thumb(args, yt: YouTube) -> int:
     return 0 if not misses else 1
 
 
+
+def cmd_perf(args, yt: YouTube) -> int:
+    """How did OUR uploads actually do, versus the source-channel priors."""
+    if getattr(args, "attach", None):
+        title, vid = args.attach
+        ok = feedback.attach_video(title, vid)
+        print(f"  {'linked' if ok else 'NO MATCH for'} {title[:50]!r} -> {vid}")
+        return 0 if ok else 1
+
+    if getattr(args, "refresh", False):
+        # Same handling as every other quota-spending command: a 403 must read
+        # as "you are out of quota", not as a traceback.
+        try:
+            res = feedback.refresh(yt)
+        except QuotaExhausted as e:
+            print(f"  out of quota: {e}", file=sys.stderr)
+            return 1
+        except YouTubeError as e:
+            print(f"  youtube error: {e}", file=sys.stderr)
+            return 1
+        print(f"  checked {res['checked']}, updated {res['updated']}"
+              + (f" ({res['note']})" if res.get("note") else ""))
+
+    st = feedback.status()
+    print(f"\n  shipped {st['shipped']} | with video id {st['with_video_id']} "
+          f"| with performance {st['with_performance']}")
+    print(f"  loop: {st['verdict']}")
+
+    rows = feedback.format_performance()
+    if not rows:
+        print("\n  no performance data yet. Link an upload first:")
+        print("    python -m formatengine perf --attach \"<brief title>\" <videoId>")
+        print("  then, a few days later:  python -m formatengine perf --refresh")
+        return 0
+
+    print(f"\n  {'format':<26}{'n':>4}{'median views':>14}{'best':>10}")
+    print("  " + "-" * 54)
+    for r in rows:
+        flag = "" if r["enough_data"] else "  (anecdote)"
+        # Format the numbers first, then pad. Applying a width to a comma
+        # format spec silently collides once the value is wide enough, which
+        # ran two 10-digit view counts together as one unreadable column.
+        med = f"{r['median_views']:,}"
+        best = f"{r['best']:,}"
+        print(f"  {r['format_slug']:<26}{r['n']:>4}{med:>16}{best:>16}{flag}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="formatengine", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -364,6 +412,13 @@ def build_parser() -> argparse.ArgumentParser:
     dc.set_defaults(fn=cmd_deconstruct)
 
     sub.add_parser("formats", help="list saved formats").set_defaults(fn=cmd_formats)
+
+    pf = sub.add_parser("perf", help="how OUR uploads did (closes the loop)")
+    pf.add_argument("--refresh", action="store_true",
+                    help="pull public stats for linked uploads (1 quota unit per 50)")
+    pf.add_argument("--attach", nargs=2, metavar=("TITLE", "VIDEO_ID"),
+                    help="link a shipped brief to the video it became")
+    pf.set_defaults(fn=cmd_perf)
 
     b = sub.add_parser("bend", help="generate + saturation-check niche bends")
     b.add_argument("format", help="format slug")
