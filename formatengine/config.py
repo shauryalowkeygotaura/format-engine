@@ -137,6 +137,15 @@ MIN_SUBSTANCE_ITEMS = 3                 # original facts/angles required per bri
 # and your-life-as formats (431K-4.1M views). Their medians: 6.1 second-person
 # uses per 100 words, 8-word sentences. Ours scored 0.0 and 13, which is the
 # mechanical definition of the "encyclopedia recitation" complaint.
+# Graphic bodily-harm markers tolerated in one script. A brief on 2026-09-11
+# passed every structural check while describing injury and bodily decay in
+# sustained clinical detail across all four beats, in a space-explainer format.
+# Structure cannot see tone. Some peril language is fine and these formats trade
+# on stakes, so this is not zero; saturation is what signals the script has
+# drifted into horror. Policy heuristic aimed at YouTube advertiser-friendliness,
+# not a measurement, and labelled as such wherever it surfaces.
+MAX_GORE_MARKERS = 4
+
 MIN_SECOND_PERSON_PER_100 = 4.0
 MAX_MEDIAN_SENTENCE_WORDS = 12
 

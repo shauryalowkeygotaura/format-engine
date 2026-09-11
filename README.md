@@ -256,6 +256,36 @@ separate them. Open a new format with your strongest idea rather than saving it.
 Full method, tables and knowledge gaps:
 `Deliverables/anime-analysis-interest-factor-research-2026-09-04.md` in the vault.
 
+## Why `brief` is slow, and why that is not a bug
+
+Groq's free tier meters **output tokens per minute**, and the number is small.
+Measured live on 2026-09-11:
+
+```
+429 ... on output tokens per minute (OTPM): Limit 1000, Requested 4500
+```
+
+It is checked against `max_tokens` **before** any tokens are generated, so a
+generous reservation is refused outright even when the reply would have been
+short. Three consequences, all of them baked into the config:
+
+- No single call may reserve more than `TPM_SAFE_COMPLETION` (900).
+- Scripts are generated in small chunks (`CHUNK_BEATS = 2`, roughly 300 words).
+- Chunks are spaced `CHUNK_GAP_SECONDS` (65) apart, which **must** exceed 60,
+  because the window is per MINUTE.
+
+So a 3-beat brief takes two or three minutes, most of it deliberate waiting.
+Run it in the background rather than watching it.
+
+The shell (hook, substance, thumbnail text) gets its **own** call, before any
+beats. When shell and beats shared a call, the model spent the whole 860-token
+budget on beats and returned zero substance items every time, which the
+differentiation gate correctly blocked as a reskin.
+
+If you point this at a paid tier or a model with a higher ceiling, raise
+`GROQ_OTPM_LIMIT` (env) and `TPM_SAFE_COMPLETION`, and the chunking will
+naturally stop triggering.
+
 ## The differentiation gate
 
 The tutorials optimise a single variable: similarity to a proven video. *"The

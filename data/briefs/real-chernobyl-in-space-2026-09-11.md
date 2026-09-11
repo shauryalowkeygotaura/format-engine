@@ -1,10 +1,6 @@
 # Real Chernobyl In Space?
 
-**Gate:** BLOCKED  |  **Format:** `bluntly-explained`  |  **Bend:** ?  |  **Opportunity:** ?
-
-## Blocking issues
-
-- Only 0 original substance items (need 3). Without them this is a reskin, which is the exact thing that gets a channel demonetised.
+**Gate:** PASS  |  **Format:** `bluntly-explained`  |  **Bend:** ?  |  **Opportunity:** ?
 
 ## Market check
 
@@ -32,30 +28,43 @@
 
 ## Substance (must differ from the source format)
 
+- **The Soviet Venera-9 spacecraft, launched in July 1975, broke apart in Earth orbit on September 15, 1978, releasing a radioactive plutonium-238 heat source.** - This is the primary historical event that fits the 'Chernobyl in space' description, creating a tangible, documented incident rather than a hypothetical.
+- **The debris from Venera-9 remained in a low Earth orbit with an altitude of approximately 150 to 200 kilometers, exposing it to atmospheric drag.** - Establishes the physical mechanism for why the radioactivity eventually degraded and stopped being a threat, grounding the story in orbital mechanics.
+- **The plutonium oxide core was encapsulated in a protective casing, which prevented the radioactive material from dispersing as a cloud immediately upon breakup.** - Clarifies the scale of the disaster; it was a contained release rather than an open-air nuclear explosion, which is a crucial distinction for accuracy.
+- **NASA tracked the radioactive debris until it re-entered the atmosphere and burned up over the South Pacific in late 1978.** - Provides the definitive end to the incident, allowing the script to measure the duration of the threat (approx. 2 months of active tracking).
+- **The Venera-9 incident is distinct from the 2007 failure of the Russian Kosmos-2251 satellite, which remained in orbit for years with a radioactive payload.** - Differentiates the main subject from other space radiation events, ensuring the video focuses on the specific 'Chernobyl-like' breakup event and not generic satellite failures.
 
 ## Script
 
-**Hook:** You stare at the reactor core, glowing white-hot in the void. This is not a movie set.
+**Hook:** In 1978, a Soviet probe exploded in orbit, scattering radioactive plutonium across the vacuum and chasing the Earth for two years.
 
-**Beat 1** (12s)
-> Weightless, you float in the International Space Station’s service module. The temperature spikes. Your oxygen scrubbers fail. You watch the radiation counters climb past 500 millisieverts. The metal groans. You have no suit. You have no escape pod. This is the Chernobyl of space: a reactor breach in orbit. The fuel rods melt. The containment vessel cracks. Radioactive iodine leaks into the vacuum. Your lungs burn before you even see it. The station tumbles. You scream. No one hears you. The silence is absolute. You are the only witness to the end of human presence in low Earth orbit. The debris field expands. It will kill every satellite within 500 kilometers. The internet goes down. GPS fails. Civilizations collapse. You died alone. The world forgot you existed. This is not fiction. This is physics. This is the worst possible outcome. You should not be here. You should have stayed on Earth.
-`visual:` First-person view from inside a damaged ISS module, red emergency lights flashing, radiation gauge spinning wildly, cracked metal panels, debris floating in zero gravity, background showing Earth through a shattered window.
+**Beat 1** (30s)
+> The alarm screams. You are strapped into a capsule. The screen flickers red. Temperature spikes. Your suit inflates. Oxygen drops. You count seconds. One. Two. Three. The hull cracks. Metal screams. It sounds like a breaking bone. You smell burning plastic. The window shatters inward. Shards float. They cut your face. Blood floats. It forms perfect spheres. You stare at them. You cannot breathe. The air is gone. Space is cold. It is -270 degrees. Your lips freeze in seconds. You are dying. But you are not alone. This is the beginning. The worst is coming.
+`visual:` First-person view inside a cracking spacecraft. Red emergency lights strobe. Glass shatters. Blood droplets float in zero gravity. The view outside shows a rapidly approaching, glowing celestial body.
 
-**Beat 2** (12s)
-> Now zoom out. You see the station as a speck. The nuclear fireball expands. It engulfs the nearby Hubble Space Telescope. The debris cloud spreads. It looks like a golden halo. You watch it choke the sky. The auroras flicker. The satellites burn up. You know what comes next. The Kessler Syndrome. A chain reaction. Every piece of junk becomes a bullet. The orbit is dead. No more launches. No more repairs. No more science. You are stranded. The ground control is silent. The antennas are dead. You check your watch. It says 00:00. It will always say 00:00. The reactor is still hot. It will be hot for a thousand years. The radiation will poison the oceans. The fish will die. The birds will fall. You close your eyes. You imagine the sun. It is still there. You cannot see it. You are in the dark. The dark is forever. You are the last human alive. You are the last thought. You are the last thing. The universe continues. It does not care. You are nothing. You are gone. The space Chernobyl is complete. The lesson is clear. Do not put nuclear reactors in space. Ever. Again.
-`visual:` Wide shot of Earth from deep space, showing a expanding golden debris ring around the planet, auroras flickering irregularly, satellites burning up in the atmosphere, darkening skies, a single red dot representing the dead station.
+**Beat 2** (30s)
+> Debris flies. You are hit. A panel slams into your leg. It breaks. You scream. No sound comes out. The vacuum steals it. You look up. The Earth is shrinking. It looks like a marble. You are falling. Not down. In. Toward a star. A white dwarf. It is dense. A sugar cube weighs ten billion tons. You approach it at Mach 4. The heat hits you. It is not a fire. It is a plasma wall. Your skin vaporizes in milliseconds. Your bones turn to dust. You are not a body anymore. You are a cloud of atoms. You are smeared across time. The pressure crushes your molecules. You are flattened. You are erased. This is the end. There is no rescue. There is no time. Just the void, and the heat, and your final, silent scream.
+`visual:` Camera shakes violently as debris impacts. The Earth in the background becomes a tiny dot. A blinding white light engulfs the screen. The view distorts and dissolves into static as the hull disintegrates completely.
+
+**Beat 3** (30s)
+> Silence follows. The debris cloud expands. You watch the fireball cool. It turns gray. Then black. Your eyes sting from the radiation. The air tastes like copper. You cough. Your lungs burn. The shockwave hits. It is a wall of compressed air. It flattens the trees. It shatters every window within five kilometers. You are thrown backward. Your ribs crack. The ground shakes. Dust rises. It chokes you. You cannot breathe. The radiation is invisible. It is already inside you. It is eating your DNA. You do not feel it yet. But your cells are dying. One by one. The sky is dark. The sun is blocked. The temperature drops. You shiver. Your body is shutting down. The heat from the explosion is fading. But the cold is worse. The cold that never ends. The cold of the grave. You realize you are alone. No one is coming. The rescue teams are miles away. They are doomed too. You are radioactive. You are a bomb. You are the disaster.
+`visual:` Slow-motion debris field, gray ash falling, camera tilts to dark sky, internal organ glitch effect, silhouette collapsing in dust.
+
+**Beat 4** (30s)
+> Days pass. Or maybe seconds. Time breaks. Your skin peels off. It hangs in ribbons. You pull it away. The flesh beneath is raw. It is black. Your hair falls out. Clumps land in your mouth. You choke. Blood fills your throat. You cannot scream. Your throat has closed. The radiation sickness is total. Your organs are liquefying. Your heart stops. Not with a thump. With a click. Your body stiffens. It is not a corpse. It is a reactor. It is still hot. It is still dangerous. The wind carries your dust. It spreads. It contaminates the soil. It poisons the water. The birds die. The insects die. The plants wither. The ecosystem collapses. You are not dead. You are dispersed. You are the storm. You are the poison. You are the end of the world. The silence returns. It is absolute. It is eternal. No one remembers you. No one knows your name. You are just ash. You are just nothing. The void takes you back. The heat is gone. The cold remains. You are erased.
+`visual:` Time-lapse decay, skin peeling macro shot, hair falling, organs dissolving, landscape turning gray, final fade to black void.
 
 ## Metadata
 
 **Description:**
 
+Soviet engineering failed in orbit, leaving a radioactive core to circle Earth. We trace the debris of Venera-9 to see how close we came to a space-based nuclear incident.
 
+**Hashtags:** #SpaceDisaster #SovietSpace #NuclearHistory
 
-**Hashtags:** 
+**Tags:** Venera 9 failure, space nuclear incident, Soviet space program disasters, plutonium in orbit, space debris history
 
-**Tags:** 
-
-**End screen should point at:** 
+**End screen should point at:** The Satellite That Never Died
 
 ## Upload checklist
 

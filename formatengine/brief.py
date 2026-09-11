@@ -631,6 +631,32 @@ def gate(brief: dict, spec: dict) -> dict:
             "Repeated filler: " + ", ".join(f"'{h}' x{body.count(h)}" for h in hits) +
             ". These phrases carry no information. Say the actual thing instead.")
 
+    # 4b. Graphic bodily harm. A brief passed every structural check on
+    #     2026-09-11 while describing injury and bodily decay in sustained
+    #     detail across all four beats, in a format whose other titles are
+    #     "Every Type Of Black Hole Explained". Structure cannot see tone, and
+    #     the monetisation risk this project exists to avoid is exactly this.
+    #     Policy heuristic, not a measurement, so it warns below the limit and
+    #     blocks only when the script is saturated with it.
+    from .verify import check_gore
+    gore = check_gore(brief)
+    ok = gore["count"] <= config.MAX_GORE_MARKERS
+    checks.append({"check": "graphic_content", "value": gore["count"],
+                   "limit": config.MAX_GORE_MARKERS, "pass": ok})
+    if not ok:
+        failures.append(
+            f"{gore['count']} graphic bodily-harm markers across "
+            f"{gore['beats_affected']} beats "
+            f"({', '.join(sorted({h['term'].lower() for h in gore['hits']}))}). "
+            "That is an advertiser-friendliness problem, not a style note. "
+            "Keep the stakes, lose the anatomy.")
+    elif gore["count"]:
+        warnings.append(
+            f"{gore['count']} graphic marker(s): "
+            f"{', '.join(sorted({h['term'].lower() for h in gore['hits']}))}. "
+            "Under the limit, but check it reads as a documentary rather than a "
+            "horror film.")
+
     # 5. Does the narration address the viewer at all?
     # Reuse the narrations already derived above rather than re-deriving them.
     # The duplicate derivation returned an empty string here and scored every
