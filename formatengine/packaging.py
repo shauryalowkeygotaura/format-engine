@@ -191,6 +191,53 @@ def _detect_subjects(img: np.ndarray, text_mask: np.ndarray | None = None) -> di
             "subject_count": count, "faces": faces, "blobs": blobs}
 
 
+def _flatness(img: np.ndarray) -> float:
+    """Share of the frame held by its 8 commonest colours, 0-1.
+
+    Separates flat illustration from photography. Illustration fills large
+    regions with identical colour; a photograph spreads across thousands of
+    near-shades. Measured 2026-09-10 over 44 real thumbnails:
+
+        ThePaintProf (flat illustration)   n=12  median 0.787  (0.580-0.942)
+        NuchaReviews + AventSir            n=32  median 0.548  (0.363-0.865)
+
+    Individual images overlap in the 0.58-0.75 band, so this is only meaningful
+    as a FORMAT-level median across a sample, which is how thumbnail_checklist()
+    uses it. Do not classify a single thumbnail with it.
+    """
+    small = cv2.resize(img, (160, 90), interpolation=cv2.INTER_AREA)
+    q = (small >> 4).astype(np.uint32)              # 4 bits per channel
+    keys = (q[..., 0] << 8) | (q[..., 1] << 4) | q[..., 2]
+    _, counts = np.unique(keys, return_counts=True)
+    counts = np.sort(counts)[::-1]
+    return round(float(counts[:8].sum()) / keys.size, 3)
+
+
+def _cell_count(img: np.ndarray) -> int:
+    """Count grid cells: many similar small tiles, as in a captioned icon menu.
+
+    This CANNOT reuse _subject_analysis's blobs. That closes with a 25x25
+    ellipse, which merges adjacent grid cells into one region larger than the
+    85% background cut, so a 12-cell grid reports as ~2 subjects. Measured
+    2026-09-10 on 44 thumbnails, this detector scores 7 and 8 on the two real
+    grids (6,182,111 and 2,673,243 views) and 0-3 on everything else.
+    """
+    small = cv2.resize(img, (480, 270), interpolation=cv2.INTER_AREA)
+    gray = cv2.cvtColor(small, cv2.COLOR_BGR2GRAY)
+    edges = cv2.dilate(cv2.Canny(gray, 50, 150), np.ones((3, 3), np.uint8), iterations=1)
+    contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    area = 480.0 * 270.0
+    n = 0
+    for c in contours:
+        x, y, w, h = cv2.boundingRect(c)
+        frac = (w * h) / area
+        # Tile-sized and roughly square. Cells in these grids run 1-20% of the
+        # frame; the aspect bound rejects text bars and full-width banners.
+        if 0.01 <= frac <= 0.20 and 0.35 <= w / max(h, 1) <= 2.8:
+            n += 1
+    return n
+
+
 def _thirds_analysis(img: np.ndarray) -> dict:
     """Is the middle third the odd one out?
 
@@ -334,6 +381,8 @@ def analyze_thumbnail(path: Path) -> dict:
         "saturation": round(float(hsv[:, :, 1].mean()) / 255.0, 3),
         "contrast": round(float(gray.std()) / 255.0, 3),
         "edge_density": round(float(cv2.Canny(gray, 60, 160).mean()) / 255.0, 4),
+        "flatness": _flatness(img),
+        "cell_count": _cell_count(img),
         "_detail": {"thirds": thirds, "text": text,
                     "blob_count": subjects["blob_count"]},
     }
@@ -380,9 +429,42 @@ def thumbnail_checklist(analyses: list[dict]) -> dict:
     if avg_con >= 0.22:
         rules.append(f"high contrast (format average {avg_con:.2f})")
 
+    # Art style. Photographic and illustrated formats want opposite source
+    # material, and hardcoding "use a real photograph" broke ThePaintProf, whose
+    # 6.18M winner is entirely flat illustration. Threshold 0.65 sits midway
+    # between the two measured format medians (0.548 vs 0.787); see _flatness().
+    flats = [a["flatness"] for a in analyses if a.get("flatness") is not None]
+    avg_flat = (sum(flats) / len(flats)) if flats else None
+    art_style = None
+    if avg_flat is not None:
+        art_style = "illustrated" if avg_flat >= 0.65 else "photographic"
+        rules.append(f"art style: {art_style} (flatness {avg_flat:.2f})")
+
+    # Cell density. A menu of many small captioned tiles is a real layout the
+    # subject-count vocabulary cannot express: ThePaintProf's two biggest videos
+    # (6.18M, 2.67M) are 8-12 captioned icon cells, which the classifier would
+    # otherwise flatten to "multi_subject" and describe as evenly spaced
+    # characters. Uses _cell_count, NOT blob_count - see _cell_count().
+    cells = [a.get("cell_count", 0) for a in analyses]
+    avg_cells = sum(cells) / n if cells else 0
+    grid_rate = round(sum(1 for c in cells if c >= 6) / n, 2)
+    if grid_rate >= 0.6:
+        dominant_layout = "grid_menu"
+        rules.append(f"grid of many captioned cells ({avg_cells:.1f} average)")
+    elif grid_rate > 0:
+        # Reported without changing the layout. On ThePaintProf only 2 of 12
+        # sampled thumbnails are grids - but they are the two biggest videos on
+        # the channel, so this is worth surfacing rather than rounding away.
+        rules.append(f"grid layout used on {grid_rate:.0%} of thumbnails "
+                     "(check whether those are the outliers)")
+
     return {
         "sample_size": n,
         "dominant_layout": dominant_layout,
+        "art_style": art_style,
+        "avg_flatness": round(avg_flat, 3) if avg_flat is not None else None,
+        "grid_rate": grid_rate,
+        "avg_cells": round(avg_cells, 1),
         "layout_distribution": layouts,
         "subject_count_mode": max(set(counts), key=counts.count),
         "middle_unique_rate": rate("middle_unique"),

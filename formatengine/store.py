@@ -93,6 +93,11 @@ def record_shipped(brief: dict) -> None:
         "format_slug": brief.get("format_slug", ""),
         "topic": brief.get("topic", ""),
         "substance": brief.get("substance", []),
+        # Register feeds the slang budget in package.gate(). Absent on anything
+        # shipped before 2026-09-05, which reads as "proper" and is the safe
+        # default: an unknown past upload should not spend the slang allowance.
+        "register": brief.get("register") or "proper",
+        "external_hook": brief.get("external_hook"),
     })
     ledger["shipped"] = shipped[-200:]
     write_json(config.LEDGER, ledger)

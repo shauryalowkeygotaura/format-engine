@@ -17,9 +17,10 @@ CACHE = DATA / "cache"          # raw API responses, keyed by request hash
 THUMBS = DATA / "thumbs"        # downloaded thumbnails for CV
 FORMATS = DATA / "formats"      # deconstructed format specs (the library)
 BRIEFS = DATA / "briefs"        # production briefs ready for the render stack
+PACKAGES = DATA / "packages"    # approved title+thumbnail, decided BEFORE script
 LEDGER = DATA / "ledger.json"   # quota ledger + shipped-brief history
 
-for _d in (DATA, CACHE, THUMBS, FORMATS, BRIEFS):
+for _d in (DATA, CACHE, THUMBS, FORMATS, BRIEFS, PACKAGES):
     _d.mkdir(parents=True, exist_ok=True)
 
 # ── YouTube Data API v3 quota ────────────────────────────────────────────────
@@ -139,6 +140,92 @@ MIN_SUBSTANCE_ITEMS = 3                 # original facts/angles required per bri
 MIN_SECOND_PERSON_PER_100 = 4.0
 MAX_MEDIAN_SENTENCE_WORDS = 12
 
+# ── External hook thresholds ─────────────────────────────────────────────────
+# Measured 2026-09-04 over 80 videos on two channels sharing a niche, title
+# templates and runtime (NuchaReviews vs AventSir). Packaging that composites a
+# real-world artifact beside the in-universe subject ran 2.7x-5x on views/day at
+# matched age, and it replicated on the second channel. Method and tables:
+#   Deliverables/anime-analysis-interest-factor-research-2026-09-04.md
+#
+# The floor is RECOGNITION, not recency. en.wikipedia 90d median pageviews,
+# 2026-06-01..2026-09-03:
+#   worked as hooks: 9/11 12,677 · Epstein 11,006 · Spider-Man 8,916 ·
+#                    Carl Jung 3,395 · CIA 2,822
+#   in-universe:     Death Note 2,235 · COTE 995 · Light novel 664 ·
+#                    L 535 · Light Yagami 477 · Re:Zero 93
+# Clean separation between 2,235 and 2,822. 2,500 splits it. This is a measured
+# boundary from n=11 terms, not a tuned one; revisit it as cases accumulate.
+HOOK_RECOGNITION_FLOOR = 2_500
+
+# Recency is deliberately NOT a threshold. The best video in the sample shipped
+# 151 days after its hook peaked, at 1% of peak attention and 0.72x the article's
+# own median, and did 5.6x channel median. A freshness gate would have blocked
+# it. freshness.attention_shape() reports the curve; nothing enforces it.
+
+# A hook is CROWDED when a single existing video already owns it at this scale.
+# Anchor: "Could L Catch Epstein?" measured 3,251,712 views, against Nucha's own
+# 444,864 on the same hook. Provisional - one observation, no losing case yet.
+HOOK_SATURATION_TOP_VIEWS = 1_000_000
+
+# Title shape. These are DEFAULTS and every format spec may override them via
+# spec["title_format"]["max_chars"] / ["max_words"]; see package._title_caps().
+#
+# Measured on the anime-analysis niche (n=80): median 31 chars / 6 words,
+# p10 24, p90 40. The cap is p90, NOT the median - the median is where titles
+# cluster, and treating it as a limit would be the invented-spec error this
+# project has already made once.
+#
+# It nearly happened again. ThePaintProf (n=34, different niche) runs a median
+# of 44 chars / 7 words, and its best video ever - "Every Real-Life Glitch
+# Explained in 11 Minutes", 6,182,111 views - is 45 characters. A global 40-char
+# cap would have blocked it. Title length is a property of the FORMAT, not of
+# YouTube, so the per-format override exists and should be used.
+MAX_TITLE_CHARS = 40
+MAX_TITLE_WORDS = 8
+
+# ── The slang track ──────────────────────────────────────────────────────────
+# Some hooks have no encyclopedia footprint at all. The highest views/day video
+# in the reference sample (12,952) was built on one. YouTube's own result set is
+# the second instrument. Measured 2026-09-05, 12 results requested per term:
+#   goonpocalypse     n=12  top 1,942,421     skibidi  n=12  top 150,681,962
+#   gooning           n=11  top 4,684,859     "zravnik qplorth" (nonsense)  n=0
+# A term nobody uses returns literally nothing, so a full result set plus one
+# high-view proof separates live slang from a dead phrase.
+SLANG_MIN_RESULTS = 8
+SLANG_MIN_TOP_VIEWS = 100_000
+
+# Scoreable is not the same as advisable. Slang works and should stay rare.
+# Measured off the reference channel's last 10 uploads: 3 sat in the crude/slang
+# register (goonpocalypse, "Did Light Crack Misa?", "Did L & Light Shower
+# Together?"), the other 7 did not. Two of the three were consecutive uploads,
+# so this is a RATE cap and deliberately not an adjacency rule - forbidding
+# back-to-back slang would contradict what the channel actually does.
+SLANG_BUDGET_WINDOW = 10        # uploads to look back over
+SLANG_BUDGET_MAX = 3            # slang-register packages allowed in that window
+
+# The crude register is not only carried by the hook. Both reference channels
+# mark it in the TITLE with filter-evasion: homoglyph substitution (Nucha's
+# "𝓝𝓱*𝓷𝓽𝓪𝓲") and symbol-censoring (Avent's "A$$ PULL!", Nucha's "stup*d foid").
+# Those are mechanically detectable, unlike innuendo, so they are what counts
+# here. Detecting innuendo would need an invented lexicon, which is the exact
+# error this project has already made once.
+SLANG_EVASION_CHARS = "$*@#"    # censoring marks inside an otherwise-normal word
+
+# ── Template decay ───────────────────────────────────────────────────────────
+# A template is a depleting resource. Measured on ThePaintProf 2026-09-10, two
+# independent templates on one channel, each traced in upload order:
+#   "Every ... Explained"      #1 6,182,111 -> #14    33,846
+#   "POV: You're About To ..." #1 2,150,187 -> #7      9,526
+# Both lost ~99% from first use to last, and both were already down ~95% by the
+# fifth use. The first use of a template is worth 10-100x the tenth.
+#
+# This WARNS, it does not block. Three mechanisms produce the same curve -
+# template fatigue, spending the best topics first, and any algorithmic
+# penalty for repetition - and public data cannot separate them. Blocking on a
+# curve whose cause is unknown is how the invented-spec failure happens.
+TEMPLATE_DECAY_WARN_AT = 5      # nth use of a template where the warning starts
+TEMPLATE_DECAY_LOUD_AT = 10     # nth use where the warning gets blunt
+
 # Groq free tier is 8000 tokens per MINUTE and counts prompt + reserved
 # completion together, so one call cannot cover a 2500-word script (which alone
 # reserves ~9000). Beats are generated in paced chunks instead.
@@ -146,6 +233,15 @@ MAX_MEDIAN_SENTENCE_WORDS = 12
 # 2500 words was refused with 'Requested 8393, Limit 8000'. 5200 keeps the
 # known-working case single-call and sends only genuinely oversized scripts
 # down the slower chunked path.
-TPM_SAFE_COMPLETION = 5200      # max_tokens any single call may reserve
-CHUNK_BEATS = 4                 # beats per continuation call
-CHUNK_GAP_SECONDS = 35          # spacing, because the cap is per minute
+# CORRECTED 2026-09-11 after a live 429. The binding limit is not the 8000
+# tokens-per-minute figure this was built around, it is OUTPUT tokens per
+# minute, and it is far smaller:
+#   groq HTTP 429: ... on output tokens per minute (OTPM): Limit 1000,
+#   Requested 4500. reduce max_tokens
+# So no single call may reserve more than ~1000 output tokens, and the old 5200
+# was five times over. Everything now goes down the chunked path, in small
+# pieces spaced far enough apart for the per-minute window to roll over.
+GROQ_OTPM_LIMIT = int(os.environ.get("GROQ_OTPM_LIMIT", "1000"))
+TPM_SAFE_COMPLETION = 900       # max_tokens any single call may reserve
+CHUNK_BEATS = 2                 # beats per continuation call (~300 words)
+CHUNK_GAP_SECONDS = 65          # > 60, so the per-MINUTE window actually resets

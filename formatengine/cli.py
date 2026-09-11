@@ -6,8 +6,14 @@ Pipeline:
     discover     find channels whose format is breaking out right now   (~200u)
     deconstruct  turn one of them into a reusable format spec           (~5u)
     bend         generate topic pivots + measure demand/competition     (~500u)
-    brief        write a gated production brief for the best bend       (0u)
+    hook         score an external hook before committing packaging     (0u)
+    package      decide title + thumbnail BEFORE the script exists      (0u)
+    brief        write a script that fits an approved package           (0u)
     verify-thumb check your own thumbnail against the measured format   (0u)
+
+`hook` and `package` need no YouTube API key at all - they run on yt-dlp and
+Wikipedia pageviews. Packaging is decided first because that is the order the
+channels this engine copies actually work in; see README, "Packaging first".
 """
 from __future__ import annotations
 
@@ -17,7 +23,8 @@ import sys
 
 from . import bend as bend_mod
 from . import brief as brief_mod
-from . import config, discover, feedback, packaging, store
+from . import package as package_mod
+from . import config, discover, feedback, freshness, packaging, store
 from .llm import LLMError
 from .outlier import format_score, profile
 from .yt import QuotaExhausted, YouTube, YouTubeError, valid_id
@@ -249,7 +256,29 @@ def cmd_brief(args, yt: YouTube) -> int:
         print(f"No such format: {args.format}", file=sys.stderr)
         return 2
     bends = spec.get("bends") or []
-    if args.topic:
+    pkg: dict | None = None
+    if getattr(args, "package", None):
+        # Packaging-first: the title is already decided and gated, so the script
+        # is written to fit it rather than the other way round.
+        pkg = package_mod.load(args.package)
+        if not pkg:
+            print(f"No such package: {args.package}. Look in {config.PACKAGES}.",
+                  file=sys.stderr)
+            return 2
+        if not (pkg.get("gate") or {}).get("passed"):
+            print(f"Package {args.package!r} did not pass its gate. Fix the "
+                  "packaging before paying for a script.", file=sys.stderr)
+            return 2
+        chosen = {"topic": pkg.get("topic", ""),
+                  "search_term": pkg.get("topic", ""),
+                  "distance": "packaged",
+                  "proposed_title": pkg.get("title", ""),
+                  "opportunity": None,
+                  "external_hook": pkg.get("external_hook"),
+                  "saturation": (pkg.get("hook_score") or {}).get("saturation",
+                                                                  {"checked": False})}
+        print(f"→ script will be written to fit approved title: {pkg.get('title')!r}")
+    elif args.topic:
         tf = spec.get("title_format", {})
         # Fill {topic}, then drop any slot the manual path can't fill so the
         # model gets a readable seed title instead of leftover braces.
@@ -271,6 +300,21 @@ def cmd_brief(args, yt: YouTube) -> int:
     print(f"→ writing brief for: {chosen.get('proposed_title') or chosen.get('topic')}")
     try:
         b = brief_mod.build(spec, chosen, words=args.words, model=args.model)
+        if pkg:
+            # The whole point of packaging-first is that the packaging is fixed
+            # before the script exists. build() regenerates a title and a
+            # thumbnail spec from the format; both are discarded here in favour
+            # of the versions that already passed the packaging gate.
+            b["title"] = pkg.get("title") or b.get("title", "")
+            b["alt_titles"] = pkg.get("alt_titles", [])
+            b["thumbnail_text"] = pkg.get("thumbnail_text") or b.get("thumbnail_text", "")
+            b["thumbnail_spec"] = pkg.get("thumbnail_spec", b.get("thumbnail_spec"))
+            b["external_hook"] = pkg.get("external_hook")
+            b["hook_score"] = pkg.get("hook_score")
+            # Carried so store.record_shipped() can charge the slang budget when
+            # this brief passes its gate; without it every upload reads "proper"
+            # and the budget never depletes.
+            b["register"] = pkg.get("register") or package_mod.register_of(pkg)
     except LLMError as e:
         print(f"Brief generation failed: {e}", file=sys.stderr)
         return 3
@@ -287,6 +331,53 @@ def cmd_brief(args, yt: YouTube) -> int:
     for w in result["warnings"]:
         print(f"  ~ {w}")
     print(f"\n  {mpath}\n  {jpath}")
+    return 0 if result["passed"] else 1
+
+
+def cmd_hook(args, yt: YouTube) -> int:
+    """Score one external hook. No YouTube API key, no quota."""
+    print(f"→ scoring hook {args.term!r}"
+          + (f" in niche {args.niche!r}" if args.niche else ""))
+    score = freshness.score_hook(args.term, args.niche or "",
+                                 topic=args.topic or "",
+                                 check_saturation=not args.no_saturation)
+    print()
+    print(freshness.summarize(score))
+    return 0 if score["verdict"] in ("GO", "UNSCORED", "CROWDED") else 1
+
+
+def cmd_package(args, yt: YouTube) -> int:
+    """Decide the title and thumbnail BEFORE any script exists."""
+    spec = store.load_format(args.format)
+    if not spec:
+        print(f"No such format: {args.format}. Run `formats` to list.", file=sys.stderr)
+        return 2
+
+    print(f"→ scoring hook {args.hook!r}")
+    score = freshness.score_hook(args.hook, args.niche, topic=args.topic,
+                                 check_saturation=not args.no_saturation)
+    print(freshness.summarize(score))
+    if score["verdict"] in ("WEAK", "INVALID") and not args.force:
+        print(f"\nBLOCKED before spending a Groq call. Pass --force to override.",
+              file=sys.stderr)
+        return 1
+
+    print(f"\n→ writing packaging for {args.topic!r} x {args.hook!r}")
+    try:
+        pkg = package_mod.build(spec, args.topic, args.hook,
+                                hook_score=score, model=args.model)
+    except LLMError as e:
+        print(f"Packaging generation failed: {e}", file=sys.stderr)
+        return 3
+
+    result = package_mod.gate(pkg, spec)
+    path = package_mod.save(pkg, result)
+    print()
+    print(package_mod.summarize(pkg, result))
+    print(f"\n  {path}")
+    if result["passed"]:
+        print(f"\nNext: python -m formatengine brief {spec['slug']} "
+              f"--package {path.stem}")
     return 0 if result["passed"] else 1
 
 
@@ -319,6 +410,24 @@ def cmd_verify_thumb(args, yt: YouTube) -> int:
             ok = abs(a[key] - want) <= 0.12
             rows.append((key, round(a[key], 3), round(want, 3), ok))
 
+    # Art style is a HARD fail, not one score among many. The single worst video
+    # on the reference channel (4,848 views, against a 60,704 median) is the one
+    # thumbnail that abandoned the house style: a dark rendered scene with no
+    # caption text, on a channel of flat captioned illustration. Leaving the
+    # house style is not a near miss that averages out with the other traits.
+    house_break = None
+    want_style = cl.get("art_style")
+    if want_style and a.get("flatness") is not None:
+        got_style = "illustrated" if a["flatness"] >= 0.65 else "photographic"
+        ok = got_style == want_style
+        rows.append(("art style", f"{got_style} ({a['flatness']})", want_style, ok))
+        if not ok:
+            house_break = (
+                f"HOUSE STYLE BREAK: this thumbnail reads {got_style}, the format "
+                f"is {want_style}. The one video on the reference channel that "
+                "did this is that channel's worst, at 1/12th its median. This is "
+                "a hard fail, not a score.")
+
     print(f"\nThumbnail vs format `{spec['slug']}`\n")
     print(f"{'TRAIT':<16} {'YOURS':<22} {'FORMAT':<22} OK")
     print("-" * 68)
@@ -328,9 +437,12 @@ def cmd_verify_thumb(args, yt: YouTube) -> int:
             misses.append(name)
     passed = len(rows) - len(misses)
     print(f"\nMatches {passed}/{len(rows)}")
+    if house_break:
+        print(f"\n  ! {house_break}")
     if misses:
         print("Fix: " + ", ".join(misses))
-    return 0 if not misses else 1
+    # A house-style break fails even when every other trait matches.
+    return 0 if not misses and not house_break else 1
 
 
 
@@ -427,10 +539,32 @@ def build_parser() -> argparse.ArgumentParser:
     b.add_argument("--model", default=None)
     b.set_defaults(fn=cmd_bend)
 
+    hk = sub.add_parser("hook", help="score an external hook (0u, no API key)")
+    hk.add_argument("term", help="the external hook, e.g. 'Jeffrey Epstein'")
+    hk.add_argument("--niche", default="", help="niche to check saturation within")
+    hk.add_argument("--topic", default="",
+                    help="in-universe subject, sharpens the competitor filter")
+    hk.add_argument("--no-saturation", action="store_true",
+                    help="skip the yt-dlp search (faster, recognition only)")
+    hk.set_defaults(fn=cmd_hook, needs_yt=False)
+
+    pk = sub.add_parser("package",
+                        help="decide title + thumbnail BEFORE the script (0u)")
+    pk.add_argument("format", help="format slug")
+    pk.add_argument("--topic", required=True, help="the in-universe subject")
+    pk.add_argument("--hook", required=True, help="the external hook to collide it with")
+    pk.add_argument("--niche", default="", help="niche for the saturation check")
+    pk.add_argument("--no-saturation", action="store_true")
+    pk.add_argument("--force", action="store_true",
+                    help="package even if the hook scores WEAK")
+    pk.add_argument("--model", default=None)
+    pk.set_defaults(fn=cmd_package, needs_yt=False)
+
     br = sub.add_parser("brief", help="write a gated production brief")
     br.add_argument("format")
     br.add_argument("--bend", type=int, default=0, help="index into the format's bends")
     br.add_argument("--topic", help="skip bends, brief this topic directly")
+    br.add_argument("--package", help="write the script to fit an approved package")
     br.add_argument("--words", type=int, default=1200)
     br.add_argument("--model", default=None)
     br.set_defaults(fn=cmd_brief)
@@ -438,17 +572,22 @@ def build_parser() -> argparse.ArgumentParser:
     vt = sub.add_parser("verify-thumb", help="check your thumbnail against a format")
     vt.add_argument("file")
     vt.add_argument("--format", required=True)
-    vt.set_defaults(fn=cmd_verify_thumb)
+    vt.set_defaults(fn=cmd_verify_thumb, needs_yt=False)
     return p
 
 
 def main(argv=None) -> int:
     args = build_parser().parse_args(argv)
-    try:
-        yt = YouTube()
-    except YouTubeError as e:
-        print(str(e), file=sys.stderr)
-        return 4
+    # `hook`, `package` and `verify-thumb` use yt-dlp, Wikipedia and OpenCV, so
+    # none of them touches the Data API. Constructing YouTube() unconditionally
+    # made those commands fail with a missing-key error they did not need.
+    yt = None
+    if getattr(args, "needs_yt", True):
+        try:
+            yt = YouTube()
+        except YouTubeError as e:
+            print(str(e), file=sys.stderr)
+            return 4
     try:
         return args.fn(args, yt)
     except QuotaExhausted as e:

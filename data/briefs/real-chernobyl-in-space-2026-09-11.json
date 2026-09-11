@@ -1,0 +1,169 @@
+{
+  "title": "Real Chernobyl In Space?",
+  "alt_titles": [
+    "Space Accident Like Chernobyl",
+    "Space Chernobyl Explained",
+    "Was Space Chernobyl?"
+  ],
+  "thumbnail_text": "NOT NUCLEAR",
+  "hook": "You stare at the reactor core, glowing white-hot in the void. This is not a movie set.",
+  "beats": [
+    {
+      "beat": 1,
+      "narration": "Weightless, you float in the International Space Station’s service module. The temperature spikes. Your oxygen scrubbers fail. You watch the radiation counters climb past 500 millisieverts. The metal groans. You have no suit. You have no escape pod. This is the Chernobyl of space: a reactor breach in orbit. The fuel rods melt. The containment vessel cracks. Radioactive iodine leaks into the vacuum. Your lungs burn before you even see it. The station tumbles. You scream. No one hears you. The silence is absolute. You are the only witness to the end of human presence in low Earth orbit. The debris field expands. It will kill every satellite within 500 kilometers. The internet goes down. GPS fails. Civilizations collapse. You died alone. The world forgot you existed. This is not fiction. This is physics. This is the worst possible outcome. You should not be here. You should have stayed on Earth.",
+      "visual": "First-person view from inside a damaged ISS module, red emergency lights flashing, radiation gauge spinning wildly, cracked metal panels, debris floating in zero gravity, background showing Earth through a shattered window.",
+      "seconds": 12
+    },
+    {
+      "beat": 2,
+      "narration": "Now zoom out. You see the station as a speck. The nuclear fireball expands. It engulfs the nearby Hubble Space Telescope. The debris cloud spreads. It looks like a golden halo. You watch it choke the sky. The auroras flicker. The satellites burn up. You know what comes next. The Kessler Syndrome. A chain reaction. Every piece of junk becomes a bullet. The orbit is dead. No more launches. No more repairs. No more science. You are stranded. The ground control is silent. The antennas are dead. You check your watch. It says 00:00. It will always say 00:00. The reactor is still hot. It will be hot for a thousand years. The radiation will poison the oceans. The fish will die. The birds will fall. You close your eyes. You imagine the sun. It is still there. You cannot see it. You are in the dark. The dark is forever. You are the last human alive. You are the last thought. You are the last thing. The universe continues. It does not care. You are nothing. You are gone. The space Chernobyl is complete. The lesson is clear. Do not put nuclear reactors in space. Ever. Again.",
+      "visual": "Wide shot of Earth from deep space, showing a expanding golden debris ring around the planet, auroras flickering irregularly, satellites burning up in the atmosphere, darkening skies, a single red dot representing the dead station.",
+      "seconds": 12
+    }
+  ],
+  "thumbnail_spec": {
+    "layout": "scene_no_clear_subject",
+    "subject_count": 0,
+    "palette": [
+      {
+        "hex": "#070507",
+        "weight": 0.5
+      },
+      {
+        "hex": "#0d0a0f",
+        "weight": 0.5
+      },
+      {
+        "hex": "#121214",
+        "weight": 0.42
+      },
+      {
+        "hex": "#0c0b0d",
+        "weight": 0.42
+      },
+      {
+        "hex": "#0f0a0c",
+        "weight": 0.42
+      }
+    ],
+    "measured_rules": [
+      "layout: scene_no_clear_subject (7/10 videos)",
+      "header text band across the top",
+      "high saturation (format average 0.50)",
+      "high contrast (format average 0.36)"
+    ],
+    "instructions": [
+      "Atmospheric scene, not a cut-out subject. The frame reads as an environment; mood and colour carry the click, and the text does the naming. Do not paste a centred hero object onto a backdrop.",
+      "Header text band across the top ~25% of the frame.",
+      "Push saturation to ~0.50 (format norm).",
+      "Hold contrast near 0.36 (format norm).",
+      "Collide 'Chernobyl disaster' with the in-universe subject in one frame: Split composition: left side shows the Chernobyl reactor building with irradiation symbols, right side shows a derelict satellite or damaged space station with radiation symbols, connected by a red jagged lightning bolt..",
+      "Art style for this format is UNMEASURED (run `deconstruct` to fill thumbnail_checklist.art_style). Match whatever the format's existing thumbnails already do rather than guessing.",
+      "Source the artifact by exact proper name, never by mood. 'Jeffrey Epstein photograph' and 'CIA seal' are exact; 'sinister figure' is the failure mode that produced a beach for water pressure."
+    ],
+    "verify_with": "python -m formatengine verify-thumb <file> --format bluntly-explained",
+    "external_hook": "Chernobyl disaster"
+  },
+  "external_hook": "Chernobyl disaster",
+  "hook_score": {
+    "term": "Chernobyl disaster",
+    "niche": "space",
+    "topic": "space disaster",
+    "verdict": "CROWDED",
+    "register": "proper",
+    "recognition": {
+      "scored": true,
+      "source": "wikipedia",
+      "register": "proper",
+      "term": "Chernobyl disaster",
+      "article": "Chernobyl disaster",
+      "daily_median": 8062,
+      "attention": {
+        "available": true,
+        "median": 8062,
+        "recent_7d_mean": 8721,
+        "prior_30d_mean": 7708,
+        "trend": 1.13,
+        "peak": 25171,
+        "peak_day": "20260715",
+        "peak_age_days": 57,
+        "pct_of_peak": 0.3465
+      }
+    },
+    "saturation": {
+      "checked": true,
+      "query": "Chernobyl disaster space space disaster",
+      "n": 8,
+      "n_raw": 15,
+      "median_views": 2629209,
+      "top_views": 18256396,
+      "top_title": "Chernobyl Nuclear Disaster | Why it happened? | Dhruv Rathee",
+      "raw_top_views": 23701648
+    },
+    "notes": [
+      "8,062/day median recognition clears the 2,500 floor.",
+      "Attention peaked 57d ago at 25,171/day; now at 34.6% of peak, trend 1.13x. Reported only. The reference winner shipped 151d past peak at 1% of peak, so age is not a reason to drop a hook.",
+      "Already held: 18,256,396 views on \"Chernobyl Nuclear Disaster | Why it happened? | Dhruv Rathee\". Going head-to-head needs a genuinely different angle, not the same premise."
+    ],
+    "checked_at": "2026-09-10T17:16:24.010818+00:00"
+  },
+  "register": "proper",
+  "gate": {
+    "passed": false,
+    "checks": [
+      {
+        "check": "title_vs_source",
+        "value": 0.247,
+        "limit": 0.72,
+        "pass": true
+      },
+      {
+        "check": "self_similarity_peak",
+        "value": 0.177,
+        "limit": 0.8,
+        "pass": true,
+        "window": 4
+      },
+      {
+        "check": "substance_items",
+        "value": 0,
+        "limit": 3,
+        "pass": false
+      },
+      {
+        "check": "hook_present",
+        "value": 17,
+        "limit": 5,
+        "pass": true
+      },
+      {
+        "check": "beat_opener_variety",
+        "value": "weightless x1",
+        "limit": 2,
+        "pass": true
+      },
+      {
+        "check": "filler_phrases",
+        "value": [],
+        "limit": [],
+        "pass": true
+      },
+      {
+        "check": "second_person_per_100w",
+        "value": 8.6,
+        "limit": 4.0,
+        "pass": true
+      },
+      {
+        "check": "median_sentence_words",
+        "value": 4,
+        "limit": 12,
+        "pass": true
+      }
+    ],
+    "failures": [
+      "Only 0 original substance items (need 3). Without them this is a reskin, which is the exact thing that gets a channel demonetised."
+    ],
+    "warnings": []
+  }
+}

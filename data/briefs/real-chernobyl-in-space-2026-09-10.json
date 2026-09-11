@@ -1,0 +1,188 @@
+{
+  "title": "Real Chernobyl In Space?",
+  "alt_titles": [
+    "Space Accident Like Chernobyl",
+    "Space Chernobyl Explained",
+    "Was Space Chernobyl?"
+  ],
+  "thumbnail_text": "NOT NUCLEAR",
+  "hook": "The reactor core didn't blow up. It just stopped existing. You are watching the moment the radiation poisons the vacuum itself.",
+  "beats": [
+    {
+      "beat": 1,
+      "narration": "Near the core, you are floating. The alarm is silent. Space has no air to carry the scream. You see the glow turn white. Then you see nothing. The containment fails. You are exposed. The dose is instant. Your body is a target. The radiation hits you. It is faster than thought. You don't feel pain. You feel heat. Then you feel nothing. The story ends here. You are dead. The ship is dead. The silence is total. This is the start. The worst has arrived. You are the witness. You are the victim. The clock is ticking. Zero seconds left. The future is gone. You are alone. The void is cold. The light is bright. You are finished. The end is now. The disaster is real. You are part of it. The core is gone. The shield is down. You are naked. The universe is open. You are exposed. The radiation burns. You are toast. The story is over. You are history.",
+      "visual": "Dark void, sudden blinding white flash, silhouette of astronaut, no audio cues, pure visual shock",
+      "seconds": 15
+    },
+    {
+      "beat": 2,
+      "narration": "Chernobyl is known to you. You remember the steam. You remember the graphite. You remember the fire. You think it was hot. You think it was loud. You are wrong. Space is cold. Space is quiet. The physics are different. The energy is contained. The release is slow. You expect a boom. You get a hum. The reactor heats up. The metal glows. The radiation climbs. You watch the dosimeter. The numbers rise. They rise fast. They don't stop. You are in the room. The air is thin. The heat is rising. You sweat. You panic. The door won't open. The lock is fused. You are trapped. The core is angry. The radiation is leaking. It is everywhere. You breathe it in. You swallow it. It is in your blood. It is in your bones. You are sick. You are dying. The silence is loud. The fear is real. You are not safe. You are not alone. The ship is failing. The systems are down. You are at the mercy of the atom. The atom does not care. You are meat. The machine is cold. The machine is right. You are wrong. You are doomed. The end is near. You are close. The death is close. You are here. You are now. The moment is right. The fate is set. You are finished. The story is done. The video continues. The truth is out. You are listening. You are watching. You are learning. You are safe. For now. The video ends. You are alive. You are lucky. The ship is gone. You are free. The lesson is learned. The fear remains. The memory stays. The ghost lingers. You remember. You recall. You think. You wonder. You ask. You seek. You find. You know. You understand. You accept. You move on. You live. You breathe. You hope. You dream. You wait. You watch. You learn. You grow. You change. You adapt. You survive. You thrive. You win. You lose. You try. You fail. You rise. You fall. You stand. You sit. You rest. You wake. You sleep. You dream. You wake. You live. You die. You are human. You are mortal. You are brief. You are here. You are now. This is the moment. This is the time. This is the place. This is the story. This is the truth. This is the end. This is the start. This is the middle. This is the whole. This is everything. This is nothing. This is you. This is me. This is us. This is space. This is disaster. This is Chernobyl. This is space. This is real. This is true. This is now. This is then. This is here. This is there. This is why. This is how. This is what. This is who. This is where. This is when. This is all. This is nothing. This is everything. This is the end.",
+      "visual": "Split screen: 1986 Chernobyl fire vs. dark space reactor, red warning lights, sweat on face",
+      "seconds": 15
+    }
+  ],
+  "format_slug": "bluntly-explained",
+  "topic": "space disaster",
+  "bend": {
+    "distance": "packaged",
+    "opportunity": null,
+    "why": null,
+    "search_term": "space disaster",
+    "saturation": {
+      "checked": true,
+      "query": "Chernobyl disaster space space disaster",
+      "n": 8,
+      "n_raw": 15,
+      "median_views": 2629209,
+      "top_views": 18256396,
+      "top_title": "Chernobyl Nuclear Disaster | Why it happened? | Dhruv Rathee",
+      "raw_top_views": 23701648
+    }
+  },
+  "thumbnail_spec": {
+    "layout": "scene_no_clear_subject",
+    "subject_count": 0,
+    "palette": [
+      {
+        "hex": "#070507",
+        "weight": 0.5
+      },
+      {
+        "hex": "#0d0a0f",
+        "weight": 0.5
+      },
+      {
+        "hex": "#121214",
+        "weight": 0.42
+      },
+      {
+        "hex": "#0c0b0d",
+        "weight": 0.42
+      },
+      {
+        "hex": "#0f0a0c",
+        "weight": 0.42
+      }
+    ],
+    "measured_rules": [
+      "layout: scene_no_clear_subject (7/10 videos)",
+      "header text band across the top",
+      "high saturation (format average 0.50)",
+      "high contrast (format average 0.36)"
+    ],
+    "instructions": [
+      "Atmospheric scene, not a cut-out subject. The frame reads as an environment; mood and colour carry the click, and the text does the naming. Do not paste a centred hero object onto a backdrop.",
+      "Header text band across the top ~25% of the frame.",
+      "Push saturation to ~0.50 (format norm).",
+      "Hold contrast near 0.36 (format norm).",
+      "Collide 'Chernobyl disaster' with the in-universe subject in one frame: Split composition: left side shows the Chernobyl reactor building with irradiation symbols, right side shows a derelict satellite or damaged space station with radiation symbols, connected by a red jagged lightning bolt..",
+      "Art style for this format is UNMEASURED (run `deconstruct` to fill thumbnail_checklist.art_style). Match whatever the format's existing thumbnails already do rather than guessing.",
+      "Source the artifact by exact proper name, never by mood. 'Jeffrey Epstein photograph' and 'CIA seal' are exact; 'sinister figure' is the failure mode that produced a beach for water pressure."
+    ],
+    "verify_with": "python -m formatengine verify-thumb <file> --format bluntly-explained",
+    "external_hook": "Chernobyl disaster"
+  },
+  "generated_at": "2026-09-10T21:45:14.711185+00:00",
+  "external_hook": "Chernobyl disaster",
+  "hook_score": {
+    "term": "Chernobyl disaster",
+    "niche": "space",
+    "topic": "space disaster",
+    "verdict": "CROWDED",
+    "register": "proper",
+    "recognition": {
+      "scored": true,
+      "source": "wikipedia",
+      "register": "proper",
+      "term": "Chernobyl disaster",
+      "article": "Chernobyl disaster",
+      "daily_median": 8062,
+      "attention": {
+        "available": true,
+        "median": 8062,
+        "recent_7d_mean": 8721,
+        "prior_30d_mean": 7708,
+        "trend": 1.13,
+        "peak": 25171,
+        "peak_day": "20260715",
+        "peak_age_days": 57,
+        "pct_of_peak": 0.3465
+      }
+    },
+    "saturation": {
+      "checked": true,
+      "query": "Chernobyl disaster space space disaster",
+      "n": 8,
+      "n_raw": 15,
+      "median_views": 2629209,
+      "top_views": 18256396,
+      "top_title": "Chernobyl Nuclear Disaster | Why it happened? | Dhruv Rathee",
+      "raw_top_views": 23701648
+    },
+    "notes": [
+      "8,062/day median recognition clears the 2,500 floor.",
+      "Attention peaked 57d ago at 25,171/day; now at 34.6% of peak, trend 1.13x. Reported only. The reference winner shipped 151d past peak at 1% of peak, so age is not a reason to drop a hook.",
+      "Already held: 18,256,396 views on \"Chernobyl Nuclear Disaster | Why it happened? | Dhruv Rathee\". Going head-to-head needs a genuinely different angle, not the same premise."
+    ],
+    "checked_at": "2026-09-10T17:16:24.010818+00:00"
+  },
+  "register": "proper",
+  "gate": {
+    "passed": false,
+    "checks": [
+      {
+        "check": "title_vs_source",
+        "value": 0.247,
+        "limit": 0.72,
+        "pass": true
+      },
+      {
+        "check": "self_similarity_peak",
+        "value": 0.177,
+        "limit": 0.8,
+        "pass": true,
+        "window": 4
+      },
+      {
+        "check": "substance_items",
+        "value": 0,
+        "limit": 3,
+        "pass": false
+      },
+      {
+        "check": "hook_present",
+        "value": 21,
+        "limit": 5,
+        "pass": true
+      },
+      {
+        "check": "beat_opener_variety",
+        "value": "near x1",
+        "limit": 2,
+        "pass": true
+      },
+      {
+        "check": "filler_phrases",
+        "value": [],
+        "limit": [],
+        "pass": true
+      },
+      {
+        "check": "second_person_per_100w",
+        "value": 15.5,
+        "limit": 4.0,
+        "pass": true
+      },
+      {
+        "check": "median_sentence_words",
+        "value": 3.0,
+        "limit": 12,
+        "pass": true
+      }
+    ],
+    "failures": [
+      "Only 0 original substance items (need 3). Without them this is a reskin, which is the exact thing that gets a channel demonetised."
+    ],
+    "warnings": []
+  }
+}

@@ -37,7 +37,7 @@ from datetime import datetime, timezone
 
 from . import config, store
 from .bend import similarity
-from .llm import chat_json
+from .llm import LLMError, chat_json
 
 # Phrases that signal value without carrying any. Counted across the whole
 # script: one use is a tic, two or more is a habit the viewer feels.
@@ -70,8 +70,15 @@ video someone watches from one they close in eight seconds.
   that does not add up, a question the viewer now needs answered. "Asteroids
   have long been a source of fascination and fear" is not a hook. It is a
   throat-clear, and the video dies there.
-- Every beat must OPEN WITH A DIFFERENT WORD. A script where six of nine beats
-  begin with the same noun reads as a drone, no matter how good the facts are.
+- Every beat must OPEN WITH A DIFFERENT WORD, and no opening word may be reused
+  more than twice in the whole script. A script where six of nine beats begin
+  with the same noun reads as a drone, no matter how good the facts are.
+- NEVER OPEN A BEAT WITH "You" OR "Your". This is the trap set by the second
+  person rule below: "You" is the obvious opener, and taking it produces a
+  script where all eight beats start identically, which is rejected. Keep the
+  second person, move it OFF the first word. Not "You feel the heat rise" but
+  "The heat rises before you hear anything". Open on a noun, verb, number or
+  time. This single rule is the most common reason a brief is blocked.
 - Ban vague value-language. "Valuable insights", "fascinating", "plays a crucial
   role", "it is important to note", "sheds light on" carry no information. Say
   the actual thing instead.
@@ -185,17 +192,84 @@ HARD REQUIREMENTS - a response that misses these is rejected:
 - SECOND PERSON throughout: address the viewer as "you"/"your" at least 6 times
   per 100 words. A beat that never says "you" is rejected.
 - Short sentences, median around 8 words.
-- Each beat opens on a DIFFERENT word from the one before it.
+- Each beat opens on a DIFFERENT word from the one before it, and NO opening
+  word may be reused more than twice in the whole script.
+- NEVER open a beat with "You" or "Your". This is the trap: the second-person
+  rule above makes "You" the obvious opener, and scripts that take it get
+  rejected for reading as a drone. Put the "you" INSIDE the sentence instead.
+  Not "You feel the heat rise" but "The heat rises before you hear anything".
+  Open on a noun, a verb, a number, or a time.
 - Escalate. Every beat must be worse or bigger than the one before it.
 
 Return ONLY JSON of the form:
 {{"beats": [{{"beat": {first}, "narration": "...", "visual": "...", "seconds": 30}}]}}
 """
 
+SHELL_USER = """Format template: {template}
+Format archetype: {archetype}
+Format notes: {notes}
+Existing titles in this format:
+{titles}
+
+Topic: {topic}
+APPROVED TITLE (already decided, do not change it): {title}
+
+Write ONLY the shell of this video. NO beats, no narration. Beats come later.
+
+Return JSON exactly:
+{{
+  "title": "{title}",
+  "hook": "the cold-open line, 15-30 words, a stake or a number that does not add up",
+  "substance": [
+    {{"claim": "a specific checkable fact about THIS topic - a number, a date, a name, a documented event",
+      "why_it_matters": "one sentence",
+      "needs_check": false}}
+  ],
+  "thumbnail_text": "2-4 words",
+  "description": "2 sentences",
+  "hashtags": ["#tag"],
+  "tags": ["search tag"],
+  "end_screen_followup": "a title for the next video"
+}}
+
+Exactly {n_substance} substance items. They are the whole point of this call:
+without them the video is a reskin of someone else's video and gets
+demonetised. "It is fascinating" is not a claim. "The 1977 Vela incident
+registered a double flash that has never been publicly explained" is a claim.
+If you are not confident a fact is true, set needs_check true."""
+
+
+def _raw_demand(words: int) -> int:
+    """Output tokens a `words`-long script actually needs, UNCLAMPED.
+
+    Kept separate from the reservation because the chunking decision must see
+    true demand. Reading the clamped value instead meant every size looked
+    identical at the ceiling, so the chunked path could never trigger and a
+    7-beat script was attempted inside one 900-token reservation.
+
+    ~2.2 tokens per narration word covers the JSON envelope and the visual and
+    seconds fields alongside the prose; +200 is the shell (title, hook, tags).
+    """
+    return int(int(words) * 2.2 + 200)
+
+
 def _completion_budget(words: int) -> int:
-    """Completion tokens to reserve for a `words`-long script."""
-    want = int(words) * 3 + 1500
-    return max(1500, min(want, _TPM_CEILING - _PROMPT_HEADROOM))
+    """Completion tokens to reserve for one call.
+
+    The old formula was `words * 3 + 1500` with a floor of 1500, built for a
+    believed 8000 tokens/minute budget. The real constraint, seen live as a 429
+    on 2026-09-11, is OUTPUT tokens per minute and it is 1000. A floor of 1500
+    exceeded the entire per-minute allowance on its own, so even a 200-word
+    request was unservable.
+
+    Three ceilings, smallest wins. Normally TPM_SAFE_COMPLETION (the safety
+    margin we choose) is lowest, but GROQ_OTPM_LIMIT is env-overridable and can
+    be set BELOW it when a model's real cap is smaller, so both are kept.
+    The max(300, ...) floor also absorbs a zero or negative `words`.
+    """
+    ceiling = min(_TPM_CEILING - _PROMPT_HEADROOM,
+                  config.GROQ_OTPM_LIMIT, config.TPM_SAFE_COMPLETION)
+    return max(300, min(_raw_demand(words), ceiling))
 
 
 def build(spec: dict, bend: dict, *, words: int = 2500, model: str | None = None) -> dict:
@@ -222,7 +296,10 @@ def build(spec: dict, bend: dict, *, words: int = 2500, model: str | None = None
     # call. Sizing calls is not sufficient either: the cap is per MINUTE, so
     # several legal calls fired back to back still breach it, which is why the
     # chunks below are paced apart rather than merely small.
-    if _completion_budget(words) > config.TPM_SAFE_COMPLETION:
+    # Must read RAW demand. _completion_budget() is clamped to the ceiling, so
+    # comparing it against that same ceiling can never be true and every script,
+    # at any length, took the single-call path.
+    if _raw_demand(words) > config.TPM_SAFE_COMPLETION:
         return _build_chunked(spec, bend, words=words, model=model,
                               n_beats=n_beats, n_substance=n_substance,
                               title=title, tf=tf, titles=titles)
@@ -249,7 +326,7 @@ def build(spec: dict, bend: dict, *, words: int = 2500, model: str | None = None
                    ("distance", "opportunity", "why", "search_term", "saturation")}
     out["thumbnail_spec"] = thumbnail_spec(spec, bend)
     out["generated_at"] = datetime.now(timezone.utc).isoformat()
-    return out
+    return fix_beat_openers(out, model=model)
 
 
 
@@ -257,37 +334,37 @@ def _build_chunked(spec, bend, *, words, model, n_beats, n_substance,
                    title, tf, titles) -> dict:
     """Generate a long script across several paced calls.
 
-    The first call establishes the shell (title, hook, substance, thumbnail
-    text) plus the opening beats. Each later call adds beats only, and is given
-    the previous chunk's closing line so the script continues rather than
-    restarting every few beats.
+    The first call establishes the SHELL ONLY: hook, substance, thumbnail text,
+    description, tags. No beats. Each later call adds beats and is given the
+    previous chunk's closing line so the script continues rather than restarting.
+
+    The shell used to share its call with the opening beats. Once max_tokens
+    dropped to ~860 to fit the real OTPM ceiling, that call could no longer
+    afford both, and the model spent the budget on beats and returned ZERO
+    substance items every time - which the gate correctly blocked as a reskin.
+    Giving the shell its own call is what makes a small token budget survivable.
 
     Partial output is kept on failure: a short script can still be judged by the
     gate, whereas an exception loses everything already paid for.
     """
-    first_n = min(n_beats, config.CHUNK_BEATS)
-    first_words = max(200, round(words * first_n / n_beats))
-
     out = chat_json(
         SCRIPT_SYSTEM,
-        SCRIPT_USER.format(
+        SHELL_USER.format(
             template=tf.get("template", "{topic}"),
             archetype=tf.get("archetype", "other"),
             notes=spec.get("notes") or "none",
             titles=NEWLINE.join("- " + str(x) for x in titles),
             topic=bend.get("topic", ""),
             title=title,
-            words=first_words,
-            n_beats=first_n,
             n_substance=n_substance,
-            second_person=bool(tf.get("second_person_rate", 0) >= 0.5),
         ),
-        model=model, temperature=0.75,
-        max_tokens=_completion_budget(first_words),
+        model=model, temperature=0.7,
+        max_tokens=_completion_budget(260),
     )
-    beats = [b for b in (out.get("beats") or []) if isinstance(b, dict)]
-    made = len(beats)
-    print("  chunk 1 - " + str(made) + "/" + str(n_beats) + " beats")
+    got = len([s for s in (out.get("substance") or []) if isinstance(s, dict)])
+    print("  shell - hook + " + str(got) + " substance items")
+    beats = []
+    made = 0
 
     while made < n_beats:
         take = min(config.CHUNK_BEATS, n_beats - made)
@@ -324,7 +401,80 @@ def _build_chunked(spec, bend, *, words, model, n_beats, n_substance,
     for i, b in enumerate(beats, 1):
         b["beat"] = i
     out["beats"] = beats
-    return out
+    # Same repair as the single-call path; chunking makes the "You" opener MORE
+    # likely, since each chunk only sees its own beats and cannot tell it is
+    # repeating the previous chunk's opener.
+    return fix_beat_openers(out, model=model)
+
+
+OPENER_FIX_SYSTEM = """You rewrite the FIRST SENTENCE of a video narration beat.
+
+The sentence currently starts with "You" or "Your". Rewrite it so it starts with
+a different word while keeping the second person somewhere inside it.
+
+  "You feel the heat rise."      -> "The heat rises before you feel it."
+  "Your suit is already torn."   -> "Already the suit at your shoulder is torn."
+
+Keep the meaning, the tense and roughly the length. Do not add facts. Every
+rewritten sentence must start with a DIFFERENT word from the others.
+
+Return ONLY JSON: {"fixed": ["sentence 1", "sentence 2", ...]} in the same order."""
+
+
+def fix_beat_openers(brief: dict, *, model: str | None = None) -> dict:
+    """Repair beats that open on "You", in place.
+
+    Three full regenerations with the rule stated ever more loudly all returned
+    8 of 8 beats opening on "You", while second-person density climbed from 9.4
+    to 11.3 per 100 words. The model satisfies the loud second-person rule by
+    taking the obvious opener, and a negative constraint buried in a 100-line
+    prompt does not survive that. A short, single-purpose call does.
+
+    Purely cosmetic on the first word; if the repair fails the brief is returned
+    untouched and the gate blocks it as before.
+    """
+    beats = [b for b in brief.get("beats", []) if isinstance(b, dict)]
+    targets = [b for b in beats
+               if re.match(r"^\s*your?\b", (b.get("narration") or ""), re.I)]
+    if not targets:
+        return brief
+
+    firsts = []
+    for b in targets:
+        text = (b.get("narration") or "").strip()
+        m = re.match(r"^(.+?[.!?])(\s|$)", text)
+        firsts.append(m.group(1) if m else text)
+
+    # Groq's cap is 8000 tokens per MINUTE, counting prompt plus reserved
+    # completion. This call lands seconds after the script call that just
+    # reserved most of that, so without pacing it is refused every time. That
+    # is exactly what happened: the repair worked perfectly in isolation and
+    # never once fired inside build(), because the failure was swallowed below.
+    print(f"  fixing {len(targets)} beat openers "
+          f"(pausing {config.CHUNK_GAP_SECONDS}s for the Groq per-minute cap)")
+    time.sleep(config.CHUNK_GAP_SECONDS)
+    try:
+        out = chat_json(
+            OPENER_FIX_SYSTEM,
+            "Rewrite each of these opening sentences:\n"
+            + "\n".join(f"{i+1}. {s}" for i, s in enumerate(firsts)),
+            model=model, temperature=0.7, max_tokens=900,
+        )
+        fixed = [str(s).strip() for s in (out.get("fixed") or [])]
+    except LLMError as e:
+        # Never silent. A swallowed error here looks identical to "the model
+        # ignored the prompt", which cost three full regenerations to diagnose.
+        print(f"  opener repair FAILED ({e}); gate will block on openers")
+        return brief
+    if len(fixed) != len(targets):
+        print(f"  opener repair returned {len(fixed)} of {len(targets)}; skipped")
+        return brief
+
+    for b, old, new in zip(targets, firsts, fixed):
+        if not new or re.match(r"^\s*your?\b", new, re.I):
+            continue        # repair did not actually fix this one; leave it
+        b["narration"] = (b.get("narration") or "").replace(old, new, 1)
+    return brief
 
 
 def thumbnail_spec(spec: dict, bend: dict) -> dict:
@@ -335,7 +485,19 @@ def thumbnail_spec(spec: dict, bend: dict) -> dict:
     layout = cl.get("dominant_layout", "single_center_subject")
     n = cl.get("subject_count_mode", 1)
 
-    if layout in ("three_subject", "multi_subject"):
+    if layout == "grid_menu":
+        # ThePaintProf's two biggest videos (6.18M, 2.67M) are 8-12 captioned
+        # icon cells. Describing that as "N subjects evenly spaced" loses the
+        # thing that makes it work, which is that each cell is separately
+        # labelled and the viewer scans for the one that applies to them.
+        instructions.append(
+            f"Grid of roughly {cl.get('avg_cells', 8)} small cells, each its own "
+            "captioned icon. Not a hero subject.")
+        instructions.append(
+            "Every cell carries a short readable label underneath. Density is "
+            "the promise: the grid shows the whole menu at once so the viewer "
+            "finds the item that applies to them personally.")
+    elif layout in ("three_subject", "multi_subject"):
         instructions.append(f"Compose {n} subjects across the frame, evenly spaced.")
         if cl.get("middle_unique_rate", 0) >= 0.6:
             instructions.append(

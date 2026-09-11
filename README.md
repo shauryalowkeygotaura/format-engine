@@ -42,8 +42,9 @@ doppler run -p youtube-title-autoresearch -c dev -- python -m formatengine <cmd>
 ## Pipeline
 
 ```
-discover  →  deconstruct  →  bend  →  brief  →  verify-thumb
- ~350u         ~5u          ~500u     0u          0u
+discover  →  deconstruct  →  bend  →  hook  →  package  →  brief  →  verify-thumb
+ ~350u         ~5u          ~500u     0u        0u          0u          0u
+                                      └── packaging decided here, before the script ──┘
 ```
 
 ```bash
@@ -56,10 +57,17 @@ python -m formatengine deconstruct UC4ZpfvppuvCefRu3T7p0ojg --name bluntly-expla
 # 3. Where can this format go that isn't already crowded?
 python -m formatengine bend bluntly-explained -n 10 --check 5
 
-# 4. Write a gated brief for the best opening
-python -m formatengine brief bluntly-explained --bend 0
+# 4. Is this external hook worth building packaging around? (no API key needed)
+python -m formatengine hook "Carl Jung" --niche anime
 
-# 5. Check your finished thumbnail against the format you're copying
+# 5. Decide the title and thumbnail BEFORE writing anything
+python -m formatengine package bluntly-explained \
+    --topic "L Lawliet" --hook "Carl Jung" --niche anime
+
+# 6. Write a script that has to fit the approved title
+python -m formatengine brief bluntly-explained --package double-agent-carl-jung-2026-09-05
+
+# 7. Check your finished thumbnail against the format you're copying
 python -m formatengine verify-thumb my-thumb.jpg --format bluntly-explained
 
 # Anytime
@@ -133,6 +141,120 @@ identical once you average them into one number. Real output from a run:
 
 Asteroids and cosmic rays are equally uncrowded. Only one of them has an
 audience.
+
+## Packaging first, and the external hook
+
+Packaging used to be derived from a finished brief. That is backwards, and the
+channels this engine copies show it in their own artifacts: a title like
+"Kira Case, But It's 2026" cannot have been reverse-engineered out of a
+completed analysis video. `package` now produces the title, alternates,
+thumbnail text and thumbnail spec on their own, gates them, and `brief
+--package` writes a script that has to fit the approved title.
+
+The gate's main input is the **external hook**: the thing in the packaging that
+does not come from the source material. Measured 2026-09-04 across 80 videos on
+two channels sharing a niche, title templates and runtime, packaging that
+collides the in-universe subject with a real-world artifact ran **2.7x-5x on
+views/day at matched age**, and the effect replicated on the second channel.
+
+The threshold is **recognition, not recency**, and that distinction was forced
+by the data. The obvious design is "is this hook trending". Tested against the
+one case with a known outcome, it fails:
+
+```
+Jeffrey Epstein, en.wikipedia daily pageviews
+  attention peak      2026-02-05 at 1,072,415/day
+  video shipped       2026-07-06, 151 days later
+  pageviews that day  10,786  =  1% of peak, 0.72x the article's own median
+  result              444,864 views — 5.6x that channel's median
+```
+
+A freshness gate would have blocked the best video in the sample. So recency is
+measured and printed, never enforced. What separates a hook is whether the
+audience already recognises it: every hook that worked measured 2,822-12,677
+pageviews/day, every in-universe subject measured 2,235/day or less, and
+`HOOK_RECOGNITION_FLOOR` splits that gap at 2,500.
+
+### The slang track
+
+Some hooks have no encyclopedia footprint at all, and the highest views/day
+video in the reference sample (12,952) was built on one. A second instrument
+scores those: YouTube's own result set. Measured 2026-09-05, 12 results asked
+for per term:
+
+```
+goonpocalypse      n=12   top   1,942,421
+skibidi            n=12   top 150,681,962
+gooning            n=11   top   4,684,859
+"zravnik qplorth"  n=0    (nonsense control)
+```
+
+A term nobody uses returns literally nothing, so a full result set plus one
+high-view proof is a real signal. Slang hooks therefore **score**, they are not
+shrugged at. `UNSCORED` is now reserved for terms neither instrument can see,
+which usually means a typo.
+
+Scoreable is not the same as advisable. A hook that only clears the YouTube
+track is marked `register: slang`, and so is any title carrying filter-evasion
+(`A$$`, `stup*d`, or homoglyphs like `𝓝𝓱𝓪𝓲`) — both reference channels do that,
+and unlike innuendo it is mechanically detectable. Those are rationed against a
+budget measured off the reference channel: **3 of its last 10 uploads** sat in
+that register. So `SLANG_BUDGET_MAX = 3` per `SLANG_BUDGET_WINDOW = 10`.
+
+Two of those three were consecutive uploads, so this is a **rate cap and
+deliberately not an adjacency rule** — forbidding back-to-back slang would
+contradict what the channel actually does.
+
+### Competitors, not results
+
+A raw result set is not a competitor set. Searching "Jeffrey Epstein anime"
+live returned a 3,515,737-view mainstream news video as its top hit, which
+competes with nothing in this niche, and counting it made every news-derived
+hook look `CROWDED`. A result now counts only when its title shares a content
+word with the hook **and** one with the niche or topic:
+
+```
+"Could L Catch Epstein?"         epstein + l  -> competitor
+"People have found Epstein..."   epstein      -> ignored
+```
+
+Short tokens are kept deliberately. This niche is full of one and two letter
+names (L, Near, Kira), and tokenising on word boundaries already makes that
+safe: "helicopter" yields one token, never a stray "l".
+
+### Nothing is global that a second niche can break
+
+Three separate thresholds have now been caught being measured on one niche and
+applied to all of them. Each is per-format:
+
+| Trait | Measured from | Where it lives |
+|---|---|---|
+| Title length | 31c/6w anime vs 44c/7w ThePaintProf | `title_format.max_chars` |
+| Art style | flatness 0.548 vs 0.787 | `thumbnail_checklist.art_style` |
+| Cell density | 1-2 subjects vs 8-12 captioned cells | `thumbnail_checklist.grid_rate` |
+
+Art style is a **hard fail** in `verify-thumb`, not one score among many. The
+worst video on ThePaintProf (4,848 views against a 60,704 median) is the one
+thumbnail that abandoned the channel's house style.
+
+### Templates are a depleting resource
+
+Measured on ThePaintProf, two independent templates on one channel, in upload
+order:
+
+```
+"Every ... Explained"       #1 6,182,111  ->  #14   33,846
+"POV: You're About To ..."  #1 2,150,187  ->   #7    9,526
+```
+
+Both lost ~99% first use to last, and both were already down ~95% by the fifth.
+`package` warns from use #5 and gets blunt at #10. It **warns rather than
+blocks**: template fatigue, spending your best topics first, and any
+repetition penalty all produce this identical curve, and public data cannot
+separate them. Open a new format with your strongest idea rather than saving it.
+
+Full method, tables and knowledge gaps:
+`Deliverables/anime-analysis-interest-factor-research-2026-09-04.md` in the vault.
 
 ## The differentiation gate
 

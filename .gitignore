@@ -7,3 +7,7 @@ data/discover-*.json
 __pycache__/
 *.pyc
 .env
+
+# Vendored Groq client, written here by Scripts/sync_groq_pool.py before that
+# script learned to skip non-consumers. Nothing in this package imports it.
+formatengine/groq_pool.py

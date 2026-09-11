@@ -5,6 +5,7 @@ Groq sits behind Cloudflare and rejects the default urllib User-Agent with a
 """
 from __future__ import annotations
 
+import http.client
 import json
 import os
 import time
@@ -67,6 +68,16 @@ def chat(system: str, user: str, *, model: str | None = None,
                 time.sleep(2 ** attempt)
                 continue
             raise LLMError(f"groq network error: {e.reason}") from e
+        except (http.client.HTTPException, ConnectionError, TimeoutError, OSError) as e:
+            # RemoteDisconnected is an HTTPException, NOT a URLError, so it
+            # escaped the handler above and killed a whole chunked run mid-way.
+            # Groq drops long-held connections often enough that this is the
+            # single most common failure in a paced multi-call script build.
+            if attempt < 2:
+                last = f"{type(e).__name__}: {e}"
+                time.sleep(2 ** attempt)
+                continue
+            raise LLMError(f"groq connection error: {type(e).__name__}: {e}") from e
     else:
         raise LLMError(f"groq failed after retries: {last}")
 
