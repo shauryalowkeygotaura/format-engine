@@ -61,26 +61,104 @@ _ENTITY_STOP = {
 
 
 def article_text(title: str) -> str:
-    """Lead section of an article, or empty string."""
-    url = ("https://en.wikipedia.org/api/rest_v1/page/summary/"
+    """Full plain-text article, or empty string.
+
+    The short REST summary is not enough. Kosmos 954's summary says the
+    satellite "reentered the Earth's atmosphere the following year" rather than
+    naming 1978, so a true claim about the 1978 reentry was reported as
+    unsupported. Relative dates in a lead paragraph are common; the body
+    almost always states the year outright, so check the whole article.
+    """
+    url = ("https://en.wikipedia.org/w/api.php?action=query&prop=extracts"
+           "&explaintext=1&redirects=1&format=json&titles="
            + urllib.parse.quote(title.replace(" ", "_")))
-    d = _get_json(url, timeout=25)
+    d = _get_json(url, timeout=30)
     if not d:
         return ""
-    return " ".join(str(d.get(k) or "") for k in ("extract", "description"))
+    query = d.get("query") if isinstance(d, dict) else None
+    pages = (query or {}).get("pages") if isinstance(query, dict) else None
+    for page in (pages or {}).values():
+        if not isinstance(page, dict):
+            continue                      # API shape varies on errors/redirects
+        text = page.get("extract") or ""
+        if isinstance(text, str) and text:
+            # 200k characters of plain text is far longer than any real
+            # article; the cap only bounds memory on a pathological response.
+            # Truncation here can only cause a false "unsupported", never a
+            # false "verified", which is the safe direction for this check.
+            return text[:200_000]
+    return ""
 
 
 def entities(text: str) -> list[str]:
     """Candidate proper nouns, longest first so "Venera-9" beats "Venera"."""
     found = []
     for m in _ENTITY.finditer(text or ""):
-        e = m.group(1).strip()
+        # A capitalised run swallows sentence-initial and adjective words:
+        # "The Soviet Venera-9" is one match. Peel leading stop words so the
+        # lookup searches the spacecraft, not the phrase.
+        words = m.group(1).strip().split(" ")
+        while words and words[0] in _ENTITY_STOP:
+            words.pop(0)
+        e = " ".join(words).strip()
         if len(e) < 3 or e in _ENTITY_STOP:
             continue
         if e.lower() in {f.lower() for f in found}:
             continue
         found.append(e)
-    return sorted(found, key=len, reverse=True)
+    return sorted(found, key=_anchor_score, reverse=True)
+
+
+_MONTHS = {"january", "february", "march", "april", "may", "june", "july",
+           "august", "september", "october", "november", "december"}
+# Named things too generic to test a specific claim against. The article on
+# "Pacific Ocean" will never mention a given year, so anchoring on it produces
+# a true-but-useless "unsupported".
+_WEAK_ANCHORS = {"pacific ocean", "atlantic ocean", "earth", "sun", "moon",
+                 "canada", "russia", "united states", "soviet union", "europe",
+                 "asia", "africa", "nasa", "space", "orbit"}
+
+
+def _anchor_score(entity: str) -> int:
+    """How good a subject this name is for checking one claim.
+
+    Ranking by raw length picked "September 15" over "Venera-9" and reported
+    that the September 15 article fails to mention 1978 - a true statement that
+    tells you nothing. A designation carrying a number is the specific thing the
+    claim is about; a month or a continent is not.
+    """
+    low = entity.lower()
+    score = len(entity)
+    if any(ch.isdigit() for ch in entity):
+        score += 100                      # Venera-9, Kosmos 954, Apollo 13
+    if low.split(" ")[0] in _MONTHS:
+        score -= 200                      # a date, not a subject
+    if low in _WEAK_ANCHORS:
+        score -= 150
+    return score
+
+
+# Words that carry the claim's technical content. Deliberately narrow: only
+# hyphenated designations (plutonium-238, uranium-235), acronyms (RTG, RORSAT)
+# and long domain nouns. Everything shorter or commoner paraphrases too freely
+# for absence to mean anything.
+_COMMON = {
+    "approximately", "government", "environment", "international", "including",
+    "following", "different", "contamination", "acknowledge", "publicly",
+    "extent", "roughly", "spent", "scattered", "released", "crashed", "other",
+    "after", "into", "from", "with", "that", "this", "were", "their", "which",
+}
+
+
+def _tech_terms(claim: str) -> set[str]:
+    """Distinctive technical vocabulary, lowercased."""
+    out: set[str] = set()
+    for m in re.finditer(r"[A-Za-z][A-Za-z]+-\d+|\b[A-Z]{3,}\b|\b[a-z]{8,}\b",
+                         claim or ""):
+        term = m.group(0).lower()
+        if term not in _COMMON:
+            out.add(term)
+    return out
 
 
 def check_claim(claim: str) -> dict:
@@ -99,15 +177,26 @@ def check_claim(claim: str) -> dict:
         text = article_text(title)
         if not text:
             continue
+        # Technical terms the article never uses. Years catch a fabricated
+        # DATE; they cannot catch a fabricated CATEGORY. A brief called Kosmos
+        # 954 "an anti-satellite test platform powered by an RTG containing
+        # plutonium-238"; it was a radar ocean reconnaissance satellite with a
+        # uranium-235 fission reactor, and every date in the claim was right.
+        # Absence is a smell, not proof, because an article may paraphrase, so
+        # this WARNS and never decides the verdict on its own.
+        missing_terms = sorted(t for t in _tech_terms(claim)
+                               if t not in text.lower())
         if not years:
             return {"verdict": "unknown", "entity": ent, "article": title,
+                    "missing_terms": missing_terms,
                     "reason": "no dates in the claim to check against"}
         missing = sorted(y for y in years if y not in text)
         if not missing:
             return {"verdict": "verified", "entity": ent, "article": title,
-                    "missing_years": []}
+                    "missing_years": [], "missing_terms": missing_terms}
         return {"verdict": "unsupported", "entity": ent, "article": title,
-                "missing_years": missing, "article_text": text[:300],
+                "missing_years": missing, "missing_terms": missing_terms,
+                "article_text": text[:300],
                 "reason": (f"the article on {title!r} does not mention "
                            + ", ".join(missing))}
     return {"verdict": "unknown", "entity": ents[0] if ents else None,
@@ -148,6 +237,66 @@ def check_gore(brief: dict) -> dict:
             "beats_affected": len({h["where"] for h in hits if h["where"] != "hook"})}
 
 
+# Comma-grouped first, so "6,041,174.70" is ONE fact. A looser pattern split it
+# into "6,041" and "174.70" and counted a single repeated figure twice.
+_NUMBER = re.compile(r"\b\d{1,3}(?:,\d{3})+(?:\.\d+)?\b"
+                     r"|\b\d+\.\d+\b"
+                     r"|\b\d{3,}\b")
+_NAMED = re.compile(r"\b[A-Z][a-z]{2,}(?: [A-Z][a-z]{2,})+\b")
+# "BES-5", "uranium-235": the digits belong to a designation, and a video about
+# that hardware will name it repeatedly. Stripped before numbers are read.
+_DESIGNATION = re.compile(r"\b[A-Za-z]+-\d+\b")
+# NOT named _YEAR: that name is already taken at the top of this module by the
+# unanchored pattern check_claim() uses to find years inside a claim. Defining
+# a second _YEAR here shadowed it, and an anchored pattern finds nothing inside
+# a sentence, which would have silently reported every claim as "no dates to
+# check against" and disabled the fact check entirely.
+_YEAR_EXACT = re.compile(r"^(?:1[89]|20)\d{2}$")
+
+
+def _facts_in(text: str) -> set[str]:
+    """Specific numbers and multi-word proper names, lowercased.
+
+    Years are excluded: an explainer about a 1978 event dates things in several
+    beats and that is not repetition. Bare small integers are excluded too, as
+    counts like "twelve" carry no identity.
+    """
+    stripped = _DESIGNATION.sub(" ", text or "")
+    out = {m.group(0).lower() for m in _NAMED.finditer(stripped)}
+    for m in _NUMBER.finditer(stripped):
+        value = m.group(0)
+        if not _YEAR_EXACT.match(value):
+            out.add(value.lower())
+    return out
+
+
+def check_repetition(brief: dict, *, exclude: str = "") -> dict:
+    """Facts restated across beats, which is filler wearing a new sentence.
+
+    Whole-beat text similarity does NOT find this. Measured 2026-09-24, the
+    repetitive brief scored a maximum pairwise similarity of 0.16 against 0.12
+    for a known-good one: no separation, because the repetition is of specific
+    FACTS inside otherwise different prose. Counting the facts themselves
+    separates cleanly - 7 repeats against 0, 0 and 0 for three known-good
+    briefs across twenty beats.
+
+    `exclude` holds the subject and hook, whose names SHOULD recur: a video
+    about Kosmos 954 will say "Kosmos 954" in every beat and that is correct.
+    """
+    beats = [(b.get("narration") or "") for b in brief.get("beats", [])
+             if isinstance(b, dict)]
+    skip = {w.lower() for w in re.split(r"[^A-Za-z0-9]+", exclude) if w}
+    seen: dict[str, int] = {}
+    for text in beats:
+        for f in _facts_in(text):
+            if f in skip or any(part in skip
+                                for part in f.split(" ")):
+                continue
+            seen[f] = seen.get(f, 0) + 1
+    repeated = sorted(f for f, n in seen.items() if n >= 2)
+    return {"beats": len(beats), "repeated": repeated, "count": len(repeated)}
+
+
 def summarize(claims: dict | None, gore: dict) -> str:
     # Read defensively throughout: these dicts are also loaded back from saved
     # brief JSON, which may have been written by an older schema or hand-edited.
@@ -162,6 +311,13 @@ def summarize(claims: dict | None, gore: dict) -> str:
             out.append(f"  [{mark}] {str(r.get('claim',''))[:90]}")
             if verdict != "verified":
                 out.append(f"          {r.get('reason','')}")
+            # Shown on every verdict, including "verified": the dates can all
+            # check out while the category is invented.
+            terms = r.get("missing_terms") or []
+            if terms and r.get("article"):
+                out.append(f"          terms absent from '{r['article']}': "
+                           + ", ".join(terms[:6])
+                           + " (may be paraphrase - eyeball it)")
             # Only claim this when the brief actually said so. A missing key
             # means unknown, and asserting "it was marked false" would put words
             # in the brief's mouth.

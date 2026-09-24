@@ -1,0 +1,255 @@
+{
+  "title": "Real Chernobyl In Space?",
+  "hook": "Chernobyl cost $700 billion. Space disasters cost nothing. That is the lie that keeps us alive.",
+  "substance": [
+    {
+      "claim": "The Chernobyl disaster is estimated to have cost US$700 billion, making it the most expensive disaster in history.",
+      "why_it_matters": "Establishes the financial and physical scale of the terrestrial baseline against which space debris impact risks are often underestimated.",
+      "needs_check": false
+    },
+    {
+      "claim": "Reactor 4 at Chernobyl had 1,661 individual fuel channels requiring over 45 million litres of coolant per hour.",
+      "why_it_matters": "Highlights the extreme complexity and volume of systems that can fail in a nuclear environment, a parallel to the complex thermal management systems of spacecraft.",
+      "needs_check": false
+    },
+    {
+      "claim": "The Soviet government did not publicly acknowledge the Chernobyl disaster until two days after the explosion, when radiation levels were detected in Sweden.",
+      "why_it_matters": "Demonstrates the danger of institutional denial during a catastrophic event, a risk that exists in modern space agencies when warning systems are ambiguous.",
+      "needs_check": false
+    },
+    {
+      "claim": "The exclusion zone was initially set at 10 kilometres, evacuating around 49,000 people, and later expanded to 30 kilometres.",
+      "why_it_matters": "Shows how the physical boundaries of a disaster zone can expand unpredictably, mirroring how a single orbital collision can fragment debris into a wider hazard zone.",
+      "needs_check": false
+    },
+    {
+      "claim": "28 of the 134 workers who showed symptoms of acute radiation syndrome died within three months of the Chernobyl explosion.",
+      "why_it_matters": "Provides a concrete human cost metric for radiation exposure, a relevant comparison for the potential health effects of cosmic radiation or debris contamination.",
+      "needs_check": false
+    }
+  ],
+  "thumbnail_text": "NOT NUCLEAR",
+  "description": "We analyze the economics and physics of the world's worst nuclear disaster. Then we apply those exact failure modes to the orbital environment.",
+  "hashtags": [
+    "#SpaceDisaster",
+    "#Chernobyl",
+    "#OrbitalDebris",
+    "#Science"
+  ],
+  "tags": [
+    "Chernobyl disaster",
+    "space debris impact",
+    "nuclear accident scale",
+    "orbital mechanics",
+    "satellite collision risk",
+    "Pripyat"
+  ],
+  "end_screen_followup": "Every Way The Universe Could End Explained in 9 Minutes",
+  "beats": [
+    {
+      "beat": 1,
+      "narration": "Reactor 4 demanded forty-five million litres of coolant per hour. One thousand six hundred and sixty-one fuel channels ran hot. The Soviet government stayed silent for two days. Sweden detected the radiation first. The exclusion zone began at ten kilometres. Forty-nine thousand people were evacuated immediately.",
+      "visual": "Archive footage of the reactor building exterior. Text overlay: '45M Litres/HR'. Map showing the 10km evacuation radius.",
+      "seconds": 30
+    },
+    {
+      "beat": 2,
+      "narration": "The zone expanded to thirty kilometres. One hundred and thirty-four workers developed acute radiation syndrome. Twenty-eight of them died within three months. The total cost reached seven hundred billion dollars. Space disasters cost nothing. That is the lie that keeps us alive.",
+      "visual": "Map expanding to 30km. List of names appearing on screen. Text overlay: '$700 Billion'. Fade to black with the final sentence.",
+      "seconds": 30
+    },
+    {
+      "beat": 3,
+      "narration": "Silence broke over Minsk. The Soviet government stayed quiet for two days. Radiation detectors in Sweden finally screamed. The secret was dead. Authorities rushed to contain the fire. They dropped sand and boron from helicopters. The effort was chaotic and slow. Every minute mattered. But the damage was already done.",
+      "visual": "Black and white footage of distant smoke columns. A Russian news anchor speaking calmly. Helicopters hovering over a glowing reactor core. Close-up of dust being sprinkled into an open pit.",
+      "seconds": 30
+    },
+    {
+      "beat": 4,
+      "narration": "Failure spread outward. The exclusion zone grew from ten to thirty kilometres. Forty-nine thousand people lost their homes overnight. No one warned them first. The government prioritized secrecy over safety. This delay cost lives. The cleanup crews worked in shifts. They had no protective gear. The radiation levels were lethal. This was not an accident. It was a system collapse.",
+      "visual": "Wide shot of Pristupnitsky village emptying. Cars parked on empty streets. Workers in white suits loading trucks with dirty debris. A map showing the red zone expanding rapidly.",
+      "seconds": 30
+    }
+  ],
+  "format_slug": "bluntly-explained",
+  "topic": "space disaster",
+  "bend": {
+    "distance": "packaged",
+    "opportunity": null,
+    "why": null,
+    "search_term": "space disaster",
+    "saturation": {
+      "checked": true,
+      "query": "Chernobyl disaster space space disaster",
+      "n": 8,
+      "n_raw": 15,
+      "median_views": 2629209,
+      "top_views": 18256396,
+      "top_title": "Chernobyl Nuclear Disaster | Why it happened? | Dhruv Rathee",
+      "raw_top_views": 23701648
+    }
+  },
+  "thumbnail_spec": {
+    "layout": "scene_no_clear_subject",
+    "subject_count": 0,
+    "palette": [
+      {
+        "hex": "#070507",
+        "weight": 0.5
+      },
+      {
+        "hex": "#0d0a0f",
+        "weight": 0.5
+      },
+      {
+        "hex": "#121214",
+        "weight": 0.42
+      },
+      {
+        "hex": "#0c0b0d",
+        "weight": 0.42
+      },
+      {
+        "hex": "#0f0a0c",
+        "weight": 0.42
+      }
+    ],
+    "measured_rules": [
+      "layout: scene_no_clear_subject (7/10 videos)",
+      "header text band across the top",
+      "high saturation (format average 0.50)",
+      "high contrast (format average 0.36)"
+    ],
+    "instructions": [
+      "Atmospheric scene, not a cut-out subject. The frame reads as an environment; mood and colour carry the click, and the text does the naming. Do not paste a centred hero object onto a backdrop.",
+      "Header text band across the top ~25% of the frame.",
+      "Push saturation to ~0.50 (format norm).",
+      "Hold contrast near 0.36 (format norm).",
+      "Collide 'Chernobyl disaster' with the in-universe subject in one frame: Split composition: left side shows the Chernobyl reactor building with irradiation symbols, right side shows a derelict satellite or damaged space station with radiation symbols, connected by a red jagged lightning bolt..",
+      "Art style for this format is UNMEASURED (run `deconstruct` to fill thumbnail_checklist.art_style). Match whatever the format's existing thumbnails already do rather than guessing.",
+      "Source the artifact by exact proper name, never by mood. 'Jeffrey Epstein photograph' and 'CIA seal' are exact; 'sinister figure' is the failure mode that produced a beach for water pressure."
+    ],
+    "verify_with": "python -m formatengine verify-thumb <file> --format bluntly-explained",
+    "external_hook": "Chernobyl disaster"
+  },
+  "generated_at": "2026-09-24T05:50:36.062026+00:00",
+  "alt_titles": [
+    "Space Accident Like Chernobyl",
+    "Space Chernobyl Explained",
+    "Was Space Chernobyl?"
+  ],
+  "external_hook": "Chernobyl disaster",
+  "hook_score": {
+    "term": "Chernobyl disaster",
+    "niche": "space",
+    "topic": "space disaster",
+    "verdict": "CROWDED",
+    "register": "proper",
+    "recognition": {
+      "scored": true,
+      "source": "wikipedia",
+      "register": "proper",
+      "term": "Chernobyl disaster",
+      "article": "Chernobyl disaster",
+      "daily_median": 8062,
+      "attention": {
+        "available": true,
+        "median": 8062,
+        "recent_7d_mean": 8721,
+        "prior_30d_mean": 7708,
+        "trend": 1.13,
+        "peak": 25171,
+        "peak_day": "20260715",
+        "peak_age_days": 57,
+        "pct_of_peak": 0.3465
+      }
+    },
+    "saturation": {
+      "checked": true,
+      "query": "Chernobyl disaster space space disaster",
+      "n": 8,
+      "n_raw": 15,
+      "median_views": 2629209,
+      "top_views": 18256396,
+      "top_title": "Chernobyl Nuclear Disaster | Why it happened? | Dhruv Rathee",
+      "raw_top_views": 23701648
+    },
+    "notes": [
+      "8,062/day median recognition clears the 2,500 floor.",
+      "Attention peaked 57d ago at 25,171/day; now at 34.6% of peak, trend 1.13x. Reported only. The reference winner shipped 151d past peak at 1% of peak, so age is not a reason to drop a hook.",
+      "Already held: 18,256,396 views on \"Chernobyl Nuclear Disaster | Why it happened? | Dhruv Rathee\". Going head-to-head needs a genuinely different angle, not the same premise."
+    ],
+    "checked_at": "2026-09-10T17:16:24.010818+00:00"
+  },
+  "register": "proper",
+  "gate": {
+    "passed": false,
+    "checks": [
+      {
+        "check": "title_vs_source",
+        "value": 0.247,
+        "limit": 0.72,
+        "pass": true
+      },
+      {
+        "check": "self_similarity_peak",
+        "value": 0.177,
+        "limit": 0.8,
+        "pass": true,
+        "window": 4
+      },
+      {
+        "check": "substance_items",
+        "value": 5,
+        "limit": 3,
+        "pass": true
+      },
+      {
+        "check": "hook_present",
+        "value": 16,
+        "limit": 5,
+        "pass": true
+      },
+      {
+        "check": "beat_opener_variety",
+        "value": "reactor x1",
+        "limit": 2,
+        "pass": true
+      },
+      {
+        "check": "filler_phrases",
+        "value": [],
+        "limit": [],
+        "pass": true
+      },
+      {
+        "check": "graphic_content",
+        "value": 0,
+        "limit": 4,
+        "pass": true
+      },
+      {
+        "check": "hook_delivered",
+        "value": false,
+        "limit": true,
+        "pass": false
+      },
+      {
+        "check": "second_person_per_100w",
+        "value": 0.0,
+        "limit": "n/a (explainer format)",
+        "pass": true
+      },
+      {
+        "check": "median_sentence_words",
+        "value": 6.0,
+        "limit": 12,
+        "pass": true
+      }
+    ],
+    "failures": [
+      "The packaging promises 'Chernobyl disaster' but the narration never mentions it. The title and thumbnail carry the collision and the script does not deliver it, which is a bait-and-switch. Work the hook into the beats or repackage the video."
+    ],
+    "warnings": []
+  }
+}

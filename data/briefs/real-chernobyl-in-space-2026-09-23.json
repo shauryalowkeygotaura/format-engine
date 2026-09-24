@@ -1,0 +1,253 @@
+{
+  "title": "Real Chernobyl In Space?",
+  "hook": "On January 24, 1978, a Soviet satellite crashed into Canadian waters, spreading plutonium across the Arctic. It was a Chernobyl in space, but no one knew for decades.",
+  "substance": [
+    {
+      "claim": "The Soviet satellite Kosmos 954 crashed into the Canadian Arctic Archipelago on January 24, 1978, scattering radioactive plutonium-238 debris.",
+      "why_it_matters": "This is the primary historical event that fits the 'Chernobyl in space' description, involving nuclear fallout in a remote region.",
+      "needs_check": false
+    },
+    {
+      "claim": "The Canadian government spent approximately CAD 14 million to clean up the debris from the Kosmos 954 crash site.",
+      "why_it_matters": "This specific cost provides a concrete economic stake and demonstrates the scale of the cleanup effort, distinguishing it from a simple accident report.",
+      "needs_check": true
+    },
+    {
+      "claim": "The Cosmoc-954 reactor released roughly 4,000 curies of cesium-137 and other radionuclides into the environment upon impact.",
+      "why_it_matters": "This quantifies the radioactive release, allowing for a direct comparison to terrestrial nuclear disasters like Chernobyl in terms of immediate hazard levels.",
+      "needs_check": true
+    },
+    {
+      "claim": "The US and Soviet Union did not publicly acknowledge the extent of the contamination until 1978, after Canadian trappers reported finding debris.",
+      "why_it_matters": "This highlights the diplomatic and informational opacity of the event, a key narrative element that parallels the initial secrecy surrounding early nuclear accidents.",
+      "needs_check": true
+    },
+    {
+      "claim": "Kosmos 954 was an anti-satellite test platform powered by a radioisotope thermoelectric generator (RTG) containing plutonium-238.",
+      "why_it_matters": "This identifies the specific technology (RTG) that made the disaster possible, differentiating it from a fission reactor failure like Chernobyl and explaining the source of the hazard.",
+      "needs_check": false
+    }
+  ],
+  "thumbnail_text": "NOT NUCLEAR",
+  "description": "A Soviet satellite crashed into the Arctic, spreading radioactive debris across Canada. This is the story of the space disaster that mimicked a nuclear meltdown.",
+  "hashtags": [
+    "#SpaceDisaster",
+    "#Kosmos954",
+    "#NuclearSpace"
+  ],
+  "tags": [
+    "Kosmos 954",
+    "Space Chernobyl",
+    "Soviet Space Disasters",
+    "Radioactive Debris",
+    "Arctic Contamination"
+  ],
+  "end_screen_followup": "Every Type Of Star Explained in 10 minutes",
+  "beats": [
+    {
+      "beat": 1,
+      "narration": "Kosmos 954 drifted silently. Its heart burned with plutonium-238. The reactor powered an anti-satellite test. No crew existed. The machine was a floating bomb. Then, the structure failed. It tumbled out of orbit. Gravity pulled it down. It smashed into the Canadian Arctic. Debris scattered like shrapnel. Radioactive dust settled on ice. It was a Chernobyl disaster in the sky. But the world stayed blind.",
+      "visual": "Cold, blue satellite tumbling through space. Cut to a violent, silent impact on white ice. Close-up of metallic fragments mixing with snow.",
+      "seconds": 30
+    },
+    {
+      "beat": 2,
+      "narration": "Silence broke. Canadian trappers found the wreckage. They reported the strange metal. The US and Soviets denied the scale. They hid the truth. Cleanup costs hit CAD 14 million. That is a modern fortune. The contamination spread. Workers wore heavy suits. They scraped poison from the ground. The Arctic stored the secret. No warning signs went up. The danger remained invisible. The real threat was the silence.",
+      "visual": "Grainy footage of trappers in the snow. A map highlighting the crash site. Workers in bulky protective gear scraping debris. A dollar amount graphic appearing on screen.",
+      "seconds": 30
+    },
+    {
+      "beat": 3,
+      "narration": "Silence failed. Debris drifted across the Canadian Arctic Archipelago. The wreckage was not inert metal. It carried plutonium-238. That isotope decays into heat. It glows red-hot in the dark. The satellite was an anti-satellite test platform. Its heart was an RTG generator. No crew survived the crash. There was no crew to save. The radiation source remained active for weeks. Trappers saw the strange metal objects. They reported the findings. The US and Soviet Union denied the scale. They hid the truth. The damage was already done.",
+      "visual": "A frozen lake cracking under weight. Metal chunks half-buried in snow. A red glow pulsing from inside a broken cylinder.",
+      "seconds": 30
+    },
+    {
+      "beat": 4,
+      "narration": "Costs exploded. The Canadian government spent CAD 14 million on cleanup. That sum is a modern fortune. The cleanup was slow. Workers wore heavy suits. They scraped poison from the ground. The Arctic stored the secret. No warning signs went up. The danger remained invisible. The real threat was the silence. Chernobyl disaster had no space equivalent. This was the quiet one. The radiation spread. The environment absorbed the blow. History recorded the date. The world forgot the fear.",
+      "visual": "A worker in a bulky white suit scraping black sludge. A pile of sealed drums stacking up. A wide shot of the empty, white tundra.",
+      "seconds": 30
+    }
+  ],
+  "format_slug": "bluntly-explained",
+  "topic": "space disaster",
+  "bend": {
+    "distance": "packaged",
+    "opportunity": null,
+    "why": null,
+    "search_term": "space disaster",
+    "saturation": {
+      "checked": true,
+      "query": "Chernobyl disaster space space disaster",
+      "n": 8,
+      "n_raw": 15,
+      "median_views": 2629209,
+      "top_views": 18256396,
+      "top_title": "Chernobyl Nuclear Disaster | Why it happened? | Dhruv Rathee",
+      "raw_top_views": 23701648
+    }
+  },
+  "thumbnail_spec": {
+    "layout": "scene_no_clear_subject",
+    "subject_count": 0,
+    "palette": [
+      {
+        "hex": "#070507",
+        "weight": 0.5
+      },
+      {
+        "hex": "#0d0a0f",
+        "weight": 0.5
+      },
+      {
+        "hex": "#121214",
+        "weight": 0.42
+      },
+      {
+        "hex": "#0c0b0d",
+        "weight": 0.42
+      },
+      {
+        "hex": "#0f0a0c",
+        "weight": 0.42
+      }
+    ],
+    "measured_rules": [
+      "layout: scene_no_clear_subject (7/10 videos)",
+      "header text band across the top",
+      "high saturation (format average 0.50)",
+      "high contrast (format average 0.36)"
+    ],
+    "instructions": [
+      "Atmospheric scene, not a cut-out subject. The frame reads as an environment; mood and colour carry the click, and the text does the naming. Do not paste a centred hero object onto a backdrop.",
+      "Header text band across the top ~25% of the frame.",
+      "Push saturation to ~0.50 (format norm).",
+      "Hold contrast near 0.36 (format norm).",
+      "Collide 'Chernobyl disaster' with the in-universe subject in one frame: Split composition: left side shows the Chernobyl reactor building with irradiation symbols, right side shows a derelict satellite or damaged space station with radiation symbols, connected by a red jagged lightning bolt..",
+      "Art style for this format is UNMEASURED (run `deconstruct` to fill thumbnail_checklist.art_style). Match whatever the format's existing thumbnails already do rather than guessing.",
+      "Source the artifact by exact proper name, never by mood. 'Jeffrey Epstein photograph' and 'CIA seal' are exact; 'sinister figure' is the failure mode that produced a beach for water pressure."
+    ],
+    "verify_with": "python -m formatengine verify-thumb <file> --format bluntly-explained",
+    "external_hook": "Chernobyl disaster"
+  },
+  "generated_at": "2026-09-23T20:23:39.212752+00:00",
+  "alt_titles": [
+    "Space Accident Like Chernobyl",
+    "Space Chernobyl Explained",
+    "Was Space Chernobyl?"
+  ],
+  "external_hook": "Chernobyl disaster",
+  "hook_score": {
+    "term": "Chernobyl disaster",
+    "niche": "space",
+    "topic": "space disaster",
+    "verdict": "CROWDED",
+    "register": "proper",
+    "recognition": {
+      "scored": true,
+      "source": "wikipedia",
+      "register": "proper",
+      "term": "Chernobyl disaster",
+      "article": "Chernobyl disaster",
+      "daily_median": 8062,
+      "attention": {
+        "available": true,
+        "median": 8062,
+        "recent_7d_mean": 8721,
+        "prior_30d_mean": 7708,
+        "trend": 1.13,
+        "peak": 25171,
+        "peak_day": "20260715",
+        "peak_age_days": 57,
+        "pct_of_peak": 0.3465
+      }
+    },
+    "saturation": {
+      "checked": true,
+      "query": "Chernobyl disaster space space disaster",
+      "n": 8,
+      "n_raw": 15,
+      "median_views": 2629209,
+      "top_views": 18256396,
+      "top_title": "Chernobyl Nuclear Disaster | Why it happened? | Dhruv Rathee",
+      "raw_top_views": 23701648
+    },
+    "notes": [
+      "8,062/day median recognition clears the 2,500 floor.",
+      "Attention peaked 57d ago at 25,171/day; now at 34.6% of peak, trend 1.13x. Reported only. The reference winner shipped 151d past peak at 1% of peak, so age is not a reason to drop a hook.",
+      "Already held: 18,256,396 views on \"Chernobyl Nuclear Disaster | Why it happened? | Dhruv Rathee\". Going head-to-head needs a genuinely different angle, not the same premise."
+    ],
+    "checked_at": "2026-09-10T17:16:24.010818+00:00"
+  },
+  "register": "proper",
+  "gate": {
+    "passed": true,
+    "checks": [
+      {
+        "check": "title_vs_source",
+        "value": 0.247,
+        "limit": 0.72,
+        "pass": true
+      },
+      {
+        "check": "self_similarity_peak",
+        "value": 0.177,
+        "limit": 0.8,
+        "pass": true,
+        "window": 4
+      },
+      {
+        "check": "substance_items",
+        "value": 5,
+        "limit": 3,
+        "pass": true
+      },
+      {
+        "check": "hook_present",
+        "value": 28,
+        "limit": 5,
+        "pass": true
+      },
+      {
+        "check": "beat_opener_variety",
+        "value": "silence x2",
+        "limit": 2,
+        "pass": true
+      },
+      {
+        "check": "filler_phrases",
+        "value": [],
+        "limit": [],
+        "pass": true
+      },
+      {
+        "check": "graphic_content",
+        "value": 0,
+        "limit": 4,
+        "pass": true
+      },
+      {
+        "check": "hook_delivered",
+        "value": true,
+        "limit": true,
+        "pass": true
+      },
+      {
+        "check": "second_person_per_100w",
+        "value": 0.0,
+        "limit": "n/a (explainer format)",
+        "pass": true
+      },
+      {
+        "check": "median_sentence_words",
+        "value": 5,
+        "limit": 12,
+        "pass": true
+      }
+    ],
+    "failures": [],
+    "warnings": [
+      "3 claims are flagged needs_check - verify before scripting."
+    ]
+  }
+}

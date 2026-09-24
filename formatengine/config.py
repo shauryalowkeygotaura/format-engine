@@ -146,6 +146,13 @@ MIN_SUBSTANCE_ITEMS = 3                 # original facts/angles required per bri
 # not a measurement, and labelled as such wherever it surfaces.
 MAX_GORE_MARKERS = 4
 
+# Facts allowed to appear in more than one beat, EXCLUDING the subject and the
+# external hook, whose names should recur. Measured 2026-09-24: a brief that
+# re-told Operation Morning Light, the twelve recovered pieces and the Canadian
+# invoice across separate beats scored 7, while three known-good briefs scored
+# 0, 0 and 0 across twenty beats. 2 leaves room for a genuine callback.
+MAX_REPEATED_FACTS = 2
+
 MIN_SECOND_PERSON_PER_100 = 4.0
 MAX_MEDIAN_SENTENCE_WORDS = 12
 

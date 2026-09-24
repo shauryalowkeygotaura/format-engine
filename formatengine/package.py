@@ -336,6 +336,29 @@ def gate(pkg: dict, spec: dict) -> dict:
             "numbers on this one; if it lands soft, the template is the "
             "suspect, not the topic.")
 
+    # 1d. Is the topic a SUBJECT or a category? Everything downstream assumes a
+    #     subject. "space disaster" is a category: it resolves on Wikipedia to
+    #     "Space Shuttle Challenger disaster", which is why three separate
+    #     scripts drifted onto Challenger and Columbia, and grounding it fell
+    #     through to the hook and produced a Chernobyl video with a space title.
+    #     A concrete subject carries a proper noun or a designation number.
+    topic = (pkg.get("topic") or "").strip()
+    words = topic.split()
+    concrete = bool(
+        any(ch.isdigit() for ch in topic)          # a designation: Kosmos 954
+        or any(w[:1].isupper() for w in words[1:])  # a name past position one
+        # A short capitalised phrase is a name: "Chernobyl", "Apollo 13".
+        or (words and words[0][:1].isupper() and len(words) <= 3)
+    )
+    checks.append({"check": "topic_is_concrete", "value": topic or "(none)",
+                   "limit": "a named subject", "pass": concrete})
+    if topic and not concrete:
+        warnings.append(
+            f"Topic {topic!r} reads as a category rather than a named subject. "
+            "Grounding and the beats both need one specific thing: 'Kosmos 954', "
+            "not 'space disaster'. A category lets the script wander onto "
+            "whatever famous example the model reaches for first.")
+
     # 2. Title length, from the FORMAT's own measurements where it has them.
     max_chars, max_words = _title_caps(spec)
     n_chars, n_words = len(title), len(title.split())
@@ -400,7 +423,9 @@ def gate(pkg: dict, spec: dict) -> dict:
         failures.append(f"Title is {src_sim:.0%} similar to a source title. That is a "
                         "clone, not a bend.")
 
-    recent = store.recent_shipped()
+    # Same as brief.gate: a package regenerated under its own title must not be
+    # blocked for resembling its own unpublished draft.
+    recent = store.recent_shipped(exclude_draft_title=title)
     peak = max((similarity(title, r.get("title", "")) for r in recent), default=0.0)
     ok = peak <= config.MAX_SELF_SIMILARITY_ROLLING
     checks.append({"check": "self_similarity_peak", "value": round(peak, 3),

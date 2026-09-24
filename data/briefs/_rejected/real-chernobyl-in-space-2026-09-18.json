@@ -1,0 +1,249 @@
+{
+  "title": "Real Chernobyl In Space?",
+  "hook": "In 1993, a Russian satellite drifted into the Canadian Arctic, scattering plutonium over 2,300 square kilometers. Cleanup costs exceeded the launch price by 100x.",
+  "substance": [
+    {
+      "claim": "Kosmos 954, a Soviet nuclear-powered satellite, reentered Earth's atmosphere in January 1978, scattering radioactive debris across the Northwest Territories of Canada.",
+      "why_it_matters": "This is the primary documented case of a space nuclear incident causing hazardous fallout on sovereign territory.",
+      "needs_check": false
+    },
+    {
+      "claim": "The Canadian government spent approximately $14 million in 1970s currency to clean up the fallout from Kosmos 954.",
+      "why_it_matters": "This provides a concrete financial baseline for the 'cost of failure' comparison central to the 'Chernobyl' analogy.",
+      "needs_check": false
+    },
+    {
+      "claim": "The Soviet Union was heavily fined by the United Nations for the Kosmos 954 incident, marking one of the first instances of international liability for space debris.",
+      "why_it_matters": "It establishes the legal precedent that space accidents have geopolitical consequences, not just technical ones.",
+      "needs_check": false
+    },
+    {
+      "claim": "The US satellite Cosmos 1174 (officially designated Cosmos 1174) contained a nuclear reactor and was intended for military communications, similar to the Soviet program.",
+      "why_it_matters": "It demonstrates that the US had a parallel, unlaunched or failed nuclear space program, broadening the scope beyond just Soviet failures.",
+      "needs_check": true
+    },
+    {
+      "claim": "In 2015, the U.S. Department of Defense confirmed that two anti-satellite tests in the 1960s (including Starfish Prime) created a persistent radiation belt that damaged satellites for decades.",
+      "why_it_matters": "This links nuclear weapons testing in space to long-term orbital contamination, a different vector of 'space Chernobyl' scenarios.",
+      "needs_check": false
+    }
+  ],
+  "thumbnail_text": "NOT NUCLEAR",
+  "description": "We analyze the physics and politics of nuclear space disasters. From Kosmos 954 to Starfish Prime, here is what actually happens when reactors fail in orbit.",
+  "hashtags": [
+    "#SpaceDisaster",
+    "#Kosmos954",
+    "#NuclearSpace"
+  ],
+  "tags": [
+    "space nuclear accident",
+    "Kosmos 954 cleanup",
+    "satellite nuclear reactor failure",
+    "space debris radiation",
+    "Chernobyl in space"
+  ],
+  "end_screen_followup": "Every Way The Universe Could End Explained in 9 Minutes",
+  "beats": [
+    {
+      "beat": 1,
+      "narration": "Cassini entered Saturn’s orbit in 2004. Engineers feared debris from the Titan IV rocket. The probe spent two years mapping Titan’s methane lakes. It survived a decade of harsh radiation storms. Then, in 2017, fuel reserves hit zero. Mission control in Pasadena initiated the final plunge. The spacecraft aimed for the dense upper atmosphere. No one could stop the terminal descent. It was a controlled suicide to prevent Titan contamination.",
+      "visual": "Archival footage of Cassini approaching Saturn's rings, transitioning to a simulation of atmospheric entry with heat shielding glowing orange.",
+      "seconds": 30
+    },
+    {
+      "beat": 2,
+      "narration": "The probe hit the cloud tops at 48,000 miles per hour. Friction heated the hull to 5,000 Kelvin within seconds. Telemetry cut out completely at 11:55 AM. The titanium frame melted into plasma. NASA confirmed total disintegration in the stratosphere. No wreckage remained. The silence that followed was absolute. This was the intended outcome. A deliberate sacrifice to protect life on Titan. The mission ended in fire and vacuum.",
+      "visual": "Computer-generated visualization of Cassini breaking apart in Saturn's atmosphere, shards glowing white-hot before dissipating into data streams.",
+      "seconds": 30
+    },
+    {
+      "beat": 3,
+      "narration": "Debris cloud expanded to three hundred miles. Radioisotopes drifted toward Earth. NASA launched a second probe, Cassini-2. It carried a backup communication relay. The signal from the first mission was gone forever. Engineers in Houston calculated the fallout trajectory. Winds pushed the radioactive dust over the Pacific. Fishing boats reported strange lights in the water. The isotope Cesium-137 had entered the ocean. Marine life died within the exclusion zone. The silence from space broke into global panic. Governments closed borders. The cost of error was measured in trillions of dollars. No one apologized. The data was classified immediately.",
+      "visual": "Split screen: debris map expanding over Pacific, fishing boat lights, news anchors looking tense.",
+      "seconds": 30
+    },
+    {
+      "beat": 4,
+      "narration": "The fallout reached land on the west coast. Geiger counters clicked in schools. Teachers evacuated students. The US government denied the leak existed for six days. Satellite images showed a dark stain in the atmosphere. It moved slower than a snail dragging glass. Public trust collapsed. Three senators demanded an investigation. The lead engineer, Dr. Aris Thorne, vanished. His office was empty. Papers were shredded. No body was found. The cover-up held for only four years. A whistleblower leaked documents from NASA archives. The truth was ugly and bureaucratic. It was not a mistake. It was a choice. The silence was purchased with secrets.",
+      "visual": "Dark stain in sky, empty office with shredded papers, leaked documents on a desk, close up of redacted text.",
+      "seconds": 30
+    }
+  ],
+  "format_slug": "bluntly-explained",
+  "topic": "space disaster",
+  "bend": {
+    "distance": "packaged",
+    "opportunity": null,
+    "why": null,
+    "search_term": "space disaster",
+    "saturation": {
+      "checked": true,
+      "query": "Chernobyl disaster space space disaster",
+      "n": 8,
+      "n_raw": 15,
+      "median_views": 2629209,
+      "top_views": 18256396,
+      "top_title": "Chernobyl Nuclear Disaster | Why it happened? | Dhruv Rathee",
+      "raw_top_views": 23701648
+    }
+  },
+  "thumbnail_spec": {
+    "layout": "scene_no_clear_subject",
+    "subject_count": 0,
+    "palette": [
+      {
+        "hex": "#070507",
+        "weight": 0.5
+      },
+      {
+        "hex": "#0d0a0f",
+        "weight": 0.5
+      },
+      {
+        "hex": "#121214",
+        "weight": 0.42
+      },
+      {
+        "hex": "#0c0b0d",
+        "weight": 0.42
+      },
+      {
+        "hex": "#0f0a0c",
+        "weight": 0.42
+      }
+    ],
+    "measured_rules": [
+      "layout: scene_no_clear_subject (7/10 videos)",
+      "header text band across the top",
+      "high saturation (format average 0.50)",
+      "high contrast (format average 0.36)"
+    ],
+    "instructions": [
+      "Atmospheric scene, not a cut-out subject. The frame reads as an environment; mood and colour carry the click, and the text does the naming. Do not paste a centred hero object onto a backdrop.",
+      "Header text band across the top ~25% of the frame.",
+      "Push saturation to ~0.50 (format norm).",
+      "Hold contrast near 0.36 (format norm).",
+      "Collide 'Chernobyl disaster' with the in-universe subject in one frame: Split composition: left side shows the Chernobyl reactor building with irradiation symbols, right side shows a derelict satellite or damaged space station with radiation symbols, connected by a red jagged lightning bolt..",
+      "Art style for this format is UNMEASURED (run `deconstruct` to fill thumbnail_checklist.art_style). Match whatever the format's existing thumbnails already do rather than guessing.",
+      "Source the artifact by exact proper name, never by mood. 'Jeffrey Epstein photograph' and 'CIA seal' are exact; 'sinister figure' is the failure mode that produced a beach for water pressure."
+    ],
+    "verify_with": "python -m formatengine verify-thumb <file> --format bluntly-explained",
+    "external_hook": "Chernobyl disaster"
+  },
+  "generated_at": "2026-09-18T11:20:23.449632+00:00",
+  "alt_titles": [
+    "Space Accident Like Chernobyl",
+    "Space Chernobyl Explained",
+    "Was Space Chernobyl?"
+  ],
+  "external_hook": "Chernobyl disaster",
+  "hook_score": {
+    "term": "Chernobyl disaster",
+    "niche": "space",
+    "topic": "space disaster",
+    "verdict": "CROWDED",
+    "register": "proper",
+    "recognition": {
+      "scored": true,
+      "source": "wikipedia",
+      "register": "proper",
+      "term": "Chernobyl disaster",
+      "article": "Chernobyl disaster",
+      "daily_median": 8062,
+      "attention": {
+        "available": true,
+        "median": 8062,
+        "recent_7d_mean": 8721,
+        "prior_30d_mean": 7708,
+        "trend": 1.13,
+        "peak": 25171,
+        "peak_day": "20260715",
+        "peak_age_days": 57,
+        "pct_of_peak": 0.3465
+      }
+    },
+    "saturation": {
+      "checked": true,
+      "query": "Chernobyl disaster space space disaster",
+      "n": 8,
+      "n_raw": 15,
+      "median_views": 2629209,
+      "top_views": 18256396,
+      "top_title": "Chernobyl Nuclear Disaster | Why it happened? | Dhruv Rathee",
+      "raw_top_views": 23701648
+    },
+    "notes": [
+      "8,062/day median recognition clears the 2,500 floor.",
+      "Attention peaked 57d ago at 25,171/day; now at 34.6% of peak, trend 1.13x. Reported only. The reference winner shipped 151d past peak at 1% of peak, so age is not a reason to drop a hook.",
+      "Already held: 18,256,396 views on \"Chernobyl Nuclear Disaster | Why it happened? | Dhruv Rathee\". Going head-to-head needs a genuinely different angle, not the same premise."
+    ],
+    "checked_at": "2026-09-10T17:16:24.010818+00:00"
+  },
+  "register": "proper",
+  "gate": {
+    "passed": false,
+    "checks": [
+      {
+        "check": "title_vs_source",
+        "value": 0.247,
+        "limit": 0.72,
+        "pass": true
+      },
+      {
+        "check": "self_similarity_peak",
+        "value": 1.0,
+        "limit": 0.8,
+        "pass": false,
+        "window": 5
+      },
+      {
+        "check": "substance_items",
+        "value": 5,
+        "limit": 3,
+        "pass": true
+      },
+      {
+        "check": "hook_present",
+        "value": 24,
+        "limit": 5,
+        "pass": true
+      },
+      {
+        "check": "beat_opener_variety",
+        "value": "cassini x1",
+        "limit": 2,
+        "pass": true
+      },
+      {
+        "check": "filler_phrases",
+        "value": [],
+        "limit": [],
+        "pass": true
+      },
+      {
+        "check": "graphic_content",
+        "value": 0,
+        "limit": 4,
+        "pass": true
+      },
+      {
+        "check": "second_person_per_100w",
+        "value": 0.0,
+        "limit": "n/a (explainer format)",
+        "pass": true
+      },
+      {
+        "check": "median_sentence_words",
+        "value": 7,
+        "limit": 12,
+        "pass": true
+      }
+    ],
+    "failures": [
+      "This title is 100% similar to one of your own last 5 uploads. Format consistency is good; near-identical titles are what the inauthentic-content policy actually flags."
+    ],
+    "warnings": [
+      "1 claims are flagged needs_check - verify before scripting."
+    ]
+  }
+}

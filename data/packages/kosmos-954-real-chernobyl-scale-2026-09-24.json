@@ -1,0 +1,165 @@
+{
+  "title": "Kosmos 954: Real Chernobyl Scale",
+  "alt_titles": [
+    "Kosmos 954 Broke Chernobyl",
+    "Kosmos 954 vs Chernobyl",
+    "Kosmos 954: Chernobyl Glitch"
+  ],
+  "thumbnail_text": "NUCLEAR LEGENDARY",
+  "thumbnail_collision": "A sleek, silver Kosmos 954 satellite orbited by a translucent, greenish-yellow cloud that visually merges into the silhouette of the Chernobyl reactor building, with a 'RADIOACTIVE' hazard symbol in the corner.",
+  "why_this_hook_lands": "Viewers recognize the Chernobyl glyph as the ultimate benchmark for nuclear failure, so seeing a satellite labeled with that same catastrophe creates an immediate cognitive spike that demands explanation.",
+  "thumbnail_spec": {
+    "layout": "scene_no_clear_subject",
+    "subject_count": 0,
+    "palette": [
+      {
+        "hex": "#070507",
+        "weight": 0.5
+      },
+      {
+        "hex": "#0d0a0f",
+        "weight": 0.5
+      },
+      {
+        "hex": "#121214",
+        "weight": 0.42
+      },
+      {
+        "hex": "#0c0b0d",
+        "weight": 0.42
+      },
+      {
+        "hex": "#0f0a0c",
+        "weight": 0.42
+      }
+    ],
+    "measured_rules": [
+      "layout: scene_no_clear_subject (7/10 videos)",
+      "header text band across the top",
+      "high saturation (format average 0.50)",
+      "high contrast (format average 0.36)"
+    ],
+    "instructions": [
+      "Atmospheric scene, not a cut-out subject. The frame reads as an environment; mood and colour carry the click, and the text does the naming. Do not paste a centred hero object onto a backdrop.",
+      "Header text band across the top ~25% of the frame.",
+      "Push saturation to ~0.50 (format norm).",
+      "Hold contrast near 0.36 (format norm).",
+      "Collide 'Chernobyl disaster' with the in-universe subject in one frame: A sleek, silver Kosmos 954 satellite orbited by a translucent, greenish-yellow cloud that visually merges into the silhouette of the Chernobyl reactor building, with a 'RADIOACTIVE' hazard symbol in the corner..",
+      "Art style for this format is UNMEASURED (run `deconstruct` to fill thumbnail_checklist.art_style). Match whatever the format's existing thumbnails already do rather than guessing.",
+      "Source the artifact by exact proper name, never by mood. 'Jeffrey Epstein photograph' and 'CIA seal' are exact; 'sinister figure' is the failure mode that produced a beach for water pressure."
+    ],
+    "verify_with": "python -m formatengine verify-thumb <file> --format bluntly-explained",
+    "external_hook": "Chernobyl disaster"
+  },
+  "external_hook": "Chernobyl disaster",
+  "hook_score": {
+    "term": "Chernobyl disaster",
+    "niche": "space",
+    "topic": "Kosmos 954",
+    "verdict": "GO",
+    "register": "proper",
+    "recognition": {
+      "scored": true,
+      "source": "wikipedia",
+      "register": "proper",
+      "term": "Chernobyl disaster",
+      "article": "Chernobyl disaster",
+      "daily_median": 8234,
+      "attention": {
+        "available": true,
+        "median": 8234,
+        "recent_7d_mean": 9012,
+        "prior_30d_mean": 8353,
+        "trend": 1.08,
+        "peak": 25171,
+        "peak_day": "20260715",
+        "peak_age_days": 71,
+        "pct_of_peak": 0.358
+      }
+    },
+    "saturation": {
+      "checked": true,
+      "query": "Chernobyl disaster space Kosmos 954",
+      "n": 1,
+      "n_raw": 15,
+      "median_views": 15,
+      "top_views": 15,
+      "top_title": "Kosmos 954 Space Chernobyl",
+      "raw_top_views": 2428500
+    },
+    "notes": [
+      "8,234/day median recognition clears the 2,500 floor.",
+      "Attention peaked 71d ago at 25,171/day; now at 35.8% of peak, trend 1.08x. Reported only. The reference winner shipped 151d past peak at 1% of peak, so age is not a reason to drop a hook.",
+      "Landing zone is open: biggest real competitor 15 views across 1 of 15 results."
+    ],
+    "checked_at": "2026-09-24T09:11:17.059315+00:00"
+  },
+  "topic": "Kosmos 954",
+  "format_slug": "bluntly-explained",
+  "generated_at": "2026-09-24T09:11:17.774609+00:00",
+  "register": "proper",
+  "gate": {
+    "passed": true,
+    "checks": [
+      {
+        "check": "hook_recognition",
+        "value": "GO",
+        "limit": "not WEAK",
+        "pass": true
+      },
+      {
+        "check": "template_use",
+        "value": "use #4",
+        "limit": "warn at 5",
+        "pass": true
+      },
+      {
+        "check": "topic_is_concrete",
+        "value": "Kosmos 954",
+        "limit": "a named subject",
+        "pass": true
+      },
+      {
+        "check": "title_length",
+        "value": "32c/5w",
+        "limit": "40c/8w",
+        "pass": true
+      },
+      {
+        "check": "title_shape",
+        "value": false,
+        "limit": true,
+        "pass": false
+      },
+      {
+        "check": "hook_named_in_title",
+        "value": true,
+        "limit": true,
+        "pass": true
+      },
+      {
+        "check": "title_vs_source",
+        "value": 0.169,
+        "limit": 0.72,
+        "pass": true
+      },
+      {
+        "check": "self_similarity_peak",
+        "value": 0.464,
+        "limit": 0.8,
+        "pass": true,
+        "window": 5
+      },
+      {
+        "check": "thumb_text_distinct",
+        "value": 0.082,
+        "limit": 0.6,
+        "pass": true
+      }
+    ],
+    "failures": [],
+    "warnings": [
+      "Title has no question mark, no 'vs', and no ALL-CAPS emphasis word. 69 of 80 measured titles carry at least one. Not fatal, but check there is a real collision in it."
+    ]
+  }
+}

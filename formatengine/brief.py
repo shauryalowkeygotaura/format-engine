@@ -79,14 +79,21 @@ video someone watches from one they close in eight seconds.
   second person, move it OFF the first word. Not "You feel the heat rise" but
   "The heat rises before you hear anything". Open on a noun, verb, number or
   time. This single rule is the most common reason a brief is blocked.
+- NO GRAPHIC BODILY HARM. Keep the stakes, lose the anatomy. Peril, pressure,
+  heat, cold, silence, failure and death are all fine; blood, flesh, peeling
+  skin, corpses, dissolving organs and vomit are not. This is an
+  advertiser-friendliness rule, not taste: a script saturated with injury detail
+  gets limited ads, and these formats live on ad revenue. Write the disaster
+  from the OUTSIDE - what fails, how fast, what it costs - not from inside a body.
 - Ban vague value-language. "Valuable insights", "fascinating", "plays a crucial
   role", "it is important to note", "sheds light on" carry no information. Say
   the actual thing instead.
-- WRITE IN SECOND PERSON, PRESENT TENSE. "You're four years old in a cramped
-  kindergarten" beats "Visible light dances across the polar horizon". Measured
-  across nine working channels in these formats, narration averages 6.1 uses of
-  you/your per 100 words; a script at 0 reads as an encyclopedia entry, because
-  an encyclopedia is precisely the register that never addresses its reader.
+- MATCH THE FORMAT'S VOICE, which the user message states explicitly under
+  "Voice". Some formats are second person and present tense, putting the viewer
+  inside the event; others are explainers that describe real events from the
+  outside. Follow the one you are given and do not drift into the other. An
+  explainer forced into second person invents a protagonist who was never
+  there, which is worse than either register done properly.
 - SHORT SENTENCES. Working scripts run a median of 8 words per sentence. Break
   the long ones. "You're four." "You have nothing left." "You're done."
 - NAME THINGS. 3.2 proper nouns per 100 words in working scripts. Marco.
@@ -126,10 +133,7 @@ HARD REQUIREMENTS - a response that misses these is rejected:
   of the topic. No two may restate the same fact.
 - Rewrite the target title so it is natural English. Keep the format's word
   order and rhythm, fix any grammar the template introduced.
-- SECOND PERSON. The narration must address the viewer as "you"/"your" at least
-  6 times per 100 words, spread across every beat. A script that never says
-  "you" is rejected outright. Write what is happening TO THE VIEWER: "You're in
-  the kitchen when the lights stutter", not "Residential lighting flickers".
+- Voice: {voice_rule}
 - A non-empty "hook" that creates tension in its first sentence. A brief with no
   hook is rejected outright by the renderer.
 - "thumbnail_text": 2 to 4 words that DO NOT repeat the title or any fragment of
@@ -181,6 +185,20 @@ Title: {title}
 Format rules (these OVERRIDE anything that conflicts): {notes}
 Topic: {topic}
 
+THE ONLY FACTS YOU MAY USE. These were researched and fact-checked for this
+video. Build the beats out of THESE and nothing else. Do not introduce a
+different incident, mission or spacecraft, however famous:
+{facts}
+
+Anything not in that list is something you are inventing, and inventing gets the
+whole brief thrown away. If a beat needs a detail you do not have, write around
+it instead of guessing. Do not state a date unless it appears above, and never
+give two different dates for the same event.
+
+ALREADY COVERED. Do not restate any of it. Each number, name and operation
+below has been used; using it again is filler the viewer feels:
+{covered}
+
 The script so far ENDED with this line:
 {tail}
 
@@ -189,8 +207,7 @@ totalling roughly {words} words of narration.
 
 HARD REQUIREMENTS - a response that misses these is rejected:
 - Exactly {n} objects in "beats", numbered {first}..{last}.
-- SECOND PERSON throughout: address the viewer as "you"/"your" at least 6 times
-  per 100 words. A beat that never says "you" is rejected.
+- Voice: {voice_rule}
 - Short sentences, median around 8 words.
 - Each beat opens on a DIFFERENT word from the one before it, and NO opening
   word may be reused more than twice in the whole script.
@@ -214,6 +231,8 @@ Existing titles in this format:
 Topic: {topic}
 APPROVED TITLE (already decided, do not change it): {title}
 
+{source_block}
+
 Write ONLY the shell of this video. NO beats, no narration. Beats come later.
 
 Return JSON exactly:
@@ -236,7 +255,20 @@ Exactly {n_substance} substance items. They are the whole point of this call:
 without them the video is a reskin of someone else's video and gets
 demonetised. "It is fascinating" is not a claim. "The 1977 Vela incident
 registered a double flash that has never been publicly explained" is a claim.
-If you are not confident a fact is true, set needs_check true."""
+
+EVERY CLAIM IS CHECKED AGAINST WIKIPEDIA AFTER YOU WRITE IT. A claim whose
+dates do not appear in the encyclopedia article about its subject is rejected
+and the brief is blocked, so inventing a specific-sounding fact costs more than
+omitting one.
+
+- Name a real, well-documented event and get its subject right. Do not blend two
+  events into one. A previous attempt claimed "the Soviet Venera-9 broke apart in
+  Earth orbit in 1978, scattering plutonium" - Venera 9 was a Venus mission, and
+  the event being half-remembered was Kosmos 954. That brief was thrown away.
+- If you are not certain of a date, a name or a number, either leave it out or
+  set needs_check true. needs_check true is a normal, correct answer and costs
+  you nothing. A confident wrong date is the expensive one.
+- Prefer fewer, solid, checkable claims over more that sound impressive."""
 
 
 def _raw_demand(words: int) -> int:
@@ -300,9 +332,14 @@ def build(spec: dict, bend: dict, *, words: int = 2500, model: str | None = None
     # comparing it against that same ceiling can never be true and every script,
     # at any length, took the single-call path.
     if _raw_demand(words) > config.TPM_SAFE_COMPLETION:
-        return _build_chunked(spec, bend, words=words, model=model,
-                              n_beats=n_beats, n_substance=n_substance,
-                              title=title, tf=tf, titles=titles)
+        out = _build_chunked(spec, bend, words=words, model=model,
+                             n_beats=n_beats, n_substance=n_substance,
+                             title=title, tf=tf, titles=titles)
+        # This used to `return _build_chunked(...)` directly, which skipped the
+        # finishing block below. Every chunked brief therefore shipped with no
+        # format_slug, topic, bend or thumbnail_spec - so template decay could
+        # not count it, and two ledger rows were recorded with an empty slug.
+        return _finalize(out, spec, bend)
 
     out = chat_json(
         SCRIPT_SYSTEM,
@@ -311,22 +348,165 @@ def build(spec: dict, bend: dict, *, words: int = 2500, model: str | None = None
             archetype=tf.get("archetype", "other"),
             notes=spec.get("notes") or "none",
             titles="\n".join(f"- {t}" for t in titles),
-            topic=bend.get("topic", ""),
+            topic=_topic_line(bend),
             title=title,
             words=words,
             n_beats=n_beats,
             n_substance=n_substance,
             second_person=bool(tf.get("second_person_rate", 0) >= 0.5),
+            voice_rule=_voice_rule(spec),
         ),
         model=model, temperature=0.75, max_tokens=_completion_budget(words),
     )
+    return _finalize(fix_beat_openers(out, model=model), spec, bend)
+
+
+def source_text(bend: dict, *, limit: int = 4000) -> tuple[str, str]:
+    """Encyclopedia text for this video's subject, as grounding for the shell.
+
+    Checking facts the model invented from memory is the wrong order. Across
+    three regenerations on one topic the model produced, with every date
+    correct, a Venus probe that broke up in Earth orbit, a Rogers Commission
+    report on Columbia, and an anti-satellite RTG that was really a radar
+    reconnaissance satellite with a uranium reactor. Fabrication was not an
+    accident to be caught afterwards, it was the default behaviour of asking a
+    small model for specifics it does not hold.
+
+    So the substance call is given real text and told to draw from it. The
+    fact check then becomes a regression test rather than the only defence.
+
+    Returns (article_title, text). Both empty when nothing resolves, in which
+    case generation falls back to unggrounded and the gate still applies.
+    """
+    from .verify import article_text, resolve_article
+    # TOPIC first. The topic is what the video is ABOUT; the external hook is
+    # only what it collides with. Grounding on the hook produced a Chernobyl
+    # video wearing a space title: the facts were impeccable (1,661 fuel
+    # channels, 134 workers, 28 deaths) and all about Ukraine in 1986.
+    for candidate in ((bend.get("topic") or "").strip(),
+                      (bend.get("external_hook") or "").strip()):
+        if not candidate:
+            continue
+        title = resolve_article(candidate)
+        if not title:
+            continue
+        text = article_text(title)
+        if text:
+            return title, text[:limit]
+    return "", ""
+
+
+def _covered_block(beats: list) -> str:
+    """Facts already spent by earlier beats, so a later chunk cannot re-tell them."""
+    from .verify import _facts_in
+    spent: set[str] = set()
+    for b in beats or []:
+        if isinstance(b, dict):
+            spent |= _facts_in(b.get("narration") or "")
+    return (NEWLINE.join("- " + f for f in sorted(spent))
+            if spent else "- (nothing yet, this is the opening)")
+
+
+def _facts_block(shell: dict) -> str:
+    """The shell's researched claims, as the only material the beats may use."""
+    items = [s for s in (shell.get("substance") or []) if isinstance(s, dict)]
+    lines = []
+    for s in items:
+        claim = (s.get("claim") or "").strip()
+        if claim:
+            lines.append(f"- {claim}"
+                         + ("  [UNVERIFIED - do not lead a beat with this]"
+                            if s.get("needs_check") else ""))
+    hook = (shell.get("hook") or "").strip()
+    if hook:
+        lines.insert(0, f"- (opening line, already written) {hook}")
+    return NEWLINE.join(lines) if lines else "- (none supplied)"
+
+
+def _topic_line(bend: dict) -> str:
+    """Topic, plus the packaging promise the script has to honour.
+
+    Packaging-first makes the title a promise, and the gate now blocks a script
+    whose narration never mentions the external hook. Telling the model about
+    the hook here is cheaper than letting it fail that check: a 2026-09-23
+    brief titled "Real Chernobyl In Space?" spent three of four beats on
+    Galileo, Challenger and Columbia, none of them nuclear.
+    """
+    topic = bend.get("topic", "") or ""
+    hook = (bend.get("external_hook") or "").strip()
+    if not hook:
+        return topic
+    return (f"{topic}. The packaging promises a collision with {hook!r}, so the "
+            f"narration MUST reference {hook!r} explicitly at least once and the "
+            f"beats must stay on that angle. A script that never mentions it is "
+            f"rejected.")
+
+
+def _voice_rule(spec: dict) -> str:
+    """The voice instruction for this format, matching what the gate enforces.
+
+    Kept next to _second_person_floor deliberately: if the prompt demands one
+    register and the gate measures another, the model is pushed into whichever
+    the gate punishes, which is how an explainer about an unmanned satellite
+    got written as a first-person death scene.
+    """
+    if _second_person_floor(spec) > 0:
+        return ('SECOND PERSON, present tense. Address the viewer as '
+                '"you"/"your" at least 6 times per 100 words, spread across '
+                'every beat. Write what is happening TO THE VIEWER: "You are '
+                'in the kitchen when the lights stutter", not "Residential '
+                'lighting flickers".')
+    return ('THIRD PERSON EXPLAINER, past tense for events that happened. '
+            'Describe the real event from the outside: what failed, how fast, '
+            'what it cost, who dealt with it. Do NOT address the viewer as '
+            '"you" and do NOT invent a person experiencing it. If the subject '
+            'is an unmanned satellite, nobody was aboard, so there is no one '
+            'to put the viewer inside.')
+
+
+def _second_person_floor(spec: dict) -> float:
+    """Second-person floor for THIS format, from its own measurement.
+
+    The fourth time this project globalised a threshold measured on one niche.
+    MIN_SECOND_PERSON_PER_100 = 4.0 came from "your life as" style channels,
+    where the viewer IS the subject. It was then enforced on every format,
+    including `bluntly-explained`, whose own measured second_person_rate is
+    0.10 - an explainer, not an immersion piece.
+
+    The damage was not a spurious failure, it was the opposite: the gate FORCED
+    the wrong register. A 2026-09-18 brief about Kosmos 954, an UNMANNED
+    satellite, was written as a crewed first-person death scene ("your ears
+    pop", "you check the oxygen gauge") because that was the only way to clear
+    a floor the format never earned.
+
+    second_person_rate is the share of the format's source videos that address
+    the viewer. Above half, the format really is second person and the measured
+    floor applies. At or below half it does not, and an explainer is allowed to
+    explain. A spec may override with title_format.min_second_person.
+    """
+    tf = spec.get("title_format") or {}
+    override = tf.get("min_second_person")
+    if override is not None:
+        try:
+            return float(override)
+        except (TypeError, ValueError):
+            pass
+    try:
+        measured = float(tf.get("second_person_rate") or 0.0)
+    except (TypeError, ValueError):
+        measured = 0.0
+    return config.MIN_SECOND_PERSON_PER_100 if measured >= 0.5 else 0.0
+
+
+def _finalize(out: dict, spec: dict, bend: dict) -> dict:
+    """Stamp the fields every brief needs, whichever generation path made it."""
     out["format_slug"] = spec.get("slug", "")
     out["topic"] = bend.get("topic", "")
     out["bend"] = {k: bend.get(k) for k in
                    ("distance", "opportunity", "why", "search_term", "saturation")}
     out["thumbnail_spec"] = thumbnail_spec(spec, bend)
     out["generated_at"] = datetime.now(timezone.utc).isoformat()
-    return fix_beat_openers(out, model=model)
+    return out
 
 
 
@@ -347,6 +527,20 @@ def _build_chunked(spec, bend, *, words, model, n_beats, n_substance,
     Partial output is kept on failure: a short script can still be judged by the
     gate, whereas an exception loses everything already paid for.
     """
+    src_title, src_text = source_text(bend)
+    if src_text:
+        print(f"  grounding substance in Wikipedia: {src_title}")
+        source_block = (
+            "SOURCE TEXT. Every substance claim must come from the passage "
+            f"below, which is the Wikipedia article on {src_title!r}. Take the "
+            "numbers, dates and names FROM IT rather than from memory, and do "
+            "not add specifics it does not contain. If the passage does not "
+            "support a claim you wanted to make, drop that claim.\n"
+            "---\n" + src_text + "\n---")
+    else:
+        source_block = ("No source text could be retrieved, so keep the claims "
+                        "general and set needs_check true on anything specific.")
+
     out = chat_json(
         SCRIPT_SYSTEM,
         SHELL_USER.format(
@@ -354,9 +548,10 @@ def _build_chunked(spec, bend, *, words, model, n_beats, n_substance,
             archetype=tf.get("archetype", "other"),
             notes=spec.get("notes") or "none",
             titles=NEWLINE.join("- " + str(x) for x in titles),
-            topic=bend.get("topic", ""),
+            topic=_topic_line(bend),
             title=title,
             n_substance=n_substance,
+            source_block=source_block,
         ),
         model=model, temperature=0.7,
         max_tokens=_completion_budget(260),
@@ -377,10 +572,23 @@ def _build_chunked(spec, bend, *, words, model, n_beats, n_substance,
                 SCRIPT_MORE_USER.format(
                     title=out.get("title") or title,
                     notes=spec.get("notes") or "none",
-                    topic=bend.get("topic", ""),
+                    topic=_topic_line(bend),
                     tail=tail,
                     first=made + 1, last=made + take, n=take,
-                    words=chunk_words),
+                    words=chunk_words,
+                    voice_rule=_voice_rule(spec),
+                    # Anchor the beats to the SHELL's researched facts. Without
+                    # this the only anchor was the topic string, which for a
+                    # packaged brief is something generic like "space disaster",
+                    # so the beats wandered: a script whose hook was Kosmos 954
+                    # spent all four beats on Columbia, gave two different dates
+                    # for the same reentry, and credited the Rogers Commission
+                    # (which investigated Challenger) with the Columbia report.
+                    facts=_facts_block(out),
+                    # Every chunk previously saw only the LAST beat's tail, so
+                    # chunk 3 happily re-told what chunk 1 covered. Listing the
+                    # facts already spent is what stops that.
+                    covered=_covered_block(beats)),
                 model=model, temperature=0.75,
                 max_tokens=_completion_budget(chunk_words),
             )
@@ -552,7 +760,9 @@ def gate(brief: dict, spec: dict) -> dict:
             f"not a bend. Change the topic noun, keep the structure.")
 
     # 2. Are YOUR OWN recent uploads converging into a template?
-    recent = store.recent_shipped()
+    #    Hide this title's own unpublished draft row, or regenerating a brief
+    #    fails for being 100% similar to its own previous attempt.
+    recent = store.recent_shipped(exclude_draft_title=brief.get("title", ""))
     self_sims = [similarity(brief.get("title", ""), r.get("title", "")) for r in recent]
     peak = max(self_sims) if self_sims else 0.0
     avg = sum(self_sims) / len(self_sims) if self_sims else 0.0
@@ -657,6 +867,56 @@ def gate(brief: dict, spec: dict) -> dict:
             "Under the limit, but check it reads as a documentary rather than a "
             "horror film.")
 
+    # 4c. Does the script actually DELIVER the hook the packaging promised?
+    #     Packaging-first means the title is a promise. A 2026-09-23 brief
+    #     titled "Real Chernobyl In Space?" opened on a nuclear satellite and
+    #     then spent three of four beats on Galileo, Challenger and Columbia,
+    #     none of them nuclear. The collision was in the title and the thumbnail
+    #     and nowhere in the video, which is the bait-and-switch a viewer feels
+    #     immediately. Mechanical check only: the hook's own words must appear
+    #     in the narration somewhere.
+    ext_hook = (brief.get("external_hook") or "").strip()
+    if ext_hook:
+        from .freshness import _tokens
+        # Only DISTINCTIVE hook words count. "Chernobyl disaster" shares
+        # "disaster" with ordinary script vocabulary, and a script about the
+        # Columbia shuttle passed this check on that word alone while never
+        # mentioning Chernobyl. Same lesson as the saturation filter.
+        generic = _tokens("disaster event incident accident failure crisis "
+                          "explosion story history moment case")
+        want = _tokens(ext_hook) - generic
+        if not want:                       # hook is entirely generic words
+            want = _tokens(ext_hook)
+        body_tokens = _tokens(" ".join(narrations))
+        hit = bool(want & body_tokens)
+        checks.append({"check": "hook_delivered", "value": hit,
+                       "limit": True, "pass": hit})
+        if not hit:
+            failures.append(
+                f"The packaging promises {ext_hook!r} but the narration never "
+                "mentions it. The title and thumbnail carry the collision and "
+                "the script does not deliver it, which is a bait-and-switch. "
+                "Work the hook into the beats or repackage the video.")
+
+    # 4d. Are the beats restating each other's facts? Chunked generation only
+    #     shows each call the PREVIOUS beat's tail, so later chunks re-tell what
+    #     earlier ones already covered. A 2026-09-24 brief gave Operation
+    #     Morning Light and the twelve recovered pieces in two separate beats
+    #     and the Canadian invoice in two more. Whole-beat similarity cannot see
+    #     it; repeated facts can.
+    from .verify import check_repetition
+    rep = check_repetition(
+        brief, exclude=f"{brief.get('topic','')} {brief.get('external_hook','')}")
+    ok = rep["count"] <= config.MAX_REPEATED_FACTS
+    checks.append({"check": "fact_repetition", "value": rep["count"],
+                   "limit": config.MAX_REPEATED_FACTS, "pass": ok})
+    if not ok:
+        failures.append(
+            f"{rep['count']} facts are restated across beats "
+            f"({', '.join(rep['repeated'][:5])}). Three known-good briefs "
+            "repeat none. Each beat has to advance the story; re-telling the "
+            "same number in new words is filler the viewer feels.")
+
     # 5. Does the narration address the viewer at all?
     # Reuse the narrations already derived above rather than re-deriving them.
     # The duplicate derivation returned an empty string here and scored every
@@ -671,15 +931,23 @@ def gate(brief: dict, spec: dict) -> dict:
     # a model that refused to write second person. It was the counter.
     you = sum(1 for w in re.split(r"[^A-Za-z']+", narration) if w.lower() in _PRON)
     rate = round(100 * you / nwords, 1)
-    ok = rate >= config.MIN_SECOND_PERSON_PER_100
-    checks.append({"check": "second_person_per_100w", "value": rate,
-                   "limit": config.MIN_SECOND_PERSON_PER_100, "pass": ok})
-    if not ok:
-        failures.append(
-            f"Narration uses second person {rate} times per 100 words; working "
-            f"channels in this format average 6.1. At {rate} the script reads as "
-            f"an encyclopedia entry rather than something happening to the "
-            f"viewer. Rewrite in second person, present tense.")
+    floor = _second_person_floor(spec)
+    # A zero floor means this format is an explainer and the check does not
+    # apply; reporting it as "0.0 >= 0.0 pass" would imply a rule was met.
+    if floor <= 0:
+        checks.append({"check": "second_person_per_100w", "value": rate,
+                       "limit": "n/a (explainer format)", "pass": True})
+    else:
+        ok = rate >= floor
+        checks.append({"check": "second_person_per_100w", "value": rate,
+                       "limit": floor, "pass": ok})
+        if not ok:
+            failures.append(
+                f"Narration uses second person {rate} times per 100 words, "
+                f"below this format's floor of {floor}. This format's source "
+                f"videos do address the viewer, so at {rate} the script reads "
+                f"as an encyclopedia entry rather than something happening to "
+                f"them. Rewrite in second person, present tense.")
 
     # 6. Sentence length. Working scripts sit at a median of 8 words.
     sents = [s for s in re.split(r"(?<=[.!?])\s+", narration) if s.strip()]

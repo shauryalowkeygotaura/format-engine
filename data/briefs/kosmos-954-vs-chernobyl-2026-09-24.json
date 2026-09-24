@@ -1,0 +1,260 @@
+{
+  "title": "Kosmos 954 vs Chernobyl",
+  "hook": "A 50kg nuclear reactor fell from orbit, scorching Canada with radiation levels that could kill you in hours. It was Chernobyl's silent twin.",
+  "substance": [
+    {
+      "claim": "Kosmos 954 was powered by a BES-5 nuclear reactor containing approximately 50 kg of highly-enriched uranium with over 90% uranium-235.",
+      "why_it_matters": "Establishes the massive radioactive payload that made the reentry so dangerous.",
+      "needs_check": false
+    },
+    {
+      "claim": "On 24 January 1978, the satellite reentered the atmosphere, scattering debris along a 600-kilometre path from Great Slave Lake to Baker Lake.",
+      "why_it_matters": "Defines the geographical scale of the disaster.",
+      "needs_check": false
+    },
+    {
+      "claim": "Recovered fragments displayed radioactivity of up to 1.1 sieverts per hour, a level sufficient to kill a person remaining in contact for a few hours.",
+      "why_it_matters": "Quantifies the immediate lethal threat posed by the scattered debris.",
+      "needs_check": false
+    },
+    {
+      "claim": "The Canadian government billed the Soviet Union Can$6,041,174.70 for cleanup costs under the 1972 Space Liability Convention.",
+      "why_it_matters": "Highlights the unprecedented legal and financial burden of the incident.",
+      "needs_check": false
+    },
+    {
+      "claim": "A similar RORSAT satellite failed in 1973, dropping its reactor into the Pacific Ocean north of Japan.",
+      "why_it_matters": "Contextualizes Kosmos 954 as part of a pattern of Soviet nuclear space failures.",
+      "needs_check": false
+    }
+  ],
+  "thumbnail_text": "NUCLEAR LEGENDARY",
+  "description": "The Soviet Union dropped a nuclear reactor from space onto Canada. Here is how Kosmos 954 turned the sky into a radiation hazard.",
+  "hashtags": [
+    "#Kosmos954",
+    "#SpaceDisaster",
+    "#ColdWar",
+    "#Nuclear"
+  ],
+  "tags": [
+    "Kosmos 954",
+    "Soviet nuclear satellite",
+    "Operation Morning Light",
+    "space debris",
+    "radiation leak"
+  ],
+  "end_screen_followup": "Every Type Of Star Explained in 10 minutes",
+  "beats": [
+    {
+      "beat": 1,
+      "narration": "Kosmos 954 carried a BES-5 reactor. Inside sat fifty kilograms of highly-enriched uranium. Over ninety percent was uranium-235. The machine hummed in silence. Then it fell. On 24 January 1978, the satellite reentered the atmosphere. Debris scattered along a six-hundred-kilometer path. It stretched from Great Slave Lake to Baker Lake. The sky burned. The ground shook. This was not a minor leak. It was a nuclear winter in miniature. The radiation levels spiked instantly. Workers faced 1.1 sieverts per hour. That dose kills within hours. No shield stopped the heat. The cleanup began in the snow. It was messy, slow, and terrifyingly radioactive.",
+      "visual": "Archival footage of satellite reentry, map showing debris trail across Canada, close-up of radiation gauge spiking, workers in hazmat suits in blizzard conditions.",
+      "seconds": 30
+    },
+    {
+      "beat": 2,
+      "narration": "The damage cost millions. Canada billed the Soviet Union. The invoice totaled Can$6,041,174.70. They cited the 1972 Space Liability Convention. The Soviets paid. It was a awkward admission of failure. This disaster echoed Chernobyl disaster in scale. Both involved uncontrolled nuclear release. Both left lasting contamination. Kosmos 954 proved orbit was no safe place. Space debris becomes a weapon. The reactor fell without warning. The cleanup lasted months. The political fallout lingered longer. It was a silent Chernobyl, hidden in the Arctic. The world learned a hard lesson. Nuclear power in space is a ticking bomb. It always is.",
+      "visual": "Documentary shots of the 1972 treaty, Soviet officials signing checks, split-screen comparison of Kosmos debris field and Chernobyl exclusion zone, slow pan over frozen Canadian landscape.",
+      "seconds": 30
+    },
+    {
+      "beat": 3,
+      "narration": "The 1973 failure dropped its reactor into the Pacific. It sank north of Japan. No one retrieved it. The ocean absorbed the risk. That silence contrasted with the open air of 1978. Here, fragments scattered across land. Recovery teams found hot metal in the snow. One piece measured danger that could end a life in hours. The cleanup cost over six million dollars. Can$6,041,174.70 was the bill. The treaty demanded payment. The state paid the tab. It was a financial line item for radioactive waste.",
+      "visual": "Split screen: dark ocean depth map vs. snowy terrain with recovery gear. Graphic overlay of the dollar amount counting up. Archival footage of Canadian officials.",
+      "seconds": 30
+    },
+    {
+      "beat": 4,
+      "narration": "Scale defines the horror. Chernobyl destroyed a city. This event contaminated a path. Six hundred kilometers of debris trail. From Great Slave Lake to Baker Lake. The radiation source was BES-5. Fifty kilograms of highly-enriched uranium. Over ninety percent of it was the deadly isotope. The reactor did not explode. It fell. It broke. It leaked. The danger was invisible. The cost was political. The precedent was set. Space became a dumping ground for nuclear waste.",
+      "visual": "Map animating the 600km debris path across Canada. Close-up of the BES-5 reactor diagram. Text overlay: 50kg U-235. Fade to black with static.",
+      "seconds": 30
+    }
+  ],
+  "format_slug": "bluntly-explained",
+  "topic": "Kosmos 954",
+  "bend": {
+    "distance": "packaged",
+    "opportunity": null,
+    "why": null,
+    "search_term": "Kosmos 954",
+    "saturation": {
+      "checked": true,
+      "query": "Chernobyl disaster space Kosmos 954",
+      "n": 1,
+      "n_raw": 15,
+      "median_views": 15,
+      "top_views": 15,
+      "top_title": "Kosmos 954 Space Chernobyl",
+      "raw_top_views": 2428500
+    }
+  },
+  "thumbnail_spec": {
+    "layout": "scene_no_clear_subject",
+    "subject_count": 0,
+    "palette": [
+      {
+        "hex": "#070507",
+        "weight": 0.5
+      },
+      {
+        "hex": "#0d0a0f",
+        "weight": 0.5
+      },
+      {
+        "hex": "#121214",
+        "weight": 0.42
+      },
+      {
+        "hex": "#0c0b0d",
+        "weight": 0.42
+      },
+      {
+        "hex": "#0f0a0c",
+        "weight": 0.42
+      }
+    ],
+    "measured_rules": [
+      "layout: scene_no_clear_subject (7/10 videos)",
+      "header text band across the top",
+      "high saturation (format average 0.50)",
+      "high contrast (format average 0.36)"
+    ],
+    "instructions": [
+      "Atmospheric scene, not a cut-out subject. The frame reads as an environment; mood and colour carry the click, and the text does the naming. Do not paste a centred hero object onto a backdrop.",
+      "Header text band across the top ~25% of the frame.",
+      "Push saturation to ~0.50 (format norm).",
+      "Hold contrast near 0.36 (format norm).",
+      "Collide 'Chernobyl disaster' with the in-universe subject in one frame: A sleek, silver Kosmos 954 satellite orbited by a translucent, greenish-yellow cloud that visually merges into the silhouette of the Chernobyl reactor building, with a 'RADIOACTIVE' hazard symbol in the corner..",
+      "Art style for this format is UNMEASURED (run `deconstruct` to fill thumbnail_checklist.art_style). Match whatever the format's existing thumbnails already do rather than guessing.",
+      "Source the artifact by exact proper name, never by mood. 'Jeffrey Epstein photograph' and 'CIA seal' are exact; 'sinister figure' is the failure mode that produced a beach for water pressure."
+    ],
+    "verify_with": "python -m formatengine verify-thumb <file> --format bluntly-explained",
+    "external_hook": "Chernobyl disaster"
+  },
+  "generated_at": "2026-09-24T14:03:56.559405+00:00",
+  "alt_titles": [
+    "Kosmos 954 Broke Chernobyl",
+    "Kosmos 954: Chernobyl Glitch",
+    "Kosmos 954: Real Chernobyl Scale"
+  ],
+  "external_hook": "Chernobyl disaster",
+  "hook_score": {
+    "term": "Chernobyl disaster",
+    "niche": "space",
+    "topic": "Kosmos 954",
+    "verdict": "GO",
+    "register": "proper",
+    "recognition": {
+      "scored": true,
+      "source": "wikipedia",
+      "register": "proper",
+      "term": "Chernobyl disaster",
+      "article": "Chernobyl disaster",
+      "daily_median": 8234,
+      "attention": {
+        "available": true,
+        "median": 8234,
+        "recent_7d_mean": 9012,
+        "prior_30d_mean": 8353,
+        "trend": 1.08,
+        "peak": 25171,
+        "peak_day": "20260715",
+        "peak_age_days": 71,
+        "pct_of_peak": 0.358
+      }
+    },
+    "saturation": {
+      "checked": true,
+      "query": "Chernobyl disaster space Kosmos 954",
+      "n": 1,
+      "n_raw": 15,
+      "median_views": 15,
+      "top_views": 15,
+      "top_title": "Kosmos 954 Space Chernobyl",
+      "raw_top_views": 2428500
+    },
+    "notes": [
+      "8,234/day median recognition clears the 2,500 floor.",
+      "Attention peaked 71d ago at 25,171/day; now at 35.8% of peak, trend 1.08x. Reported only. The reference winner shipped 151d past peak at 1% of peak, so age is not a reason to drop a hook.",
+      "Landing zone is open: biggest real competitor 15 views across 1 of 15 results."
+    ],
+    "checked_at": "2026-09-24T09:11:17.059315+00:00"
+  },
+  "register": "proper",
+  "gate": {
+    "passed": false,
+    "checks": [
+      {
+        "check": "title_vs_source",
+        "value": 0.134,
+        "limit": 0.72,
+        "pass": true
+      },
+      {
+        "check": "self_similarity_peak",
+        "value": 0.284,
+        "limit": 0.8,
+        "pass": true,
+        "window": 5
+      },
+      {
+        "check": "substance_items",
+        "value": 5,
+        "limit": 3,
+        "pass": true
+      },
+      {
+        "check": "hook_present",
+        "value": 23,
+        "limit": 5,
+        "pass": true
+      },
+      {
+        "check": "beat_opener_variety",
+        "value": "kosmos x1",
+        "limit": 2,
+        "pass": true
+      },
+      {
+        "check": "filler_phrases",
+        "value": [],
+        "limit": [],
+        "pass": true
+      },
+      {
+        "check": "graphic_content",
+        "value": 0,
+        "limit": 4,
+        "pass": true
+      },
+      {
+        "check": "hook_delivered",
+        "value": true,
+        "limit": true,
+        "pass": true
+      },
+      {
+        "check": "fact_repetition",
+        "value": 4,
+        "limit": 2,
+        "pass": false
+      },
+      {
+        "check": "second_person_per_100w",
+        "value": 0.0,
+        "limit": "n/a (explainer format)",
+        "pass": true
+      },
+      {
+        "check": "median_sentence_words",
+        "value": 5,
+        "limit": 12,
+        "pass": true
+      }
+    ],
+    "failures": [
+      "4 facts are restated across beats (1978, 5, 6,041,174.70, baker lake). Three known-good briefs repeat none. Each beat has to advance the story; re-telling the same number in new words is filler the viewer feels."
+    ],
+    "warnings": []
+  }
+}

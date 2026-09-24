@@ -24,6 +24,7 @@ import sys
 from . import bend as bend_mod
 from . import brief as brief_mod
 from . import package as package_mod
+from . import verify as verify_mod
 from . import config, discover, feedback, freshness, packaging, store
 from .llm import LLMError
 from .outlier import format_score, profile
@@ -214,18 +215,82 @@ def cmd_deconstruct(args, yt: YouTube) -> int:
 
 
 def cmd_formats(args, yt: YouTube) -> int:
+    """List saved formats, ranked by what OUR OWN uploads actually earned.
+
+    Before 2026-09-18 this printed formats in filename order, and
+    feedback.format_performance() was computed by `perf`, printed to a table,
+    and thrown away. Nothing in brief.py, discover.py or outlier.py imported
+    feedback. The engine measured which of its formats earn views, then picked
+    the next one to brief as if it had never looked. Measuring without reading
+    back is not a loop; it is a dashboard.
+
+    Ranking, NOT auto-selecting. `brief` still takes an explicit slug from you.
+    A format engine that hard-exploits its current winner stops discovering
+    formats, which is the single thing it exists to do. So proven formats are
+    ordered by median views, and unproven ones keep their OWN VISIBLE SECTION
+    instead of being buried under the winners. That section is the exploration
+    arm. Sorting it to the bottom of one long list would quietly close the
+    loop and the engine with it.
+
+    The n column is the honesty column. A median over one upload is an
+    anecdote and is labelled as one, the same min_samples=2 gate that
+    feedback.format_performance() already applies. Same reasoning as
+    modules/significance.py in client-acquisition-pipeline: a 1-sample result
+    must never promote itself into a rule.
+    """
     specs = store.list_formats()
     if not specs:
         print("No formats saved yet. Run: deconstruct <channel>")
         return 0
-    print(f"{'SLUG':<34} {'ARCHETYPE':<14} {'RPM$':>9}  TEMPLATE")
-    print("-" * 100)
+
+    # Best-effort: a broken or absent ledger must still list formats. The loop
+    # is an enhancement to selection, never a precondition for it.
+    try:
+        perf = {r["format_slug"]: r for r in feedback.format_performance()}
+    except Exception as e:  # noqa: BLE001 - telemetry must never break the list
+        print("  (performance unavailable: %s: %s)" % (type(e).__name__, e))
+        print()
+        perf = {}
+
+    proven, unproven = [], []
     for s in specs:
+        row = perf.get(s.get("slug", ""))
+        (proven if row and row.get("enough_data") else unproven).append((s, row))
+    proven.sort(key=lambda sr: -sr[1]["median_views"])
+
+    hdr = (f"{'SLUG':<34} {'ARCHETYPE':<14} {'RPM$':>9}  "
+           f"{'MEDIAN':>9} {'N':>3}  TEMPLATE")
+
+    def _line(s, row):
         r = s.get("rpm_estimate_usd", {})
-        print(f"{s.get('slug',''):<34} "
-              f"{s.get('title_format',{}).get('archetype',''):<14} "
-              f"{r.get('low',0):>4.0f}-{r.get('high',0):<4.0f} "
-              f"{s.get('title_format',{}).get('template','')[:46]}")
+        med = format(row["median_views"], ">9,") if row else format("-", ">9")
+        n = format(row["n"], ">3") if row else format("-", ">3")
+        return (f"{s.get('slug',''):<34} "
+                f"{s.get('title_format',{}).get('archetype',''):<14} "
+                f"{r.get('low',0):>4.0f}-{r.get('high',0):<4.0f} "
+                f"{med} {n}  "
+                f"{s.get('title_format',{}).get('template','')[:38]}")
+
+    if proven:
+        print("PROVEN  (ranked by median views of our own uploads)")
+        print(hdr)
+        print("-" * 118)
+        for s, row in proven:
+            print(_line(s, row))
+
+    if unproven:
+        if proven:
+            print()
+        print("UNPROVEN  (under 2 shipped uploads. This is the exploration arm.)")
+        print(hdr)
+        print("-" * 118)
+        for s, row in unproven:
+            print(_line(s, row))
+
+    if not proven:
+        print()
+        print("  Nothing proven yet. Link an upload, then refresh in a few days:")
+        print('    python -m formatengine perf --attach "<brief title>" <videoId>')
     return 0
 
 
@@ -379,6 +444,46 @@ def cmd_package(args, yt: YouTube) -> int:
         print(f"\nNext: python -m formatengine brief {spec['slug']} "
               f"--package {path.stem}")
     return 0 if result["passed"] else 1
+
+
+def cmd_verify(args, yt: YouTube) -> int:
+    """Fact-check a brief's substance and scan it for graphic content.
+
+    Separate from the gate because the fact check is network-bound and slow.
+    The gate catches STRUCTURE; this catches the two things that passed every
+    structural check on 2026-09-11 and were still unusable: fabricated claims
+    and a tone the format cannot carry.
+    """
+    from pathlib import Path
+    path = Path(args.brief)
+    if not path.exists():
+        path = config.BRIEFS / (args.brief if args.brief.endswith(".json")
+                                else args.brief + ".json")
+    if not path.exists():
+        print(f"No such brief: {args.brief}. Look in {config.BRIEFS}.",
+              file=sys.stderr)
+        return 2
+    data = store.read_json(path)
+    if not data:
+        print(f"Could not read {path}", file=sys.stderr)
+        return 2
+
+    gore = verify_mod.check_gore(data)
+    claims = None
+    if not args.no_facts:
+        print(f"-> checking {len(data.get('substance') or [])} claims against "
+              "Wikipedia")
+        claims = verify_mod.check_claims(data)
+    print()
+    print(verify_mod.summarize(claims, gore))
+
+    bad = (claims or {}).get("unsupported", 0)
+    over = gore["count"] > config.MAX_GORE_MARKERS
+    if bad or over:
+        print(f"\n  {path}")
+        return 1
+    print("\nBoth checks clean.")
+    return 0
 
 
 def cmd_verify_thumb(args, yt: YouTube) -> int:
@@ -568,6 +673,12 @@ def build_parser() -> argparse.ArgumentParser:
     br.add_argument("--words", type=int, default=1200)
     br.add_argument("--model", default=None)
     br.set_defaults(fn=cmd_brief)
+
+    vf = sub.add_parser("verify", help="fact-check a brief + scan for graphic content (0u)")
+    vf.add_argument("brief", help="brief slug or path under data/briefs")
+    vf.add_argument("--no-facts", action="store_true",
+                    help="skip the network fact check, gore scan only")
+    vf.set_defaults(fn=cmd_verify, needs_yt=False)
 
     vt = sub.add_parser("verify-thumb", help="check your thumbnail against a format")
     vt.add_argument("file")

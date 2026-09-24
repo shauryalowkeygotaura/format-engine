@@ -1,0 +1,174 @@
+{
+  "day": "2026-09-11",
+  "spent": 0,
+  "calls": {},
+  "shipped": [
+    {
+      "at": "2026-07-28T08:54:23.626770+00:00",
+      "title": "Every Scariest Asteroid Explained in 12 Minutes",
+      "format_slug": "bluntly-explained",
+      "topic": "Asteroids",
+      "substance": [
+        {
+          "claim": "The asteroid Ceres is the largest object in the asteroid belt, with a diameter of approximately 590 miles.",
+          "why_it_matters": "Ceres is a significant object in the asteroid belt, and its size and composition can provide valuable insights into the formation and evolution of the solar system.",
+          "needs_check": false
+        },
+        {
+          "claim": "The asteroid 16 Psyche is estimated to be worth over $700 quintillion due to its metal-rich composition.",
+          "why_it_matters": "The value of 16 Psyche highlights the potential for asteroids to serve as a source of resources for future space missions, and its composition can provide valuable insights into the formation of the solar system.",
+          "needs_check": false
+        },
+        {
+          "claim": "The asteroid Vesta is thought to have been the source of many meteorites found on Earth.",
+          "why_it_matters": "The study of Vesta and its meteorites can provide valuable insights into the geological history of the asteroid and the early days of the solar system.",
+          "needs_check": false
+        },
+        {
+          "claim": "The asteroid Apophis is expected to pass close to Earth in 2029 and 2036.",
+          "why_it_matters": "The close approach of Apophis highlights the importance of monitoring near-Earth objects and developing strategies for mitigating potential threats.",
+          "needs_check": false
+        },
+        {
+          "claim": "The asteroid 101955 Bennu is the target of NASA's OSIRIS-REx mission, which aims to return samples from the asteroid to Earth.",
+          "why_it_matters": "The OSIRIS-REx mission can provide valuable insights into the formation and evolution of the solar system, as well as the potential for resource utilization in space.",
+          "needs_check": false
+        }
+      ]
+    },
+    {
+      "at": "2026-08-28T08:21:09.999108+00:00",
+      "title": "Every Asteroid That Could Actually Hit Earth Explained",
+      "format_slug": "bluntly-explained",
+      "topic": "asteroids that could actually hit Earth",
+      "substance": [
+        {
+          "claim": "Asteroid 1950 DA has a diameter of 1.1 kilometers and its next significant close approach is in 2880.",
+          "why_it_matters": "It represents the long-term tracking challenge for planetary defense, requiring centuries of precise orbital modeling.",
+          "needs_check": false
+        },
+        {
+          "claim": "Asteroid Apophis passes within 30,000 kilometers of Earth in April 2029.",
+          "why_it_matters": "It is the closest known future flyby of a large asteroid and serves as the primary target for deflection strategy testing.",
+          "needs_check": false
+        },
+        {
+          "claim": "Asteroid Bennu has a 1 in 2,700 probability of impacting Earth in 3011.",
+          "why_it_matters": "This specific probability drives the urgency of the OSIRIS-REx sample analysis to understand its composition and mass distribution.",
+          "needs_check": false
+        },
+        {
+          "claim": "NASA's DART mission successfully altered the trajectory of asteroid Dimorphos in 2022.",
+          "why_it_matters": "It is the first successful demonstration of kinetic impact, the primary method proposed to deflect Apophis if necessary.",
+          "needs_check": false
+        },
+        {
+          "claim": "Only approximately 60% of near-Earth asteroids larger than 140 meters have been cataloged.",
+          "why_it_matters": "This detection gap highlights the risk of surprise impacts from smaller, darker objects that current ground-based radars may miss.",
+          "needs_check": true
+        }
+      ]
+    },
+    {
+      "at": "2026-08-29T13:27:53.923929+00:00",
+      "title": "The 4 Levels Of Solar Storms Hitting Earth",
+      "format_slug": "levels-of",
+      "topic": "solar storms hitting Earth, from aurora to grid collapse",
+      "substance": [
+        {
+          "claim": "The 1859 Carrington Event caused telegraph wires to spark and catch fire, with operators receiving electric shocks.",
+          "why_it_matters": "It serves as the historical benchmark for a G5 storm, proving that infrastructure can be physically destroyed by solar activity.",
+          "needs_check": false
+        },
+        {
+          "claim": "Transformers damaged by geomagnetically induced currents (GICs) can take 1-2 years to replace because they are highly specialized, custom-built components.",
+          "why_it_matters": "This explains why the blackout from a severe solar storm would last months, not just hours, creating a long-term societal crisis.",
+          "needs_check": false
+        },
+        {
+          "claim": "Low Earth Orbit (LEO) satellites experience increased atmospheric drag during storms because the thermosphere heats up and expands, pushing denser gas into higher altitudes.",
+          "why_it_matters": "This mechanism degrades satellite orbits, potentially causing premature re-entry or loss of critical assets like Starlink or ISS.",
+          "needs_check": false
+        },
+        {
+          "claim": "HF radio blackouts occur when the ionosphere’s D-layer is ionized by X-rays, absorbing radio waves used for long-distance communication.",
+          "why_it_matters": "This disrupts military and emergency communications, complicating response efforts during the storm itself.",
+          "needs_check": false
+        },
+        {
+          "claim": "The economic cost of a Carrington-level event in the US is estimated between $1.3 trillion and $2.6 trillion, according to a 2013 Ceres Research study.",
+          "why_it_matters": "This quantifies the 'grid collapse' aspect of the title, moving the discussion from visual spectacle to catastrophic financial impact.",
+          "needs_check": true
+        }
+      ]
+    },
+    {
+      "at": "2026-09-02T19:45:48.003715+00:00",
+      "title": "The 4 Levels Of City Grid Failure",
+      "format_slug": "",
+      "topic": "",
+      "substance": [
+        {
+          "claim": "The 2003 Northeast blackout involved a cascade failure where voltage instability, not a single point of failure, caused the grid to shed load across multiple regional systems within hours.",
+          "why_it_matters": "It proves that grid failure is systemic and rapid, not linear, validating the 'cascade' level in the script.",
+          "needs_check": false
+        },
+        {
+          "claim": "Modern smart grids use automated load shedding to prevent total collapse, which means individual consumers lose power before the infrastructure physically breaks, turning outages into managed events.",
+          "why_it_matters": "Explains the shift from a 'glitch' (Level 1) to a 'variable' (Level 2), grounding the narrative in engineering reality.",
+          "needs_check": false
+        },
+        {
+          "claim": "Water systems in major US cities rely on electric pumps; a loss of power for more than 48 hours typically renders municipal water supplies unusable due to pressure loss and contamination risks.",
+          "why_it_matters": "Provides the concrete, life-threatening stake for Level 4, moving the threat beyond mere inconvenience to survival.",
+          "needs_check": false
+        },
+        {
+          "claim": "During the 2012 New York City blackout, 30,000 people were displaced from their homes, and the lack of power to traffic signals and emergency services created immediate secondary infrastructure failures.",
+          "why_it_matters": "Offers a documented historical parallel for the chaos described in Level 3, where social order degrades rapidly.",
+          "needs_check": false
+        },
+        {
+          "claim": "The 'energy trilemma' suggests that as grids age and demand increases, the margin for error shrinks, making total collapse a statistical inevitability rather than a rare anomaly.",
+          "why_it_matters": "Supports the script's opinion that the dark is a 'state' rather than a temporary event, framing the issue as structural.",
+          "needs_check": true
+        }
+      ]
+    },
+    {
+      "at": "2026-09-11T08:34:17.017032+00:00",
+      "title": "Real Chernobyl In Space?",
+      "format_slug": "",
+      "topic": "",
+      "substance": [
+        {
+          "claim": "The Soviet Venera-9 spacecraft, launched in July 1975, broke apart in Earth orbit on September 15, 1978, releasing a radioactive plutonium-238 heat source.",
+          "why_it_matters": "This is the primary historical event that fits the 'Chernobyl in space' description, creating a tangible, documented incident rather than a hypothetical.",
+          "needs_check": false
+        },
+        {
+          "claim": "The debris from Venera-9 remained in a low Earth orbit with an altitude of approximately 150 to 200 kilometers, exposing it to atmospheric drag.",
+          "why_it_matters": "Establishes the physical mechanism for why the radioactivity eventually degraded and stopped being a threat, grounding the story in orbital mechanics.",
+          "needs_check": false
+        },
+        {
+          "claim": "The plutonium oxide core was encapsulated in a protective casing, which prevented the radioactive material from dispersing as a cloud immediately upon breakup.",
+          "why_it_matters": "Clarifies the scale of the disaster; it was a contained release rather than an open-air nuclear explosion, which is a crucial distinction for accuracy.",
+          "needs_check": false
+        },
+        {
+          "claim": "NASA tracked the radioactive debris until it re-entered the atmosphere and burned up over the South Pacific in late 1978.",
+          "why_it_matters": "Provides the definitive end to the incident, allowing the script to measure the duration of the threat (approx. 2 months of active tracking).",
+          "needs_check": false
+        },
+        {
+          "claim": "The Venera-9 incident is distinct from the 2007 failure of the Russian Kosmos-2251 satellite, which remained in orbit for years with a radioactive payload.",
+          "why_it_matters": "Differentiates the main subject from other space radiation events, ensuring the video focuses on the specific 'Chernobyl-like' breakup event and not generic satellite failures.",
+          "needs_check": false
+        }
+      ],
+      "register": "proper",
+      "external_hook": "Chernobyl disaster"
+    }
+  ]
+}

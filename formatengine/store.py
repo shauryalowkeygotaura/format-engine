@@ -87,6 +87,14 @@ def clear_checkpoint(run: str) -> None:
 def record_shipped(brief: dict) -> None:
     ledger = read_json(config.LEDGER, default={}) or {}
     shipped = ledger.get("shipped", [])
+    # Regenerating the same brief must REPLACE its draft row, not add another.
+    # Otherwise every retry of one package is counted as a separate upload, the
+    # self-similarity guard sees the draft as a "100% similar previous upload",
+    # and blocks its own regeneration. Rows that carry a video_id were actually
+    # published and are never replaced.
+    title = brief.get("title", "")
+    shipped = [r for r in shipped
+               if not (r.get("title") == title and not r.get("video_id"))]
     shipped.append({
         "at": datetime.now(timezone.utc).isoformat(),
         "title": brief.get("title", ""),
@@ -103,6 +111,22 @@ def record_shipped(brief: dict) -> None:
     write_json(config.LEDGER, ledger)
 
 
-def recent_shipped(n: int = config.SELF_SIMILARITY_WINDOW) -> list[dict]:
+def recent_shipped(n: int = config.SELF_SIMILARITY_WINDOW,
+                   exclude_draft_title: str | None = None) -> list[dict]:
+    """The last n ledger rows, optionally hiding one title's own draft rows.
+
+    record_shipped() already replaces a draft row on regeneration, but that
+    happens at WRITE time and the gate reads BEFORE the write. So regenerating
+    a brief saw the previous attempt at the same title and failed it at 100%
+    self-similarity, i.e. the gate blocked a brief for resembling itself.
+
+    Rows carrying a video_id were really published and are never hidden, so a
+    genuine attempt to re-upload an existing title still fails the check.
+    """
     ledger = read_json(config.LEDGER, default={}) or {}
-    return (ledger.get("shipped") or [])[-n:]
+    rows = ledger.get("shipped") or []
+    if exclude_draft_title:
+        rows = [r for r in rows
+                if not (r.get("title") == exclude_draft_title
+                        and not r.get("video_id"))]
+    return rows[-n:]
