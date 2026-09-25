@@ -440,3 +440,21 @@ def test_narration_unsupported_warns_only():
 def test_narration_without_source_is_unknown_not_clean():
     r = verify.check_narration(_KOSMOS, chat=_judge([]), source=lambda t: "")
     assert r["status"] == "unknown"
+
+
+def test_narration_matches_quote_despite_trivial_differences():
+    # Groq drops the trailing period or re-cases a word; that is the same line.
+    r = verify.check_narration(_KOSMOS, chat=_judge([
+        {"sentence": "the soviets paid", "verdict": "contradicted",
+         "reason": "half"}]), source=_src)
+    assert r["contradicted"] == 1 and r["dropped"] == 0
+
+
+def test_narration_keeps_dropped_quotes_for_eyeballing():
+    # The judge varies run to run on the same input, so a flag it could not
+    # quote exactly may still be a real contradiction. Surface it, never lose it.
+    r = verify.check_narration(_KOSMOS, chat=_judge([
+        {"sentence": "The Soviets refused to pay anything.",
+         "verdict": "contradicted", "reason": "x"}]), source=_src)
+    assert r["dropped_flags"][0]["sentence"].startswith("The Soviets refused")
+    assert "refused" in verify.summarize_narration(r)

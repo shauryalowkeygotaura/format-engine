@@ -1,6 +1,6 @@
 {
   "title": "Kosmos 954 vs Chernobyl",
-  "hook": "A 50kg nuclear reactor fell from orbit, scorching Canada with radiation levels that could kill you in hours. It was Chernobyl's silent twin.",
+  "hook": "A 50kg nuclear reactor fell from orbit onto Canada, scattering fragments hot enough to kill you in hours. In 1978, eight years before Chernobyl.",
   "substance": [
     {
       "claim": "Kosmos 954 was powered by a BES-5 nuclear reactor containing approximately 50 kg of highly-enriched uranium with over 90% uranium-235.",
@@ -47,25 +47,25 @@
   "beats": [
     {
       "beat": 1,
-      "narration": "Kosmos 954 carried a BES-5 reactor. Inside sat fifty kilograms of highly-enriched uranium. Over ninety percent was uranium-235. The machine hummed in silence. Then it fell. On 24 January 1978, the satellite reentered the atmosphere. Debris scattered along a six-hundred-kilometer path. It stretched from Great Slave Lake to Baker Lake. This was not a minor leak. The radiation levels spiked instantly. Workers faced 1.1 sieverts per hour. That dose kills within hours. No shield stopped the heat. The cleanup began in the snow. It was messy, slow, and terrifyingly radioactive.",
+      "narration": "Kosmos 954 carried a BES-5 reactor. Inside sat fifty kilograms of highly-enriched uranium. Over ninety percent was uranium-235. By December 1977 it had drifted off course, and the system meant to boost the spent core into a safe disposal orbit had failed. Then it fell. On 24 January 1978, the satellite reentered the atmosphere. Debris scattered along a six-hundred-kilometer path. It stretched from Great Slave Lake to Baker Lake. Searchers found fragments reading up to 1.1 sieverts per hour. One piece was hot enough to kill a person who stayed beside it for a few hours. The cleanup began in the snow. It was called Operation Morning Light.",
       "visual": "Archival footage of satellite reentry, map showing debris trail across Canada, close-up of radiation gauge spiking, workers in hazmat suits in blizzard conditions.",
       "seconds": 30
     },
     {
       "beat": 2,
-      "narration": "The damage cost millions. Canada billed the Soviet Union. The invoice totaled Can$6,041,174.70. They cited the 1972 Space Liability Convention. The Soviets paid. It was an awkward admission of failure. This disaster echoed Chernobyl in kind, if not in scale. Both involved uncontrolled nuclear release. Both left lasting contamination. Kosmos 954 proved orbit was no safe place. Space debris becomes a weapon. The reactor fell without warning. The cleanup lasted months. The political fallout lingered longer. It was a silent Chernobyl, hidden in the Arctic. The world learned a hard lesson. Nuclear power in space is a ticking bomb. It always is.",
+      "narration": "The damage cost millions. Canada billed the Soviet Union. The invoice totaled Can$6,041,174.70. They cited the 1972 Space Liability Convention. In secret meetings, Soviet officials had already warned the Americans they had lost control of the satellite. The cleanup lasted months. The political fallout lingered longer. This was 1978. Chernobyl came in 1986, on a far larger scale.",
       "visual": "Documentary shots of the 1972 treaty, Soviet officials signing checks, split-screen comparison of Kosmos debris field and Chernobyl exclusion zone, slow pan over frozen Canadian landscape.",
       "seconds": 30
     },
     {
       "beat": 3,
-      "narration": "The 1973 failure dropped its reactor into the Pacific. It sank north of Japan. No one retrieved it. The ocean absorbed the risk. That silence contrasted with the open air of 1978. Here, fragments scattered across land. Recovery teams found hot metal in the snow. One piece measured danger that could end a life in hours. The cleanup cost over six million dollars. Can$6,041,174.70 was the bill. The treaty demanded payment. The state paid the tab. It was a financial line item for radioactive waste.",
+      "narration": "The 1973 failure dropped its reactor into the Pacific. It sank north of Japan. That silence contrasted with the open air of 1978. Here, fragments scattered across land. Recovery teams found hot metal in the snow. The pieces they found held an estimated one percent of the fuel. Moscow eventually paid three million Canadian dollars, about half the bill. It was a financial line item for radioactive waste.",
       "visual": "Split screen: dark ocean depth map vs. snowy terrain with recovery gear. Graphic overlay of the dollar amount counting up. Archival footage of Canadian officials.",
       "seconds": 30
     },
     {
       "beat": 4,
-      "narration": "Scale defines the horror. Chernobyl destroyed a city. This event contaminated a path. Six hundred kilometers of debris trail. From Great Slave Lake to Baker Lake. The radiation source was BES-5. Fifty kilograms of highly-enriched uranium. Over ninety percent of it was the deadly isotope. The reactor did not explode. It fell. It broke. It leaked. The danger was invisible. The cost was political. The precedent was set. Space became a dumping ground for nuclear waste.",
+      "narration": "Scale defines the horror. Chernobyl emptied a city. This event contaminated a path. The reactor did not explode. It fell. It broke. The danger was invisible. The cost was political. The precedent was set.",
       "visual": "Map animating the 600km debris path across Canada. Close-up of the BES-5 reactor diagram. Text overlay: 50kg U-235. Fade to black with static.",
       "seconds": 30
     }

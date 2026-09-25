@@ -359,6 +359,12 @@ def _default_source(name: str) -> str:
     return article_text(title) if title else ""
 
 
+def _norm(sentence: str) -> str:
+    """Case, spacing and edge punctuation stripped: the judge drops a final
+    period or re-cases a word, and that is still the same sentence."""
+    return re.sub(r"\s+", " ", sentence or "").strip(" \t\"'.!?,;:").lower()
+
+
 def _sentences(text: str) -> list[str]:
     return [s.strip() for s in re.split(r"(?<=[.!?])\s+", text or "") if s.strip()]
 
@@ -401,22 +407,26 @@ def check_narration(brief: dict, *, chat=None, source=None) -> dict:
     where = {}
     for b in beats:
         for s in _sentences(b.get("narration") or ""):
-            where.setdefault(s.lower(), b.get("beat"))
-    flags, dropped = [], 0
+            where.setdefault(_norm(s), b.get("beat"))
+    flags, dropped = [], []
     for f in (out or {}).get("flags") or []:
         if not isinstance(f, dict):
             continue
         sentence = (f.get("sentence") or "").strip()
         verdict = f.get("verdict")
-        beat = where.get(sentence.lower())
+        beat = where.get(_norm(sentence))
         if beat is None or verdict not in ("contradicted", "unsupported"):
-            dropped += 1
+            # Kept, not discarded: the judge varies between runs on the same
+            # input, so an unlocatable flag may still be a real contradiction.
+            dropped.append({"sentence": sentence, "verdict": verdict,
+                            "reason": f.get("reason") or ""})
             continue
         flags.append({"beat": beat, "sentence": sentence, "verdict": verdict,
                       "reason": f.get("reason") or ""})
     n_bad = sum(f["verdict"] == "contradicted" for f in flags)
     return {"status": "checked", "flags": flags, "contradicted": n_bad,
-            "unsupported": len(flags) - n_bad, "dropped": dropped}
+            "unsupported": len(flags) - n_bad, "dropped": len(dropped),
+            "dropped_flags": dropped}
 
 
 def summarize_narration(r: dict) -> str:
@@ -424,10 +434,13 @@ def summarize_narration(r: dict) -> str:
         return f"NARRATION CHECK  unknown: {r.get('reason', '')}"
     out = [f"NARRATION CHECK  {r['contradicted']} contradicted, "
            f"{r['unsupported']} unsupported"
-           + (f" ({r['dropped']} judge quotes not found, ignored)"
+           + (f" ({r['dropped']} judge quotes not in script, listed below)"
               if r.get("dropped") else "")]
     for f in sorted(r["flags"], key=lambda f: f["verdict"]):
         mark = "FAIL" if f["verdict"] == "contradicted" else "??  "
         out.append(f"  [{mark}] beat {f['beat']}: {f['sentence'][:80]}")
         out.append(f"          {f['reason'][:110]}")
+    for f in r.get("dropped_flags") or []:
+        out.append(f"  [not found, eyeball] {f.get('verdict')}: "
+                   f"{str(f.get('sentence'))[:80]}")
     return "\n".join(out)
