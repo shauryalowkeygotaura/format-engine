@@ -75,6 +75,7 @@ import json
 import re
 import statistics
 import subprocess
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -84,6 +85,8 @@ from . import config
 
 # Wikimedia asks for a descriptive UA and rate-limits the default urllib one.
 _UA = {"User-Agent": "format-engine/1.0 (vault research; contact via github.com/shauryalowkeygotaura)"}
+# Longest Retry-After we will honour. Wikipedia asked for 21s on 2026-09-25.
+_MAX_RETRY_AFTER = 30
 
 # Whitelist, not character-removal. An LLM writes these hook strings and they
 # are interpolated into URLs and into a yt-dlp search argument.
@@ -110,18 +113,35 @@ def sanitize_hook(term: str) -> str:
 
 
 def _get_json(url: str, *, timeout: int = 25) -> dict | None:
-    """GET and parse, or None. Status is checked before the body is touched."""
+    """GET and parse, or None. Status is checked before the body is touched.
+
+    A 429 is waited out once, for as long as the server's Retry-After asks
+    (capped). Without this, Wikipedia throttling after a claim-check loop came
+    back as None, which callers read as "no article exists" - and the narration
+    check then reported nothing to compare against rather than a rate limit.
+    """
     req = urllib.request.Request(url, headers=_UA)
-    try:
-        with urllib.request.urlopen(req, timeout=timeout) as r:
-            if r.status != 200:
-                return None
-            try:
-                return json.loads(r.read().decode("utf-8"))
-            except (json.JSONDecodeError, UnicodeDecodeError):
-                return None
-    except (urllib.error.URLError, urllib.error.HTTPError, OSError, TimeoutError):
-        return None
+    for attempt in range(2):
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                if r.status != 200:
+                    return None
+                try:
+                    return json.loads(r.read().decode("utf-8"))
+                except (json.JSONDecodeError, UnicodeDecodeError):
+                    return None
+        except urllib.error.HTTPError as e:
+            if e.code == 429 and attempt == 0:
+                try:
+                    wait = int(e.headers.get("Retry-After") or 5)
+                except (TypeError, ValueError):
+                    wait = 5
+                time.sleep(min(max(wait, 1), _MAX_RETRY_AFTER))
+                continue
+            return None
+        except (urllib.error.URLError, OSError, TimeoutError):
+            return None
+    return None
 
 
 # ── Wikipedia: recognition and attention shape ───────────────────────────────

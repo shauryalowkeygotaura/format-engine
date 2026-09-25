@@ -9,6 +9,7 @@ Pipeline:
     hook         score an external hook before committing packaging     (0u)
     package      decide title + thumbnail BEFORE the script exists      (0u)
     brief        write a script that fits an approved package           (0u)
+    verify       fact-check the script + scan it for graphic content    (0u)
     verify-thumb check your own thumbnail against the measured format   (0u)
 
 `hook` and `package` need no YouTube API key at all - they run on yt-dlp and
@@ -474,15 +475,33 @@ def cmd_verify(args, yt: YouTube) -> int:
         print(f"-> checking {len(data.get('substance') or [])} claims against "
               "Wikipedia")
         claims = verify_mod.check_claims(data)
+    narration = None
+    if not args.no_facts:
+        # The claims above can all be true while the narration built on them
+        # is not; see verify.check_narration.
+        print("-> checking narration against the source articles")
+        try:
+            narration = verify_mod.check_narration(data)
+        except LLMError as e:
+            narration = {"status": "unknown", "reason": str(e)[:200]}
     print()
     print(verify_mod.summarize(claims, gore))
+    if narration is not None:
+        print()
+        print(verify_mod.summarize_narration(narration))
 
     bad = (claims or {}).get("unsupported", 0)
+    lies = (narration or {}).get("contradicted", 0)
     over = gore["count"] > config.MAX_GORE_MARKERS
-    if bad or over:
+    if bad or lies or over:
         print(f"\n  {path}")
         return 1
-    print("\nBoth checks clean.")
+    if narration is not None and narration.get("status") != "checked":
+        # Not the same as clean: nothing was compared.
+        print("\nClaims and gore clean; narration NOT checked "
+              f"({narration.get('reason', '')}). Re-run before rendering.")
+        return 0
+    print("\nAll checks clean.")
     return 0
 
 

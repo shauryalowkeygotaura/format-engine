@@ -332,3 +332,102 @@ def summarize(claims: dict | None, gore: dict) -> str:
     for h in (gore.get("hits") or [])[:12]:
         out.append(f"  - {h.get('where')}: {h.get('term')!r}")
     return "\n".join(out)
+
+
+_NARRATION_JUDGE = """You check a documentary script against source text.
+Judge LITERAL factual assertions only: events, amounts, outcomes, causes,
+comparisons of size or severity. Ignore obvious rhetoric ("the danger was
+invisible"). A sentence that describes a physical event as if it happened
+("the ground shook") is a factual assertion.
+
+For each asserted sentence, decide:
+  contradicted - the sources say otherwise
+  unsupported  - the sources do not say it either way
+Leave out sentences the sources support.
+
+Quote each sentence EXACTLY as it appears in the script.
+Return JSON: {"flags": [{"sentence": "...", "verdict": "contradicted"|"unsupported", "reason": "..."}]}"""
+
+# Per-source cap. The topic article is the evidence; the hook article is only
+# needed for comparison lines ("echoed Chernobyl in scale"), and its lead
+# section carries the scale facts. Kept small for the Groq TPM ceiling.
+_NARRATION_SOURCE_CHARS = (7000, 2500)
+
+
+def _default_source(name: str) -> str:
+    title = resolve_article(name)
+    return article_text(title) if title else ""
+
+
+def _sentences(text: str) -> list[str]:
+    return [s.strip() for s in re.split(r"(?<=[.!?])\s+", text or "") if s.strip()]
+
+
+def check_narration(brief: dict, *, chat=None, source=None) -> dict:
+    """Ask a judge model which narration sentences the sources contradict.
+
+    check_claims() only reads `substance`. The narration is written FROM the
+    substance but by a separate call, and it embellishes: the 2026-09-24
+    Kosmos 954 brief had five verified claims and narration saying the Soviets
+    paid the bill (they paid about half) and that it matched Chernobyl in scale.
+
+    The judge is a small model and is not trusted blindly: a flag only counts
+    if its quoted sentence really occurs in the narration, so a paraphrased or
+    invented quote is dropped rather than failing the brief. "contradicted"
+    blocks; "unsupported" warns, because sources omit plenty of true things.
+    """
+    if chat is None:
+        from .llm import chat_json as chat
+    source = source or _default_source
+    names = [(brief.get("topic") or "").strip(),
+             (brief.get("external_hook") or "").strip()]
+    parts = []
+    for name, cap in zip(names, _NARRATION_SOURCE_CHARS):
+        text = source(name) if name else ""
+        if text:
+            parts.append(f"SOURCE: {name}\n{text[:cap]}")
+    beats = [b for b in brief.get("beats", []) if isinstance(b, dict)]
+    if not parts:
+        return {"status": "unknown", "flags": [], "contradicted": 0,
+                "unsupported": 0, "dropped": 0,
+                "reason": "no source article resolved for topic or hook"}
+
+    script = "\n\n".join(f"BEAT {b.get('beat')}: {b.get('narration') or ''}"
+                         for b in beats)
+    out = chat(_NARRATION_JUDGE,
+               "\n\n".join(parts) + "\n\nSCRIPT:\n" + script,
+               temperature=0.0)
+
+    where = {}
+    for b in beats:
+        for s in _sentences(b.get("narration") or ""):
+            where.setdefault(s.lower(), b.get("beat"))
+    flags, dropped = [], 0
+    for f in (out or {}).get("flags") or []:
+        if not isinstance(f, dict):
+            continue
+        sentence = (f.get("sentence") or "").strip()
+        verdict = f.get("verdict")
+        beat = where.get(sentence.lower())
+        if beat is None or verdict not in ("contradicted", "unsupported"):
+            dropped += 1
+            continue
+        flags.append({"beat": beat, "sentence": sentence, "verdict": verdict,
+                      "reason": f.get("reason") or ""})
+    n_bad = sum(f["verdict"] == "contradicted" for f in flags)
+    return {"status": "checked", "flags": flags, "contradicted": n_bad,
+            "unsupported": len(flags) - n_bad, "dropped": dropped}
+
+
+def summarize_narration(r: dict) -> str:
+    if r.get("status") != "checked":
+        return f"NARRATION CHECK  unknown: {r.get('reason', '')}"
+    out = [f"NARRATION CHECK  {r['contradicted']} contradicted, "
+           f"{r['unsupported']} unsupported"
+           + (f" ({r['dropped']} judge quotes not found, ignored)"
+              if r.get("dropped") else "")]
+    for f in sorted(r["flags"], key=lambda f: f["verdict"]):
+        mark = "FAIL" if f["verdict"] == "contradicted" else "??  "
+        out.append(f"  [{mark}] beat {f['beat']}: {f['sentence'][:80]}")
+        out.append(f"          {f['reason'][:110]}")
+    return "\n".join(out)

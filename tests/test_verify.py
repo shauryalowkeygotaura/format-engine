@@ -393,3 +393,50 @@ def test_year_regexes_do_not_shadow_each_other(monkeypatch):
     monkeypatch.setattr(verify, "article_text", lambda t: "Reentered in 1978.")
     r = verify.check_claim("Kosmos 954 reentered in 1978.")
     assert r["verdict"] == "verified"
+
+
+# ── narration grounding ──────────────────────────────────────────────────────
+# The 2026-09-24 Kosmos 954 brief: all five substance claims checked out, and
+# the NARRATION still said "The Soviets paid" (they paid C$3M of the C$6M
+# bill), "The ground shook", and that it "echoed Chernobyl disaster in scale".
+# The claim check never reads narration, so none of that could be seen.
+_KOSMOS = {"topic": "Kosmos 954", "external_hook": "Chernobyl disaster",
+           "beats": _beats("Canada billed the Soviet Union. The Soviets paid.",
+                           "The ground shook. The cleanup began in the snow.")}
+
+
+def _judge(flags):
+    return lambda system, user, **kw: {"flags": flags}
+
+
+def _src(title):
+    return {"Kosmos 954": "The Soviet Union paid C$3 million.",
+            "Chernobyl disaster": "The worst nuclear disaster."}.get(title, "")
+
+
+def test_narration_contradiction_fails():
+    r = verify.check_narration(_KOSMOS, chat=_judge([
+        {"sentence": "The Soviets paid.", "verdict": "contradicted",
+         "reason": "paid C$3M of C$6M"}]), source=_src)
+    assert r["contradicted"] == 1 and r["flags"][0]["beat"] == 1
+
+
+def test_narration_drops_quotes_the_judge_invented():
+    # A small judge model paraphrases. A flag whose sentence is not actually in
+    # the narration cannot be located or fixed, so it must not fail the brief.
+    r = verify.check_narration(_KOSMOS, chat=_judge([
+        {"sentence": "The Soviets refused to pay anything.",
+         "verdict": "contradicted", "reason": "x"}]), source=_src)
+    assert r["contradicted"] == 0 and r["dropped"] == 1
+
+
+def test_narration_unsupported_warns_only():
+    r = verify.check_narration(_KOSMOS, chat=_judge([
+        {"sentence": "The ground shook.", "verdict": "unsupported",
+         "reason": "not in source"}]), source=_src)
+    assert r["contradicted"] == 0 and r["unsupported"] == 1
+
+
+def test_narration_without_source_is_unknown_not_clean():
+    r = verify.check_narration(_KOSMOS, chat=_judge([]), source=lambda t: "")
+    assert r["status"] == "unknown"
