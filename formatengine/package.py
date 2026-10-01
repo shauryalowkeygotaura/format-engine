@@ -321,7 +321,18 @@ def gate(pkg: dict, spec: dict) -> dict:
     nth = used + 1
     checks.append({"check": "template_use", "value": f"use #{nth}",
                    "limit": f"warn at {config.TEMPLATE_DECAY_WARN_AT}", "pass": True})
-    if nth >= config.TEMPLATE_DECAY_LOUD_AT:
+    kind = (spec.get("title_format") or {}).get("template_kind")
+    if kind == "lens":
+        # A lens ("The LIES That Make X ACTUALLY Work") promises a hidden
+        # mechanism and re-applies to any subject. Enrico Tartarotti 2026-09-25:
+        # 1.11M -> 594k -> 688k over three uses. The ~99% curve was measured on
+        # topic-bound templates, so it is not quoted here. Unset stays loud.
+        if nth >= config.TEMPLATE_DECAY_WARN_AT:
+            warnings.append(
+                f"This is use #{nth} of {spec.get('slug')!r}, a lens template. "
+                "Lens decay is unmeasured past use #3 on the reference channel; "
+                "compare this upload's views against the template's first uses.")
+    elif nth >= config.TEMPLATE_DECAY_LOUD_AT:
         warnings.append(
             f"This is use #{nth} of {spec.get('slug')!r}. On the reference "
             "channel both templates were down ~99% by this point (6,182,111 to "

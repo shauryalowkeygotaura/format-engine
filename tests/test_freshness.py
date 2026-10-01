@@ -440,6 +440,36 @@ def test_tenth_use_warns_loudly(monkeypatch):
     assert any("use #10" in w and "99%" in w for w in r["warnings"])
 
 
+def _lens_spec():
+    spec = dict(SPEC)
+    spec["title_format"] = {**(SPEC.get("title_format") or {}), "template_kind": "lens"}
+    return spec
+
+
+def test_lens_template_does_not_get_the_99_percent_warning(monkeypatch):
+    """Enrico Tartarotti, 2026-09-25: 'The LIES That Make X ACTUALLY Work' held
+    1.11M -> 594k -> 688k. The PaintProf curve was not measured on lenses."""
+    _uses(monkeypatch, 9)
+    r = package.gate(_pkg("No, L Can't Catch Epstein"), _lens_spec())
+    assert not any("99%" in w or "95%" in w for w in r["warnings"])
+    assert any("use #10" in w and "lens" in w for w in r["warnings"])
+
+
+def test_lens_template_is_quiet_before_the_warn_threshold(monkeypatch):
+    _uses(monkeypatch, 2)
+    r = package.gate(_pkg("No, L Can't Catch Epstein"), _lens_spec())
+    assert not any("use #" in w for w in r["warnings"])
+
+
+def test_unknown_template_kind_keeps_the_topic_warning(monkeypatch):
+    """Unset means unmeasured: the conservative (louder) warning stays."""
+    _uses(monkeypatch, 9)
+    spec = dict(SPEC)
+    spec["title_format"] = {**(SPEC.get("title_format") or {}), "template_kind": "bogus"}
+    r = package.gate(_pkg("No, L Can't Catch Epstein"), spec)
+    assert any("use #10" in w and "99%" in w for w in r["warnings"])
+
+
 def test_template_decay_never_blocks(monkeypatch):
     """The curve is real but three mechanisms produce it and public data cannot
     separate them, so this must warn rather than block."""
