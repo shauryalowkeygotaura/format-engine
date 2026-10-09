@@ -217,6 +217,7 @@ HARD REQUIREMENTS - a response that misses these is rejected:
   Not "You feel the heat rise" but "The heat rises before you hear anything".
   Open on a noun, a verb, a number, or a time.
 - Escalate. Every beat must be worse or bigger than the one before it.
+- {stage_rule}
 
 Return ONLY JSON of the form:
 {{"beats": [{{"beat": {first}, "narration": "...", "visual": "...", "seconds": 30}}]}}
@@ -510,6 +511,41 @@ def _finalize(out: dict, spec: dict, bend: dict) -> dict:
 
 
 
+_NUM_WORDS = {w: i for i, w in enumerate(
+    "zero one two three four five six seven eight nine ten eleven twelve thirteen "
+    "fourteen fifteen sixteen seventeen eighteen nineteen twenty".split())}
+_LEVEL_LABEL = re.compile(r"^\s*(?:level|stage|phase)\s+(\d+|[a-z]+)\b", re.I)
+_TITLE_COUNT = re.compile(r"\b(\d+|" + "|".join(_NUM_WORDS) + r")\s+(levels|stages|phases|degrees)\b",
+                          re.I)
+
+
+def _level_numbers(beats: list) -> list[int | None]:
+    """The 'Level N' number each beat opens with, or None if it has no label."""
+    out = []
+    for b in beats:
+        m = _LEVEL_LABEL.match((b.get("narration") or "") if isinstance(b, dict) else "")
+        tok = m.group(1).lower() if m else ""
+        out.append(int(tok) if tok.isdigit() else _NUM_WORDS.get(tok))
+    return out
+
+
+def _is_levels_format(spec: dict, title: str) -> bool:
+    text = f"{title} {spec.get('notes') or ''}".lower()
+    return bool(_TITLE_COUNT.search(title or "")) or "level" in text
+
+
+def _sync_title_count(title: str, n: int) -> str:
+    """'The 4 Levels Of X' over 17 levels -> 'The 17 Levels Of X'. The count in a
+    levels title is a promise the viewer checks; it must match the video."""
+    def repl(m):
+        word = m.group(1)
+        new = str(n) if word.isdigit() else next(
+            (w.capitalize() if word[0].isupper() else w for w, i in _NUM_WORDS.items() if i == n),
+            str(n))
+        return f"{new} {m.group(2)}"
+    return _TITLE_COUNT.sub(repl, title, count=1)
+
+
 def _build_chunked(spec, bend, *, words, model, n_beats, n_substance,
                    title, tf, titles) -> dict:
     """Generate a long script across several paced calls.
@@ -560,6 +596,7 @@ def _build_chunked(spec, bend, *, words, model, n_beats, n_substance,
     print("  shell - hook + " + str(got) + " substance items")
     beats = []
     made = 0
+    levels = _is_levels_format(spec, out.get("title") or title)
 
     while made < n_beats:
         take = min(config.CHUNK_BEATS, n_beats - made)
@@ -588,7 +625,16 @@ def _build_chunked(spec, bend, *, words, model, n_beats, n_substance,
                     # Every chunk previously saw only the LAST beat's tail, so
                     # chunk 3 happily re-told what chunk 1 covered. Listing the
                     # facts already spent is what stops that.
-                    covered=_covered_block(beats)),
+                    covered=_covered_block(beats),
+                    # Each chunk only ever saw the previous beat's TAIL, so in a
+                    # levels script every chunk restarted the count: the
+                    # 2026-09-02 city-grid brief ran Level 1-8, then 1-4, then
+                    # 1-4 again, with "Level four" twice in a row at the end.
+                    stage_rule=(
+                        f"Beat number k IS 'Level k'. The previous beat was Level "
+                        f"{made}; open beat {made + 1} with 'Level {made + 1},'. "
+                        "Never restart the count, never repeat a level."
+                        if levels else "")),
                 model=model, temperature=0.75,
                 max_tokens=_completion_budget(chunk_words),
             )
@@ -609,6 +655,10 @@ def _build_chunked(spec, bend, *, words, model, n_beats, n_substance,
     for i, b in enumerate(beats, 1):
         b["beat"] = i
     out["beats"] = beats
+    if levels and beats:
+        nums = [n for n in _level_numbers(beats) if n is not None]
+        if nums:
+            out["title"] = _sync_title_count(out.get("title") or title, max(nums))
     # Same repair as the single-call path; chunking makes the "You" opener MORE
     # likely, since each chunk only sees its own beats and cannot tell it is
     # repeating the previous chunk's opener.
@@ -831,6 +881,30 @@ def gate(brief: dict, spec: dict) -> dict:
                 f"{n_top} of {len(openers)} beats open with the word '{top}'. "
                 f"That reads as a drone however good the facts are. Vary the "
                 f"opening word of every beat.")
+
+    # A levels script must count up once, 1..N, and the title must promise N.
+    # Chunked generation once shipped Level 1-8, then 1-4, then 1-4 again under
+    # the title "The 4 Levels", and every other check passed it.
+    nums = [n for n in _level_numbers(beats) if n is not None]
+    if nums:
+        seq_ok = nums == list(range(1, len(nums) + 1))
+        tm = _TITLE_COUNT.search(brief.get("title") or "")
+        promised = None
+        if tm:
+            w = tm.group(1).lower()
+            promised = int(w) if w.isdigit() else _NUM_WORDS.get(w)
+        count_ok = promised is None or promised == max(nums)
+        ok = seq_ok and count_ok
+        checks.append({"check": "level_sequence", "value": nums, "limit": "1..N, title = N",
+                       "pass": ok})
+        if not seq_ok:
+            failures.append(
+                f"Levels run {nums}: the count restarts or repeats. A viewer of a "
+                f"levels video tracks the number; a restart reads as a broken video.")
+        if not count_ok:
+            failures.append(
+                f"Title promises {promised} levels, the script has {max(nums)}. "
+                f"The count in the title is a promise; match it.")
 
     body = " ".join(narrations).lower()
     hits = [ph for ph in FILLER_PHRASES if body.count(ph) >= 2]
