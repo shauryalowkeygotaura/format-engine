@@ -1,0 +1,886 @@
+{
+  "name": "engineering-failures",
+  "slug": "engineering-failures",
+  "source_channel": {
+    "id": "UCGZx4eW6KrESA0ggubrPB6A",
+    "title": "The Hydraulic Record",
+    "url": "https://www.youtube.com/channel/UCGZx4eW6KrESA0ggubrPB6A",
+    "subscribers": 26200,
+    "age_days": 131.4,
+    "score": 67.8
+  },
+  "rpm_band": "education",
+  "rpm_estimate_usd": {
+    "low": 5.0,
+    "high": 14.0,
+    "note": "estimate from category, not measured"
+  },
+  "safety_flags": [],
+  "titles": [
+    "Salmon Creek Dam: What a Gold Mine Left Behind",
+    "The Nepal Flood: What We Know",
+    "St. Francis Dam: Declared Safe 12 Hours Before It Failed",
+    "Teton Dam: The Dam That Failed Its First Fill",
+    "Banqiao Dam: The Deadliest Dam Failure in History",
+    "How Russia's Largest Power Plant Destroyed Itself From the Inside",
+    "Owyhee Dam: The Dam That Had To Work",
+    "Vajont: Six Minutes That Erased A Valley"
+  ],
+  "title_format": {
+    "archetype": "story",
+    "template": "{topic}: {qualifier}",
+    "second_person_rate": 0.0,
+    "per_title": [
+      {
+        "title": "Salmon Creek Dam: What a Gold Mine Left Behind",
+        "number": null,
+        "adjective": null,
+        "topic": "Salmon Creek Dam",
+        "enforcement": null,
+        "qualifier": "What a Gold Mine Left Behind",
+        "second_person": false
+      },
+      {
+        "title": "The Nepal Flood: What We Know",
+        "number": null,
+        "adjective": null,
+        "topic": "The Nepal Flood",
+        "enforcement": null,
+        "qualifier": "What We Know",
+        "second_person": false
+      },
+      {
+        "title": "St. Francis Dam: Declared Safe 12 Hours Before It Failed",
+        "number": null,
+        "adjective": null,
+        "topic": "St. Francis Dam",
+        "enforcement": null,
+        "qualifier": "Declared Safe 12 Hours Before It Failed",
+        "second_person": false
+      },
+      {
+        "title": "Teton Dam: The Dam That Failed Its First Fill",
+        "number": null,
+        "adjective": null,
+        "topic": "Teton Dam",
+        "enforcement": null,
+        "qualifier": "The Dam That Failed Its First Fill",
+        "second_person": false
+      },
+      {
+        "title": "Banqiao Dam: The Deadliest Dam Failure in History",
+        "number": null,
+        "adjective": null,
+        "topic": "Banqiao Dam",
+        "enforcement": null,
+        "qualifier": "The Deadliest Dam Failure in History",
+        "second_person": false
+      },
+      {
+        "title": "How Russia's Largest Power Plant Destroyed Itself From the Inside",
+        "number": null,
+        "adjective": null,
+        "topic": "Russia's Largest Power Plant",
+        "enforcement": null,
+        "qualifier": "How [it] Destroyed Itself From the Inside",
+        "second_person": false
+      },
+      {
+        "title": "Owyhee Dam: The Dam That Had To Work",
+        "number": null,
+        "adjective": null,
+        "topic": "Owyhee Dam",
+        "enforcement": null,
+        "qualifier": "The Dam That Had To Work",
+        "second_person": false
+      },
+      {
+        "title": "Vajont: Six Minutes That Erased A Valley",
+        "number": null,
+        "adjective": null,
+        "topic": "Vajont",
+        "enforcement": null,
+        "qualifier": "Six Minutes That Erased A Valley",
+        "second_person": false
+      }
+    ],
+    "slot_vocabulary": {
+      "adjective": [],
+      "enforcement": [],
+      "qualifier": [
+        "What a Gold Mine Left Behind",
+        "What We Know",
+        "Declared Safe 12 Hours Before It Failed",
+        "The Dam That Failed Its First Fill",
+        "The Deadliest Dam Failure in History",
+        "How [it] Destroyed Itself From the Inside",
+        "The Dam That Had To Work",
+        "Six Minutes That Erased A Valley"
+      ],
+      "number": []
+    },
+    "topic_axis": "specific infrastructure projects (dams/power plants) and their catastrophic failures",
+    "notes": "The format works by pairing a specific, recognizable subject with a concise, high-stakes narrative hook that summarizes the tragedy or anomaly."
+  },
+  "thumbnail_checklist": {
+    "sample_size": 8,
+    "dominant_layout": "multi_subject",
+    "art_style": "photographic",
+    "avg_flatness": 0.303,
+    "grid_rate": 0.0,
+    "avg_cells": 1.0,
+    "layout_distribution": {
+      "single_subject": 1,
+      "multi_subject": 7
+    },
+    "subject_count_mode": 5,
+    "middle_unique_rate": 0.0,
+    "center_dominant_rate": 0.12,
+    "header_text_rate": 0.12,
+    "avg_saturation": 0.263,
+    "avg_contrast": 0.275,
+    "avg_brightness": 0.451,
+    "signature_palette": [
+      {
+        "hex": "#121315",
+        "weight": 0.39
+      },
+      {
+        "hex": "#4a5733",
+        "weight": 0.36
+      },
+      {
+        "hex": "#7c9ab5",
+        "weight": 0.32
+      },
+      {
+        "hex": "#637177",
+        "weight": 0.29
+      },
+      {
+        "hex": "#827c75",
+        "weight": 0.28
+      }
+    ],
+    "rules": [
+      "layout: multi_subject (7/8 videos)",
+      "high contrast (format average 0.27)",
+      "art style: photographic (flatness 0.30)"
+    ]
+  },
+  "thumbnail_analyses": [
+    {
+      "layout": "single_subject",
+      "subject_count": 1,
+      "face_count": 1,
+      "middle_unique": false,
+      "center_dominant": false,
+      "has_header_text": false,
+      "text_coverage": 0.1696,
+      "palette": [
+        {
+          "hex": "#4a5733",
+          "share": 0.361
+        },
+        {
+          "hex": "#77705e",
+          "share": 0.263
+        },
+        {
+          "hex": "#1d1e19",
+          "share": 0.148
+        },
+        {
+          "hex": "#abbfd3",
+          "share": 0.119
+        },
+        {
+          "hex": "#f0f6f7",
+          "share": 0.11
+        }
+      ],
+      "brightness": 0.439,
+      "saturation": 0.349,
+      "contrast": 0.274,
+      "edge_density": 0.2108,
+      "flatness": 0.254,
+      "cell_count": 0,
+      "_detail": {
+        "thirds": {
+          "middle_unique": false,
+          "center_dominant": false,
+          "flank_similarity_chisq": 268.673,
+          "middle_distance_chisq": 65.016,
+          "edge_energy_split": [
+            0.257,
+            0.39,
+            0.353
+          ]
+        },
+        "text": {
+          "text_coverage": 0.1696,
+          "has_header_band": false,
+          "text_boxes": 490
+        },
+        "blob_count": 1
+      },
+      "video_id": "DavIoWHmBUE",
+      "title": "Salmon Creek Dam: What a Gold Mine Left Behind"
+    },
+    {
+      "layout": "multi_subject",
+      "subject_count": 5,
+      "face_count": 2,
+      "middle_unique": false,
+      "center_dominant": false,
+      "has_header_text": false,
+      "text_coverage": 0.3323,
+      "palette": [
+        {
+          "hex": "#637177",
+          "share": 0.295
+        },
+        {
+          "hex": "#4a4f48",
+          "share": 0.248
+        },
+        {
+          "hex": "#1e1c1c",
+          "share": 0.172
+        },
+        {
+          "hex": "#e6dfd3",
+          "share": 0.145
+        },
+        {
+          "hex": "#b0a296",
+          "share": 0.14
+        }
+      ],
+      "brightness": 0.44,
+      "saturation": 0.25,
+      "contrast": 0.28,
+      "edge_density": 0.1931,
+      "flatness": 0.243,
+      "cell_count": 1,
+      "_detail": {
+        "thirds": {
+          "middle_unique": false,
+          "center_dominant": false,
+          "flank_similarity_chisq": 49.319,
+          "middle_distance_chisq": 38.679,
+          "edge_energy_split": [
+            0.229,
+            0.378,
+            0.392
+          ]
+        },
+        "text": {
+          "text_coverage": 0.3323,
+          "has_header_band": false,
+          "text_boxes": 514
+        },
+        "blob_count": 6
+      },
+      "video_id": "9pH_3n23_8o",
+      "title": "The Nepal Flood: What We Know"
+    },
+    {
+      "layout": "multi_subject",
+      "subject_count": 5,
+      "face_count": 0,
+      "middle_unique": false,
+      "center_dominant": false,
+      "has_header_text": false,
+      "text_coverage": 0.3809,
+      "palette": [
+        {
+          "hex": "#827c75",
+          "share": 0.285
+        },
+        {
+          "hex": "#554d48",
+          "share": 0.189
+        },
+        {
+          "hex": "#eae6df",
+          "share": 0.182
+        },
+        {
+          "hex": "#b3aca5",
+          "share": 0.181
+        },
+        {
+          "hex": "#211e1f",
+          "share": 0.162
+        }
+      ],
+      "brightness": 0.508,
+      "saturation": 0.137,
+      "contrast": 0.288,
+      "edge_density": 0.1932,
+      "flatness": 0.324,
+      "cell_count": 0,
+      "_detail": {
+        "thirds": {
+          "middle_unique": false,
+          "center_dominant": false,
+          "flank_similarity_chisq": 3.699,
+          "middle_distance_chisq": 1.272,
+          "edge_energy_split": [
+            0.25,
+            0.361,
+            0.388
+          ]
+        },
+        "text": {
+          "text_coverage": 0.3809,
+          "has_header_band": false,
+          "text_boxes": 597
+        },
+        "blob_count": 8
+      },
+      "video_id": "NFV55w_i1zg",
+      "title": "St. Francis Dam: Declared Safe 12 Hours Before It Failed"
+    },
+    {
+      "layout": "multi_subject",
+      "subject_count": 4,
+      "face_count": 0,
+      "middle_unique": false,
+      "center_dominant": false,
+      "has_header_text": false,
+      "text_coverage": 0.2125,
+      "palette": [
+        {
+          "hex": "#121315",
+          "share": 0.386
+        },
+        {
+          "hex": "#44413a",
+          "share": 0.228
+        },
+        {
+          "hex": "#7c7670",
+          "share": 0.175
+        },
+        {
+          "hex": "#eaeae7",
+          "share": 0.125
+        },
+        {
+          "hex": "#b4b4b0",
+          "share": 0.086
+        }
+      ],
+      "brightness": 0.346,
+      "saturation": 0.26,
+      "contrast": 0.309,
+      "edge_density": 0.0617,
+      "flatness": 0.398,
+      "cell_count": 4,
+      "_detail": {
+        "thirds": {
+          "middle_unique": false,
+          "center_dominant": false,
+          "flank_similarity_chisq": 44.219,
+          "middle_distance_chisq": 23.137,
+          "edge_energy_split": [
+            0.436,
+            0.396,
+            0.169
+          ]
+        },
+        "text": {
+          "text_coverage": 0.2125,
+          "has_header_band": false,
+          "text_boxes": 272
+        },
+        "blob_count": 4
+      },
+      "video_id": "aRYq2kuHL2E",
+      "title": "Teton Dam: The Dam That Failed Its First Fill"
+    },
+    {
+      "layout": "multi_subject",
+      "subject_count": 5,
+      "face_count": 1,
+      "middle_unique": false,
+      "center_dominant": false,
+      "has_header_text": false,
+      "text_coverage": 0.3887,
+      "palette": [
+        {
+          "hex": "#beac97",
+          "share": 0.247
+        },
+        {
+          "hex": "#9a8671",
+          "share": 0.244
+        },
+        {
+          "hex": "#6a5749",
+          "share": 0.239
+        },
+        {
+          "hex": "#2a2321",
+          "share": 0.171
+        },
+        {
+          "hex": "#ebe6dc",
+          "share": 0.099
+        }
+      ],
+      "brightness": 0.503,
+      "saturation": 0.272,
+      "contrast": 0.261,
+      "edge_density": 0.1248,
+      "flatness": 0.249,
+      "cell_count": 0,
+      "_detail": {
+        "thirds": {
+          "middle_unique": false,
+          "center_dominant": false,
+          "flank_similarity_chisq": 64.247,
+          "middle_distance_chisq": 26.981,
+          "edge_energy_split": [
+            0.192,
+            0.378,
+            0.43
+          ]
+        },
+        "text": {
+          "text_coverage": 0.3887,
+          "has_header_band": false,
+          "text_boxes": 586
+        },
+        "blob_count": 6
+      },
+      "video_id": "CFnh54FeNo0",
+      "title": "Banqiao Dam: The Deadliest Dam Failure in History"
+    },
+    {
+      "layout": "multi_subject",
+      "subject_count": 5,
+      "face_count": 1,
+      "middle_unique": false,
+      "center_dominant": false,
+      "has_header_text": false,
+      "text_coverage": 0.459,
+      "palette": [
+        {
+          "hex": "#61503f",
+          "share": 0.28
+        },
+        {
+          "hex": "#23201e",
+          "share": 0.211
+        },
+        {
+          "hex": "#877f75",
+          "share": 0.21
+        },
+        {
+          "hex": "#b7b2a9",
+          "share": 0.168
+        },
+        {
+          "hex": "#e8e6de",
+          "share": 0.131
+        }
+      ],
+      "brightness": 0.462,
+      "saturation": 0.222,
+      "contrast": 0.297,
+      "edge_density": 0.202,
+      "flatness": 0.322,
+      "cell_count": 1,
+      "_detail": {
+        "thirds": {
+          "middle_unique": false,
+          "center_dominant": false,
+          "flank_similarity_chisq": 18.705,
+          "middle_distance_chisq": 10.123,
+          "edge_energy_split": [
+            0.297,
+            0.36,
+            0.343
+          ]
+        },
+        "text": {
+          "text_coverage": 0.459,
+          "has_header_band": false,
+          "text_boxes": 803
+        },
+        "blob_count": 5
+      },
+      "video_id": "k6xYWNjXrHs",
+      "title": "How Russia's Largest Power Plant Destroyed Itself From the Inside"
+    },
+    {
+      "layout": "multi_subject",
+      "subject_count": 5,
+      "face_count": 2,
+      "middle_unique": false,
+      "center_dominant": false,
+      "has_header_text": false,
+      "text_coverage": 0.246,
+      "palette": [
+        {
+          "hex": "#7c9ab5",
+          "share": 0.322
+        },
+        {
+          "hex": "#6f6d6f",
+          "share": 0.206
+        },
+        {
+          "hex": "#64b4fc",
+          "share": 0.198
+        },
+        {
+          "hex": "#ced8d9",
+          "share": 0.152
+        },
+        {
+          "hex": "#2d2c2d",
+          "share": 0.122
+        }
+      ],
+      "brightness": 0.553,
+      "saturation": 0.382,
+      "contrast": 0.229,
+      "edge_density": 0.1559,
+      "flatness": 0.235,
+      "cell_count": 0,
+      "_detail": {
+        "thirds": {
+          "middle_unique": false,
+          "center_dominant": false,
+          "flank_similarity_chisq": 29.097,
+          "middle_distance_chisq": 30.395,
+          "edge_energy_split": [
+            0.244,
+            0.314,
+            0.442
+          ]
+        },
+        "text": {
+          "text_coverage": 0.246,
+          "has_header_band": false,
+          "text_boxes": 460
+        },
+        "blob_count": 5
+      },
+      "video_id": "h2vJovuH0bk",
+      "title": "Owyhee Dam: The Dam That Had To Work"
+    },
+    {
+      "layout": "multi_subject",
+      "subject_count": 4,
+      "face_count": 1,
+      "middle_unique": false,
+      "center_dominant": true,
+      "has_header_text": true,
+      "text_coverage": 0.3851,
+      "palette": [
+        {
+          "hex": "#313a31",
+          "share": 0.284
+        },
+        {
+          "hex": "#141916",
+          "share": 0.23
+        },
+        {
+          "hex": "#596457",
+          "share": 0.186
+        },
+        {
+          "hex": "#c2cdc3",
+          "share": 0.152
+        },
+        {
+          "hex": "#8d9586",
+          "share": 0.148
+        }
+      ],
+      "brightness": 0.356,
+      "saturation": 0.233,
+      "contrast": 0.261,
+      "edge_density": 0.1,
+      "flatness": 0.401,
+      "cell_count": 2,
+      "_detail": {
+        "thirds": {
+          "middle_unique": false,
+          "center_dominant": true,
+          "flank_similarity_chisq": 26.921,
+          "middle_distance_chisq": 20.067,
+          "edge_energy_split": [
+            0.143,
+            0.491,
+            0.366
+          ]
+        },
+        "text": {
+          "text_coverage": 0.3851,
+          "has_header_band": true,
+          "text_boxes": 487
+        },
+        "blob_count": 4
+      },
+      "video_id": "-l11P5nXNHg",
+      "title": "Vajont: Six Minutes That Erased A Valley"
+    }
+  ],
+  "source_videos": [
+    {
+      "id": "DavIoWHmBUE",
+      "title": "Salmon Creek Dam: What a Gold Mine Left Behind",
+      "views": 93026,
+      "view_multiple": 0.55,
+      "velocity_multiple": 38.45,
+      "url": "https://www.youtube.com/watch?v=DavIoWHmBUE"
+    },
+    {
+      "id": "9pH_3n23_8o",
+      "title": "The Nepal Flood: What We Know",
+      "views": 2043484,
+      "view_multiple": 12.45,
+      "velocity_multiple": 23.81,
+      "url": "https://www.youtube.com/watch?v=9pH_3n23_8o"
+    },
+    {
+      "id": "NFV55w_i1zg",
+      "title": "St. Francis Dam: Declared Safe 12 Hours Before It Failed",
+      "views": 200170,
+      "view_multiple": 1.22,
+      "velocity_multiple": 7.3,
+      "url": "https://www.youtube.com/watch?v=NFV55w_i1zg"
+    },
+    {
+      "id": "aRYq2kuHL2E",
+      "title": "Teton Dam: The Dam That Failed Its First Fill",
+      "views": 1090631,
+      "view_multiple": 6.64,
+      "velocity_multiple": 6.18,
+      "url": "https://www.youtube.com/watch?v=aRYq2kuHL2E"
+    },
+    {
+      "id": "CFnh54FeNo0",
+      "title": "Banqiao Dam: The Deadliest Dam Failure in History",
+      "views": 389516,
+      "view_multiple": 2.37,
+      "velocity_multiple": 2.57,
+      "url": "https://www.youtube.com/watch?v=CFnh54FeNo0"
+    },
+    {
+      "id": "k6xYWNjXrHs",
+      "title": "How Russia's Largest Power Plant Destroyed Itself From the Inside",
+      "views": 218416,
+      "view_multiple": 1.33,
+      "velocity_multiple": 0.72,
+      "url": "https://www.youtube.com/watch?v=k6xYWNjXrHs"
+    },
+    {
+      "id": "h2vJovuH0bk",
+      "title": "Owyhee Dam: The Dam That Had To Work",
+      "views": 170385,
+      "view_multiple": 1.04,
+      "velocity_multiple": 1.34,
+      "url": "https://www.youtube.com/watch?v=h2vJovuH0bk"
+    },
+    {
+      "id": "-l11P5nXNHg",
+      "title": "Vajont: Six Minutes That Erased A Valley",
+      "views": 168712,
+      "view_multiple": 1.03,
+      "velocity_multiple": 0.59,
+      "url": "https://www.youtube.com/watch?v=-l11P5nXNHg"
+    }
+  ],
+  "saved_at": "2026-10-15T07:45:56.743980+00:00",
+  "bends": [
+    {
+      "topic": "Chernobyl Nuclear Power Plant",
+      "search_term": "Chernobyl disaster history",
+      "distance": "lateral",
+      "proposed_title": "Chernobyl Nuclear Power Plant: What We Know",
+      "why": "High-income history and engineering enthusiasts are deeply interested in the technical and human failures of major nuclear infrastructure.",
+      "audience_age_skew": "older",
+      "rpm_guess": "high",
+      "saturation": {
+        "checked": true,
+        "search_term": "Chernobyl disaster history",
+        "demand_median_views": 625779,
+        "demand_max_views": 19925097,
+        "competition_count": 0,
+        "competition_strength": 0,
+        "competitors": [],
+        "verdict": "open"
+      },
+      "opportunity": 98.7,
+      "title_similarity_to_source": 0.442
+    },
+    {
+      "topic": "Fukushima Daiichi Nuclear Power Plant",
+      "search_term": "Fukushima nuclear accident",
+      "distance": "lateral",
+      "proposed_title": "Fukushima Daiichi Nuclear Power Plant: The Dam That Failed Its First Fill",
+      "why": "This audience seeks detailed post-mortems of modern energy infrastructure failures, particularly those with significant geopolitical impact.",
+      "audience_age_skew": "older",
+      "rpm_guess": "high",
+      "saturation": {
+        "checked": true,
+        "search_term": "Fukushima nuclear accident",
+        "demand_median_views": 435920,
+        "demand_max_views": 6102738,
+        "competition_count": 0,
+        "competition_strength": 0,
+        "competitors": [],
+        "verdict": "open"
+      },
+      "opportunity": 90.8,
+      "title_similarity_to_source": 0.6
+    },
+    {
+      "topic": "Three Mile Island Nuclear Power Plant",
+      "search_term": "Three Mile Island accident",
+      "distance": "lateral",
+      "proposed_title": "Three Mile Island Nuclear Power Plant: How [it] Destroyed Itself From the Inside",
+      "why": "The historical significance of this event makes it a staple for older demographics interested in regulatory history and engineering flaws.",
+      "audience_age_skew": "older",
+      "rpm_guess": "high",
+      "saturation": {
+        "checked": true,
+        "search_term": "Three Mile Island accident",
+        "demand_median_views": 145950,
+        "demand_max_views": 1328447,
+        "competition_count": 0,
+        "competition_strength": 0,
+        "competitors": [],
+        "verdict": "open"
+      },
+      "opportunity": 72.1,
+      "title_similarity_to_source": 0.609
+    },
+    {
+      "topic": "Palo Verde Nuclear Power Station",
+      "search_term": "Palo Verde nuclear station",
+      "distance": "lateral",
+      "proposed_title": "Palo Verde Nuclear Power Station: Declared Safe 12 Hours Before It Failed",
+      "why": "Viewers researching major US infrastructure are curious about near-misses and operational challenges at the country's largest nuclear facility.",
+      "audience_age_skew": "mixed",
+      "rpm_guess": "medium",
+      "saturation": {
+        "checked": true,
+        "search_term": "Palo Verde nuclear station",
+        "demand_median_views": 947,
+        "demand_max_views": 626096,
+        "competition_count": 0,
+        "competition_strength": 0,
+        "competitors": [],
+        "verdict": "weak-demand"
+      },
+      "opportunity": 5.0,
+      "title_similarity_to_source": 0.582
+    },
+    {
+      "topic": "Exxon Valdez Oil Spill",
+      "search_term": "Exxon Valdez spill story",
+      "distance": "far",
+      "proposed_title": "Exxon Valdez Oil Spill: The Dam That Had To Work",
+      "why": "Environmental and maritime history enthusiasts are highly engaged with the narrative of corporate industrial failure and ecological impact.",
+      "audience_age_skew": "older",
+      "rpm_guess": "medium",
+      "saturation": {
+        "checked": true,
+        "search_term": "Exxon Valdez spill story",
+        "demand_median_views": 928,
+        "demand_max_views": 794394,
+        "competition_count": 0,
+        "competition_strength": 0,
+        "competitors": [],
+        "verdict": "weak-demand"
+      },
+      "opportunity": 5.0,
+      "title_similarity_to_source": 0.618
+    },
+    {
+      "topic": "Hindenburg Disaster",
+      "search_term": "Hindenburg disaster details",
+      "distance": "far",
+      "proposed_title": "Hindenburg Disaster: What a Gold Mine Left Behind",
+      "why": "Aviation history is a massive niche with reliable demand for dramatic storytelling about catastrophic transport infrastructure failures.",
+      "audience_age_skew": "older",
+      "rpm_guess": "medium",
+      "saturation": {
+        "checked": false,
+        "reason": "outside search budget"
+      },
+      "opportunity": 0.0,
+      "title_similarity_to_source": 0.641
+    },
+    {
+      "topic": "Challenger Space Shuttle Disaster",
+      "search_term": "Challenger shuttle failure",
+      "distance": "far",
+      "proposed_title": "Challenger Space Shuttle Disaster: Declared Safe 12 Hours Before It Failed",
+      "why": "Space enthusiasts and history buffs have a enduring interest in the technical and bureaucratic failures behind major aerospace projects.",
+      "audience_age_skew": "mixed",
+      "rpm_guess": "high",
+      "saturation": {
+        "checked": false,
+        "reason": "outside search budget"
+      },
+      "opportunity": 0.0,
+      "title_similarity_to_source": 0.604
+    },
+    {
+      "topic": "Gulf of Mexico Oil Platform",
+      "search_term": "oil platform safety failures",
+      "distance": "far",
+      "proposed_title": "Gulf of Mexico Oil Platform: The Dam That Failed Its First Fill",
+      "why": "Energy sector professionals and engineering students actively search for case studies on offshore infrastructure risks and safety protocols.",
+      "audience_age_skew": "mixed",
+      "rpm_guess": "high",
+      "saturation": {
+        "checked": false,
+        "reason": "outside search budget"
+      },
+      "opportunity": 0.0,
+      "title_similarity_to_source": 0.63
+    },
+    {
+      "topic": "Bhopal Gas Tragedy",
+      "search_term": "Bhopal gas leak history",
+      "distance": "far",
+      "proposed_title": "Bhopal Gas Tragedy: Six Minutes That Erased A Valley",
+      "why": "Industrial safety and disaster history audiences are large and global, with a strong interest in chemical plant failures.",
+      "audience_age_skew": "mixed",
+      "rpm_guess": "medium",
+      "saturation": {
+        "checked": false,
+        "reason": "outside search budget"
+      },
+      "opportunity": 0.0,
+      "title_similarity_to_source": 0.691
+    },
+    {
+      "topic": "Deepwater Horizon Oil Spill",
+      "search_term": "Deepwater Horizon explosion",
+      "distance": "far",
+      "proposed_title": "Deepwater Horizon Oil Spill: How [it] Destroyed Itself From the Inside",
+      "why": "This incident is a top search term for industrial safety, engineering ethics, and modern disaster narratives.",
+      "audience_age_skew": "mixed",
+      "rpm_guess": "medium",
+      "saturation": {
+        "checked": false,
+        "reason": "outside search budget"
+      },
+      "opportunity": 0.0,
+      "title_similarity_to_source": 0.484
+    }
+  ]
+}

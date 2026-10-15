@@ -1,0 +1,166 @@
+{
+  "title": "Machchhu: The River That Took Morbi Twice",
+  "alt_titles": [
+    "Machchhu Dam: Six Minutes That Erased Morbi",
+    "Machchhu Dam: The 1979 Flood Before the 2022 Bridge",
+    "Morbi 1979 vs 2022"
+  ],
+  "thumbnail_text": "SAME RIVER",
+  "thumbnail_collision": "Photograph of 1979 Machchhu dam wreckage composited with photograph of 2022 Morbi bridge collapse, split by a vertical line",
+  "why_this_hook_lands": "Same river, two disasters 43 years apart: the 1979 Machchhu-II dam failure flooded Morbi, and in 2022 the Morbi suspension bridge collapsed into the same Machchhu river. The link is place, not cause; the script must never imply the dam caused the bridge failure.",
+  "thumbnail_spec": {
+    "layout": "multi_subject",
+    "subject_count": 5,
+    "palette": [
+      {
+        "hex": "#121315",
+        "weight": 0.39
+      },
+      {
+        "hex": "#4a5733",
+        "weight": 0.36
+      },
+      {
+        "hex": "#7c9ab5",
+        "weight": 0.32
+      },
+      {
+        "hex": "#637177",
+        "weight": 0.29
+      },
+      {
+        "hex": "#827c75",
+        "weight": 0.28
+      }
+    ],
+    "measured_rules": [
+      "layout: multi_subject (7/8 videos)",
+      "high contrast (format average 0.27)",
+      "art style: photographic (flatness 0.30)"
+    ],
+    "instructions": [
+      "Compose 5 subjects across the frame, evenly spaced.",
+      "Hold contrast near 0.28 (format norm).",
+      "Collide 'Morbi bridge collapse' with the in-universe subject in one frame: Photograph of 1979 Machchhu dam wreckage composited with photograph of 2022 Morbi bridge collapse, split by a vertical line.",
+      "The hook must be an actual photograph, not an illustration of one. The measured winners pair an anime/manga crop with a real photograph plus an institutional symbol (agency seal, occult sigil, skyline).",
+      "Source the artifact by exact proper name, never by mood. 'Jeffrey Epstein photograph' and 'CIA seal' are exact; 'sinister figure' is the failure mode that produced a beach for water pressure."
+    ],
+    "verify_with": "python -m formatengine verify-thumb <file> --format engineering-failures",
+    "external_hook": "Morbi bridge collapse"
+  },
+  "external_hook": "Morbi bridge collapse",
+  "hook_score": {
+    "term": "Morbi bridge collapse",
+    "niche": "dam failure documentary",
+    "topic": "Machchhu dam failure, Morbi 1979",
+    "verdict": "WEAK",
+    "register": "proper",
+    "recognition": {
+      "scored": true,
+      "source": "wikipedia",
+      "register": "proper",
+      "term": "Morbi bridge collapse",
+      "article": "2022 Morbi bridge collapse",
+      "daily_median": 61,
+      "attention": {
+        "available": true,
+        "median": 61,
+        "recent_7d_mean": 45,
+        "prior_30d_mean": 44,
+        "trend": 1.03,
+        "peak": 160,
+        "peak_day": "20260716",
+        "peak_age_days": 91,
+        "pct_of_peak": 0.2866
+      }
+    },
+    "saturation": {
+      "checked": true,
+      "query": "Morbi bridge collapse dam failure documentary Machchhu dam failure Morbi 1979",
+      "n": 3,
+      "n_raw": 15,
+      "median_views": 54613,
+      "top_views": 120529,
+      "top_title": "Morbi Bridge Collapse: Gujarat के Morbi के राजा ने बनवाया था पुल, बनने से गिरने तक की कहानी",
+      "raw_top_views": 23257447
+    },
+    "notes": [
+      "61/day median sits below the 2,500 floor, which is in-universe territory. In the reference sample every hook that worked measured 2,822-12,677/day and every in-universe subject measured 2,235/day or less. A hook the audience must be told about is not doing the work of a hook.",
+      "Attention peaked 91d ago at 160/day; now at 28.7% of peak, trend 1.03x. Reported only. The reference winner shipped 151d past peak at 1% of peak, so age is not a reason to drop a hook.",
+      "Landing zone is open: biggest real competitor 120,529 views across 3 of 15 results."
+    ],
+    "checked_at": "2026-10-15T07:57:44.303541+00:00"
+  },
+  "topic": "Machchhu dam failure, Morbi 1979",
+  "format_slug": "engineering-failures",
+  "generated_at": "2026-10-15T07:57:46.368158+00:00",
+  "register": "proper",
+  "gate": {
+    "passed": true,
+    "checks": [
+      {
+        "check": "hook_recognition",
+        "value": "WEAK",
+        "limit": "not WEAK",
+        "pass": false
+      },
+      {
+        "check": "template_use",
+        "value": "use #1",
+        "limit": "warn at 5",
+        "pass": true
+      },
+      {
+        "check": "topic_is_concrete",
+        "value": "Machchhu dam failure, Morbi 1979",
+        "limit": "a named subject",
+        "pass": true
+      },
+      {
+        "check": "title_length",
+        "value": "25c/4w",
+        "limit": "40c/8w",
+        "pass": true
+      },
+      {
+        "check": "title_shape",
+        "value": false,
+        "limit": true,
+        "pass": false
+      },
+      {
+        "check": "hook_named_in_title",
+        "value": true,
+        "limit": true,
+        "pass": true
+      },
+      {
+        "check": "title_vs_source",
+        "value": 0.212,
+        "limit": 0.72,
+        "pass": true
+      },
+      {
+        "check": "self_similarity_peak",
+        "value": 0.291,
+        "limit": 0.8,
+        "pass": true,
+        "window": 6
+      },
+      {
+        "check": "thumb_text_distinct",
+        "value": 0.118,
+        "limit": 0.6,
+        "pass": true
+      }
+    ],
+    "failures": [
+      "Hook 'Morbi bridge collapse' scored WEAK. 61/day median sits below the 2,500 floor, which is in-universe territory. In the reference sample every hook that worked measured 2,822-12,677/day and every in-universe subject measured 2,235/day or less. A hook the audience must be told about is not doing the work of a hook."
+    ],
+    "warnings": [
+      "Title has no question mark, no 'vs', and no ALL-CAPS emphasis word. 69 of 80 measured titles carry at least one. Not fatal, but check there is a real collision in it."
+    ],
+    "override": "Hook recognition overridden by hand 2026-10-15: story-archetype format wins on topic (Teton Dam 1.1M on a low-pageview subject); landing zone open (3 rivals, top 120k). See hand_corrected."
+  },
+  "hand_corrected": "2026-10-15: generated title 'Morbi Bridge 1979 Failure' was factually wrong (1979 was a dam, not a bridge) and the rationale claimed a false causal link. Title, thumbnail text and rationale rewritten. Hook gate overridden on purpose: story-archetype channels win on topic, not hook recognition (Teton Dam 1.1M)."
+}
