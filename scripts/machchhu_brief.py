@@ -98,7 +98,7 @@ BEATS = [
      "In 1979, a dam built for drought met a flood three times its design. "
      "In 2022, a repaired bridge, carrying four times its stated limit, gave way. "
      "Different engineering. Different decisions.",
-     "split screen dam and bridge"),
+     "concrete dam and river bridge"),
     ("What they share is the river, and the town on its banks. "
      "And a question every engineer is supposed to ask first. "
      "Not, what is this built to do. "
@@ -112,6 +112,10 @@ def main():
     words = sum(len(t.split()) for t, _ in BEATS)
     brief = {
         "title": gen["title"],
+        # Leads with stock-searchable words: format-render anchors every footage
+        # query on the topic's first two content words ("dam flood").
+        "topic": "dam flood India monsoon, the 1979 Machchhu dam failure in Morbi",
+        "format_slug": "engineering-failures",
         "alt_titles": gen.get("alt_titles", []),
         "hook": BEATS[0][0],
         "substance": [

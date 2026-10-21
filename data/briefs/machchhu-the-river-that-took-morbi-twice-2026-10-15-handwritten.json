@@ -1,5 +1,7 @@
 {
   "title": "Machchhu: The River That Took Morbi Twice",
+  "topic": "dam flood India monsoon, the 1979 Machchhu dam failure in Morbi",
+  "format_slug": "engineering-failures",
   "alt_titles": [
     "Machchhu Dam: Six Minutes That Erased Morbi",
     "Machchhu Dam: The 1979 Flood Before the 2022 Bridge",
@@ -151,7 +153,7 @@
     {
       "beat": 20,
       "narration": "So these were two different failures. In 1979, a dam built for drought met a flood three times its design. In 2022, a repaired bridge, carrying four times its stated limit, gave way. Different engineering. Different decisions.",
-      "visual": "split screen dam and bridge",
+      "visual": "concrete dam and river bridge",
       "seconds": 14.2
     },
     {
