@@ -1,0 +1,162 @@
+{
+  "title": "Titanic vs Titan: Real Crash",
+  "alt_titles": [
+    "Titanic Survived, Titan Not",
+    "Real Titanic Comparison",
+    "Titanic Glitch vs Titan"
+  ],
+  "thumbnail_text": "WRONG BOAT",
+  "thumbnail_collision": "Titanic iceberg collision clip next to Titan submersible implosion schematic",
+  "why_this_hook_lands": "Viewers immediately associate the name Titan with the famous movie Titanic, creating an instant cognitive dissonance when the thumbnail reveals the real, failed submersible.",
+  "thumbnail_spec": {
+    "layout": "multi_subject",
+    "subject_count": 5,
+    "palette": [
+      {
+        "hex": "#121315",
+        "weight": 0.39
+      },
+      {
+        "hex": "#4a5733",
+        "weight": 0.36
+      },
+      {
+        "hex": "#7c9ab5",
+        "weight": 0.32
+      },
+      {
+        "hex": "#637177",
+        "weight": 0.29
+      },
+      {
+        "hex": "#827c75",
+        "weight": 0.28
+      }
+    ],
+    "measured_rules": [
+      "layout: multi_subject (7/8 videos)",
+      "high contrast (format average 0.27)",
+      "art style: photographic (flatness 0.30)"
+    ],
+    "instructions": [
+      "Compose 5 subjects across the frame, evenly spaced.",
+      "Hold contrast near 0.28 (format norm).",
+      "Collide 'Titanic' with the in-universe subject in one frame: Titanic iceberg collision clip next to Titan submersible implosion schematic.",
+      "The hook must be an actual photograph, not an illustration of one. The measured winners pair an anime/manga crop with a real photograph plus an institutional symbol (agency seal, occult sigil, skyline).",
+      "Source the artifact by exact proper name, never by mood. 'Jeffrey Epstein photograph' and 'CIA seal' are exact; 'sinister figure' is the failure mode that produced a beach for water pressure."
+    ],
+    "verify_with": "python -m formatengine verify-thumb <file> --format engineering-failures",
+    "external_hook": "Titanic"
+  },
+  "external_hook": "Titanic",
+  "hook_score": {
+    "term": "Titanic",
+    "niche": "engineering failure documentary",
+    "topic": "Titan submersible implosion",
+    "verdict": "CROWDED",
+    "register": "proper",
+    "recognition": {
+      "scored": true,
+      "source": "wikipedia",
+      "register": "proper",
+      "term": "Titanic",
+      "article": "Titanic",
+      "daily_median": 5864,
+      "attention": {
+        "available": true,
+        "median": 5864,
+        "recent_7d_mean": 5413,
+        "prior_30d_mean": 5582,
+        "trend": 0.97,
+        "peak": 11127,
+        "peak_day": "20260831",
+        "peak_age_days": 53,
+        "pct_of_peak": 0.4865
+      }
+    },
+    "saturation": {
+      "checked": true,
+      "query": "Titanic engineering failure documentary Titan submersible implosion",
+      "n": 2,
+      "n_raw": 15,
+      "median_views": 652312,
+      "top_views": 1304501,
+      "top_title": "Hear the Loud Bang Believed to be the Titan Sub's Implosion | Implosion: The Titanic Sub Disaster",
+      "raw_top_views": 15871365
+    },
+    "notes": [
+      "5,864/day median recognition clears the 2,500 floor.",
+      "Attention peaked 53d ago at 11,127/day; now at 48.6% of peak, trend 0.97x. Reported only. The reference winner shipped 151d past peak at 1% of peak, so age is not a reason to drop a hook.",
+      "Already held: 1,304,501 views on \"Hear the Loud Bang Believed to be the Titan Sub's Implosion | Implosion: The Titanic Sub Disaster\". Going head-to-head needs a genuinely different angle, not the same premise."
+    ],
+    "checked_at": "2026-10-22T19:26:44.624698+00:00"
+  },
+  "topic": "Titan submersible implosion",
+  "format_slug": "engineering-failures",
+  "generated_at": "2026-10-22T19:26:45.481646+00:00",
+  "register": "proper",
+  "gate": {
+    "passed": true,
+    "checks": [
+      {
+        "check": "hook_recognition",
+        "value": "CROWDED",
+        "limit": "not WEAK",
+        "pass": true
+      },
+      {
+        "check": "template_use",
+        "value": "use #1",
+        "limit": "warn at 5",
+        "pass": true
+      },
+      {
+        "check": "topic_is_concrete",
+        "value": "Titan submersible implosion",
+        "limit": "a named subject",
+        "pass": true
+      },
+      {
+        "check": "title_length",
+        "value": "28c/5w",
+        "limit": "40c/8w",
+        "pass": true
+      },
+      {
+        "check": "title_shape",
+        "value": true,
+        "limit": true,
+        "pass": true
+      },
+      {
+        "check": "hook_named_in_title",
+        "value": true,
+        "limit": true,
+        "pass": true
+      },
+      {
+        "check": "title_vs_source",
+        "value": 0.176,
+        "limit": 0.72,
+        "pass": true
+      },
+      {
+        "check": "self_similarity_peak",
+        "value": 0.216,
+        "limit": 0.8,
+        "pass": true,
+        "window": 6
+      },
+      {
+        "check": "thumb_text_distinct",
+        "value": 0.079,
+        "limit": 0.6,
+        "pass": true
+      }
+    ],
+    "failures": [],
+    "warnings": [
+      "Hook is CROWDED: Hear the Loud Bang Believed to be the Titan Sub's Implosion | Implosion: The Titanic Sub Disaster already holds it at 1,304,501 views. Ship only if your angle genuinely differs from theirs."
+    ]
+  }
+}
