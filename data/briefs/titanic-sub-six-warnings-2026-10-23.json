@@ -42,6 +42,7 @@
         "RMS Titanic wreck bow",
         "OceanGate Titan submersible"
       ],
+      "cards": [],
       "seconds": 17.3
     },
     {
@@ -51,6 +52,13 @@
       "photos": [
         "Stockton Rush"
       ],
+      "cards": [
+        {
+          "kind": "quote",
+          "text": "There's a rule you don't do that. Well, I did.",
+          "by": "Stockton Rush, OceanGate CEO, 2021"
+        }
+      ],
       "seconds": 20.4
     },
     {
@@ -58,6 +66,13 @@
       "narration": "No agency ever certified Titan as safe. It never had to be. It dived in international waters and did not carry passengers from a port. Passengers signed a waiver calling it experimental. One said the waiver mentioned death three times on page one. In 2019, the classification society Lloyd's Register refused to class it.",
       "visual": "legal document signature waiver",
       "photos": [],
+      "cards": [
+        {
+          "kind": "quote",
+          "text": "...could result in physical injury, disability, emotional trauma or death.",
+          "by": "Titan passenger waiver"
+        }
+      ],
       "seconds": 20.8
     },
     {
@@ -65,6 +80,22 @@
       "narration": "The first warning arrives in March 2018. A Boeing engineer who had worked on the preliminary designs analyses the hull, and emails the CEO directly. We think you are at high risk of a significant failure at or before you reach four thousand meters. He attaches a graph. At the four thousand metre line, he has drawn a skull and crossbones.",
       "visual": "engineer reviewing graph on screen",
       "photos": [],
+      "cards": [
+        {
+          "kind": "title",
+          "text": "WARNING",
+          "sub": "1 / 6"
+        },
+        {
+          "kind": "email",
+          "from": "Mark Negley",
+          "to": "Stockton Rush",
+          "date": "March 2018",
+          "subject": "Titan hull analysis",
+          "body": "We think you are at high risk of a significant failure at or before you reach 4,000 meters. We do not think you have any safety margin.",
+          "highlight": "high risk of a significant failure"
+        }
+      ],
       "seconds": 23.5
     },
     {
@@ -74,6 +105,18 @@
       "photos": [
         "Titanic iceberg 1912"
       ],
+      "cards": [
+        {
+          "kind": "title",
+          "text": "WARNING",
+          "sub": "2 / 6"
+        },
+        {
+          "kind": "quote",
+          "text": "In your race to Titanic you are mirroring that famous catch cry: She is unsinkable.",
+          "by": "Rob McCallum, email to Stockton Rush, 2018"
+        }
+      ],
       "seconds": 30.4
     },
     {
@@ -81,6 +124,18 @@
       "narration": "The third warning comes from inside the company. Its director of marine operations, David Lochridge, writes a safety report. He wants the hull scanned for hidden flaws. He says he is told that cannot be done, the hull is too thick. And the viewport, he warns, is only certified to thirteen hundred metres. A third of the way to Titanic. OceanGate says Lochridge is not an engineer, and that its own testing beats any outside check. It sues him. He sues back. They settle.",
       "visual": "office report papers desk lamp",
       "photos": [],
+      "cards": [
+        {
+          "kind": "title",
+          "text": "WARNING",
+          "sub": "3 / 6"
+        },
+        {
+          "kind": "stat",
+          "value": "1,300 m",
+          "label": "viewport certified depth"
+        }
+      ],
       "seconds": 32.3
     },
     {
@@ -88,6 +143,18 @@
       "narration": "Later in 2018, warning four. A group from the submarine industry drafts a letter. Their words: unanimous concern. An experimental approach that could end in outcomes from minor to catastrophic. The letter is never formally sent, but the CEO reads it, and calls the man who organised it. Industry standards, he tells him, are stifling innovation.",
       "visual": "letter envelope desk",
       "photos": [],
+      "cards": [
+        {
+          "kind": "title",
+          "text": "WARNING",
+          "sub": "4 / 6"
+        },
+        {
+          "kind": "quote",
+          "text": "Unanimous concern regarding the development of TITAN.",
+          "by": "Draft letter, submarine industry, 2018"
+        }
+      ],
       "seconds": 21.5
     },
     {
@@ -95,6 +162,18 @@
       "narration": "Number five does not come from a person. It comes from the hull. The first carbon fibre hull cracks, after fifty dives. A new one is built in 2021. Scale models of the new design implode in a university lab, so the curing method is changed, and the full-size hull passes a pressure test. The titanium rings from the old hull are not replaced. They are reused.",
       "visual": "pressure test laboratory equipment",
       "photos": [],
+      "cards": [
+        {
+          "kind": "title",
+          "text": "WARNING",
+          "sub": "5 / 6"
+        },
+        {
+          "kind": "stat",
+          "value": "50 dives",
+          "label": "until the first hull cracked"
+        }
+      ],
       "seconds": 25.8
     },
     {
@@ -102,6 +181,18 @@
       "narration": "July the fifteenth, 2022. Dive eighty. Warning six. Titan is coming back up from the wreck when the passengers hear a loud bang. The sub's own sensors record it. Afterwards, the hull's strain readings have permanently shifted. Investigators later concluded that bang was the carbon fibre delaminating. Its layers coming apart. Titan keeps diving.",
       "visual": "underwater bubbles deep sea darkness",
       "photos": [],
+      "cards": [
+        {
+          "kind": "title",
+          "text": "WARNING",
+          "sub": "6 / 6"
+        },
+        {
+          "kind": "stat",
+          "value": "DIVE 80",
+          "label": "15 July 2022: the loud bang"
+        }
+      ],
       "seconds": 20.8
     },
     {
@@ -110,6 +201,13 @@
       "visual": "empty bedroom morning light",
       "photos": [
         "Stockton Rush OceanGate"
+      ],
+      "cards": [
+        {
+          "kind": "quote",
+          "text": "At some point, safety just is pure waste.",
+          "by": "Stockton Rush, CBS News, 2022"
+        }
       ],
       "seconds": 12.7
     },
@@ -121,6 +219,7 @@
         "Polar Prince",
         "OceanGate Titan"
       ],
+      "cards": [],
       "seconds": 20.0
     },
     {
@@ -128,6 +227,13 @@
       "narration": "At 9:18 Titan begins its descent. Every fifteen minutes, a text. Every few seconds, an automatic ping. At about two thousand two hundred metres: all good here. At 10:47, deeper than three thousand three hundred metres: dropped two weights. The last ping arrives six seconds later.",
       "visual": "deep sea descent dark blue water",
       "photos": [],
+      "cards": [
+        {
+          "kind": "stat",
+          "value": "3,346 m",
+          "label": "last ping, 10:47:33"
+        }
+      ],
       "seconds": 17.7
     },
     {
@@ -135,6 +241,7 @@
       "narration": "On the ship above, people had heard a loud bang. It was later determined to be the sound of Titan imploding. Death was instant. James Cameron believes they had dropped their weights and were coming up, trying to manage an emergency.",
       "visual": "dark ocean surface night ship",
       "photos": [],
+      "cards": [],
       "seconds": 15.8
     },
     {
@@ -145,6 +252,7 @@
         "Titan submersible debris Coast Guard",
         "Titan submersible debris"
       ],
+      "cards": [],
       "seconds": 17.3
     },
     {
@@ -155,6 +263,7 @@
         "James Cameron director",
         "Titanic iceberg 1912"
       ],
+      "cards": [],
       "seconds": 23.5
     },
     {
@@ -163,6 +272,13 @@
       "visual": "official report documents",
       "photos": [
         "United States Coast Guard"
+      ],
+      "cards": [
+        {
+          "kind": "title",
+          "text": "PREVENTABLE",
+          "sub": "US COAST GUARD, 2025"
+        }
       ],
       "seconds": 18.5
     },
@@ -173,6 +289,7 @@
       "photos": [
         "RMS Titanic wreck"
       ],
+      "cards": [],
       "seconds": 11.2
     }
   ],

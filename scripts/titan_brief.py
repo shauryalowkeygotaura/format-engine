@@ -136,6 +136,37 @@ BEATS = [
 ]
 
 
+# Designed cards per beat (index into BEATS). Every quote and number is copied
+# verbatim from the Wikipedia source; these are the shots that carry information.
+CARDS = {
+    1: [{"kind": "quote", "text": "There's a rule you don't do that. Well, I did.",
+         "by": "Stockton Rush, OceanGate CEO, 2021"}],
+    2: [{"kind": "quote", "text": "...could result in physical injury, disability, emotional trauma or death.",
+         "by": "Titan passenger waiver"}],
+    3: [{"kind": "title", "text": "WARNING", "sub": "1 / 6"},
+        {"kind": "email", "from": "Mark Negley", "to": "Stockton Rush", "date": "March 2018",
+         "subject": "Titan hull analysis",
+         "body": "We think you are at high risk of a significant failure at or before you reach 4,000 meters. We do not think you have any safety margin.",
+         "highlight": "high risk of a significant failure"}],
+    4: [{"kind": "title", "text": "WARNING", "sub": "2 / 6"},
+        {"kind": "quote", "text": "In your race to Titanic you are mirroring that famous catch cry: She is unsinkable.",
+         "by": "Rob McCallum, email to Stockton Rush, 2018"}],
+    5: [{"kind": "title", "text": "WARNING", "sub": "3 / 6"},
+        {"kind": "stat", "value": "1,300 m", "label": "viewport certified depth"}],
+    6: [{"kind": "title", "text": "WARNING", "sub": "4 / 6"},
+        {"kind": "quote", "text": "Unanimous concern regarding the development of TITAN.",
+         "by": "Draft letter, submarine industry, 2018"}],
+    7: [{"kind": "title", "text": "WARNING", "sub": "5 / 6"},
+        {"kind": "stat", "value": "50 dives", "label": "until the first hull cracked"}],
+    8: [{"kind": "title", "text": "WARNING", "sub": "6 / 6"},
+        {"kind": "stat", "value": "DIVE 80", "label": "15 July 2022: the loud bang"}],
+    9: [{"kind": "quote", "text": "At some point, safety just is pure waste.",
+         "by": "Stockton Rush, CBS News, 2022"}],
+    11: [{"kind": "stat", "value": "3,346 m", "label": "last ping, 10:47:33"}],
+    15: [{"kind": "title", "text": "PREVENTABLE", "sub": "US COAST GUARD, 2025"}],
+}
+
+
 def main():
     words = len(HOOK.split()) + sum(len(t.split()) for t, _, _ in BEATS)
     brief = {
@@ -152,7 +183,7 @@ def main():
             {"claim": "Final text 'dropped two wts' at 10:47:27; last ping 10:47:33 at ~3,346 m.", "source": "Wikipedia: Titan submersible implosion"},
             {"claim": "USCG Aug 2025 report called it 'preventable'.", "source": "Wikipedia: Titan submersible implosion"},
         ],
-        "beats": [{"beat": i + 1, "narration": t, "visual": v, "photos": ph,
+        "beats": [{"beat": i + 1, "narration": t, "visual": v, "photos": ph, "cards": CARDS.get(i, []),
                    "seconds": round(len(t.split()) / 2.6, 1)} for i, (t, v, ph) in enumerate(BEATS)],
         "description": ("Titan imploded on 18 June 2023 on its way to the Titanic. Before that dive, there was a Boeing "
                         "engineer's email, a specialist's 'she is unsinkable' warning, an internal safety report, an "
