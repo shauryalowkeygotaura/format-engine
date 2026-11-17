@@ -118,7 +118,7 @@ KIDS_TOPIC_SUBSTRINGS = ["nursery rhyme", "for kids", "toddler", "baby shark", "
 
 # ── Groq (free tier) ─────────────────────────────────────────────────────────
 GROQ_MODEL = os.environ.get("GROQ_MODEL", "qwen/qwen3.8-27b")
-GROQ_MODEL_FAST = os.environ.get("GROQ_MODEL_FAST", "llama-3.1-8b-instant")
+GROQ_MODEL_FAST = os.environ.get("GROQ_MODEL_FAST", "openai/gpt-oss-20b")  # llama-3.1-8b-instant retired; unused today
 GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
 
 # ── Differentiation gate ─────────────────────────────────────────────────────
